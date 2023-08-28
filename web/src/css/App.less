@@ -29,19 +29,19 @@ a {
 #page {
 }
 
-#times-wrap {
+#columns-panel {
     display: flex;
     height: 100svh;
     justify-content: space-between;
-    align-items: center;
+    align-items: stretch; // columns will take up full height
 }
 
-.times-column {
+.column {
     flex: 1;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
+    flex-direction: column;  // stack children vertically
+    justify-content: center;  // center children vertically
+    align-items: center;      // center children horizontally
     border-left: 1px solid #ddd;
     border-right: 1px solid #ddd;
 }
