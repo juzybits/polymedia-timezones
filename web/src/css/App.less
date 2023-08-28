@@ -15,16 +15,33 @@ body {
     color: @text-color;
 }
 
-#layout {
-}
-
-#page {
-}
-
 a {
     color: rgb(121 238 255);
     text-decoration: none;
     &:hover {
         text-decoration: underline;
     }
+}
+
+#layout {
+}
+
+#page {
+}
+
+#times-wrap {
+    display: flex;
+    height: 100svh;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.times-column {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
 }

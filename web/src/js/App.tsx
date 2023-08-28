@@ -1,6 +1,16 @@
 import { useEffect, useState } from 'react';
 import '../css/App.less';
 
+/*
+TODO: let user select timezones
+TODO: load/save config from local storage
+
+TODO: show day below each time
+TODO: show timezone name below each time
+TODO: show hour difference vs local
+TODO: color time columns
+*/
+
 export const App: React.FC = () =>
 {
     const [timezones, _setTimezones] = useState<string[]>([
@@ -8,7 +18,7 @@ export const App: React.FC = () =>
         'Europe/London',
         'Asia/Tokyo'
     ]);
-    const [times, setTimes]= useState<string[]>();
+    const [times, setTimes]= useState<string[]>([]);
 
     useEffect(() => {
         const now = new Date();
@@ -17,20 +27,35 @@ export const App: React.FC = () =>
     }, [timezones]);
 
     return <div id='layout'>
-        Times:
-        <pre>
-            {JSON.stringify(times, null, 2)}
-        </pre>
+        <TimesWrap times={times} />
     </div>;
 }
 
-// Display a `Date` as "HH:mm" in the specific timezone
+// Display each time in one vertical column
+const TimesWrap: React.FC<{
+    times: string[],
+}> = ({
+    times,
+}) =>
+{
+    return <div id='times-wrap'>
+    {
+        times.map((time, index) => (
+            <div key={index} className='times-column'>
+                <span>{time}</span>
+            </div>
+        ))
+    }
+    </div>;
+}
+
+// Convert a `Date` to "HH:mm" in the specific timezone
 function dateToString(date: Date, tz: string): string {
-        const timeInTimeZone = new Intl.DateTimeFormat('en-US', {
-            hour: '2-digit',
-            minute: '2-digit',
-            timeZone: tz,
-            hour12: false,
-        }).format(date);
-        return timeInTimeZone;
+    const timeInTimeZone = new Intl.DateTimeFormat('en-US', {
+        hour: '2-digit',
+        minute: '2-digit',
+        timeZone: tz,
+        hour12: false,
+    }).format(date);
+    return timeInTimeZone;
 }
