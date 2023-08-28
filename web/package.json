@@ -1,0 +1,30 @@
+{
+    "private": true,
+    "name": "@polymedia/timezones-web",
+    "author": "@juzybits (https://polymedia.app)",
+    "description": "https://timezones.polymedia.app",
+    "scripts": {
+        "lint": "eslint ./src --ext .ts,.tsx",
+        "serve": "rm -rf .parcel-cache/ dist/ && parcel src/index.html",
+        "build": "rm -rf .parcel-cache/ dist/ && parcel build --no-source-maps src/index.html && cp src/static/* dist/",
+        "deploy-dev": "pnpm build && wrangler pages publish dist/ --project-name polymedia-timezones --branch dev",
+        "deploy-prod": "pnpm build && wrangler pages publish dist/ --project-name polymedia-timezones --branch main"
+    },
+    "dependencies": {
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "react-router-dom": "^6.15.0"
+    },
+    "devDependencies": {
+        "@parcel/transformer-less": "latest",
+        "@types/react": "^18.2.21",
+        "@types/react-dom": "^18.2.7",
+        "@typescript-eslint/eslint-plugin": "^6.4.1",
+        "@typescript-eslint/parser": "^6.4.1",
+        "eslint": "^8.48.0",
+        "eslint-plugin-deprecation": "^1.5.0",
+        "parcel": "latest",
+        "process": "latest",
+        "react-devtools": "latest"
+    }
+}
