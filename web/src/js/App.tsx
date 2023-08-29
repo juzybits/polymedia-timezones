@@ -4,8 +4,8 @@ import '../css/App.less';
 /*
 TODO: let user select timezones
 TODO: load/save config from local storage
-TODO: color time columns
 TODO: auto-refresh
+TODO: add font
 */
 
 export const App: React.FC = () =>
@@ -53,8 +53,15 @@ const Column: React.FC<{
     const time = dateToTimeStr(now, tz);
     const day = dateToDayStr(now, tz);
     const diff = getHourDiff(now, tz);
+    const hour = dateToHours(now, tz);
+    const backgroundImage = gradients[hour];
+    const color = (hour >= 8 && hour <= 16) ? 'rgb(67, 67, 67)' : 'rgb(255, 255, 255)';
     return (
-        <div key={tz} className='column'>
+        <div
+            key={tz}
+            className='column'
+            style={{ backgroundImage, color}}
+        >
             <div className='column-time'>{time}</div>
             <div className='column-day'>{day}</div>
             <div className='column-tz'>{tz}</div>
@@ -63,28 +70,88 @@ const Column: React.FC<{
     );
 }
 
-// Convert a `Date` to "HH:mm" in the specific timezone
+const gradients = [
+    'linear-gradient(rgb(3, 12, 27), rgb(8, 9, 35))',
+    'linear-gradient(rgb(3, 12, 27), rgb(8, 9, 35))',
+    'linear-gradient(rgb(3, 12, 27), rgb(3, 12, 27))',
+    'linear-gradient(rgb(4, 15, 34), rgb(3, 12, 27))',
+    'linear-gradient(rgb(8, 28, 52), rgb(4, 15, 34))',
+    'linear-gradient(rgb(33, 83, 102), rgb(8, 28, 52))',
+    'linear-gradient(rgb(57, 138, 151), rgb(33, 83, 102))',
+    'linear-gradient(rgb(89, 184, 188), rgb(57, 138, 151))',
+    'linear-gradient(rgb(146, 205, 188), rgb(89, 184, 188))',
+    'linear-gradient(rgb(203, 225, 188), rgb(146, 205, 188))',
+    'linear-gradient(rgb(241, 237, 179), rgb(203, 225, 188))',
+    'linear-gradient(rgb(245, 234, 154), rgb(241, 237, 179))',
+    'linear-gradient(rgb(250, 231, 128), rgb(245, 234, 154))',
+    'linear-gradient(rgb(254, 228, 103), rgb(250, 231, 128))',
+    'linear-gradient(rgb(250, 201, 97), rgb(254, 228, 103))',
+    'linear-gradient(rgb(246, 175, 90), rgb(250, 201, 97))',
+    'linear-gradient(rgb(241, 149, 84), rgb(246, 175, 90))',
+    'linear-gradient(rgb(202, 118, 94), rgb(241, 149, 84))',
+    'linear-gradient(rgb(152, 87, 110), rgb(202, 118, 94))',
+    'linear-gradient(rgb(101, 56, 126), rgb(152, 87, 110))',
+    'linear-gradient(rgb(69, 36, 108), rgb(101, 56, 126))',
+    'linear-gradient(rgb(43, 19, 79), rgb(69, 36, 108))',
+    'linear-gradient(rgb(16, 2, 51), rgb(43, 19, 79))',
+    'linear-gradient(rgb(12, 6, 43), rgb(16, 2, 51))',
+];
+
+/*
+const AllColumns: React.FC = () => {
+    return (
+        <div id='columns-panel'>
+        {gradients.map((gradient, index) => (
+            <div
+                key={index}
+                className='column'
+                style={{
+                    backgroundImage: gradient,
+                    color: (index >= 8 && index <= 16) ? 'rgb(67, 67, 67)' : 'rgb(255, 255, 255)',
+                }}
+            >
+                {index}:00
+            </div>
+        ))}
+        </div>
+    );
+}
+*/
+
+// Convert a `Date` to 'HH:mm' in the specific timezone
 function dateToTimeStr(date: Date, tz: string): string {
     const timeStr = new Intl.DateTimeFormat('en-US', {
+        timeZone: tz,
         hour: '2-digit',
         minute: '2-digit',
-        timeZone: tz,
-        hour12: false,
+        hourCycle: 'h23',
+
     }).format(date);
     return timeStr;
 }
 
-// Convert a `Date` to "Mon 28", "Fri 1", etc. in the specific timezone
+// Convert a `Date` to 'Mon 28', 'Fri 1', etc. in the specific timezone
 function dateToDayStr(date: Date, tz: string): string {
     const dayStr = new Intl.DateTimeFormat('en-US', {
+        timeZone: tz,
         weekday: 'short',
         day: 'numeric',
-        timeZone: tz
     }).format(date);
     return dayStr;
 }
 
-// Get the hour difference vs local time as "-8", "+5.5", "0", etc.
+// Get the hour as a number between 0 and 23
+function dateToHours(date: Date, tz: string): number {
+    const dateStr = new Intl.DateTimeFormat('en-US', {
+        timeZone: tz,
+        hour: '2-digit',
+        hourCycle: 'h23',
+    }).format(date);
+
+    return parseInt(dateStr);
+}
+
+// Get the hour difference vs local time as '-8', '+5.5', '0', etc.
 function getHourDiff(date: Date, tz: string): string {
     // Hours and minutes in local time
     const localTotalMinutes = date.getUTCHours() * 60 + date.getUTCMinutes() + date.getTimezoneOffset();
