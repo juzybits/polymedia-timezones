@@ -2,10 +2,11 @@ import { useState } from 'react';
 import '../css/App.less';
 
 /*
-TODO: let user select timezones
+TODO: let user select timezones.
+    select from city -> tz map
+    sort them by time
 TODO: load/save config from local storage
 TODO: auto-refresh
-TODO: add font
 */
 
 export const App: React.FC = () =>
@@ -62,7 +63,7 @@ const Column: React.FC<{
             className='column'
             style={{ backgroundImage, color}}
         >
-            <div className='column-time'>{time}</div>
+            <div className='column-time'><b>{time[0]}</b> : {time[1]}</div>
             <div className='column-day'>{day}</div>
             <div className='column-tz'>{tz}</div>
             <div className='column-diff'>{diff}</div>
@@ -118,8 +119,8 @@ const AllColumns: React.FC = () => {
 }
 */
 
-// Convert a `Date` to 'HH:mm' in the specific timezone
-function dateToTimeStr(date: Date, tz: string): string {
+// Convert a `Date` to ['HH', 'mm'] in the specific timezone
+function dateToTimeStr(date: Date, tz: string): string[] {
     const timeStr = new Intl.DateTimeFormat('en-US', {
         timeZone: tz,
         hour: '2-digit',
@@ -127,12 +128,12 @@ function dateToTimeStr(date: Date, tz: string): string {
         hourCycle: 'h23',
 
     }).format(date);
-    return timeStr;
+    return timeStr.split(':');
 }
 
 // Convert a `Date` to 'Mon 28', 'Fri 1', etc. in the specific timezone
 function dateToDayStr(date: Date, tz: string): string {
-    const dayStr = new Intl.DateTimeFormat('en-US', {
+    const dayStr = new Intl.DateTimeFormat('en-GB', {
         timeZone: tz,
         weekday: 'short',
         day: 'numeric',
