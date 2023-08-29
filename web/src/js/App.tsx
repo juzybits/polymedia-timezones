@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import '../css/App.less';
 
 /*
@@ -6,7 +6,6 @@ TODO: let user select timezones.
     select from city -> tz map
     sort them by time
 TODO: load/save config from local storage
-TODO: auto-refresh
 */
 
 export const App: React.FC = () =>
@@ -15,7 +14,7 @@ export const App: React.FC = () =>
         'America/Los_Angeles',
         'Europe/London',
         'Asia/Kolkata',
-        'Asia/Tokyo'
+        'Asia/Tokyo',
     ]);
 
     return (
@@ -32,9 +31,23 @@ const ColumnsPanel: React.FC<{
     timezones,
 }) =>
 {
-    const now = new Date();
+    const [now, setNow] = useState(new Date());
+    const nowRef = useRef(now); // we need a ref because setInterval() doesn't notice state changes
+
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            const newDate = new Date();
+            // Only repaint the UI if the minute has changed
+            if (newDate.getMinutes() !== nowRef.current.getMinutes()) {
+                nowRef.current = newDate;
+                setNow(newDate);
+            }
+        }, 1_000);
+        return () => clearInterval(intervalId);
+    }, []);
+
     const columns = timezones.map(tz => (
-        <Column now={now} tz={tz} />
+        <Column now={now} tz={tz} key={tz} />
     ));
     return (
         <div id='columns-panel'>
@@ -59,7 +72,6 @@ const Column: React.FC<{
     const color = (hour >= 8 && hour <= 16) ? 'rgb(67, 67, 67)' : 'rgb(255, 255, 255)';
     return (
         <div
-            key={tz}
             className='column'
             style={{ backgroundImage, color}}
         >
