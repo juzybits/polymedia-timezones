@@ -20,9 +20,17 @@ export const App: React.FC = () =>
 
     return (
         <div id='layout'>
+            <ButtonAddCity />
             <ColumnsPanel timezones={timezones} />
         </div>
     );
+}
+
+const ButtonAddCity: React.FC = () =>
+{
+    return <div id='btn-add-city'>
+        <span>+</span>
+    </div>;
 }
 
 /**
