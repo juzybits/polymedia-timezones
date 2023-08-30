@@ -571,7 +571,19 @@
     },
     {
         "timezone": "America/Indiana/Indianapolis",
-        "timezone_old": "America/Indianapolis",
+        "country_name": "United States",
+        "country_code": "us",
+        "cities": [
+            "Indianapolis",
+            "Fort Wayne",
+            "South Bend",
+            "Carmel",
+            "Bloomington"
+        ]
+    },
+    {
+        "timezone": "America/Indianapolis",
+        "old": true,
         "country_name": "United States",
         "country_code": "us",
         "cities": [
@@ -614,7 +626,19 @@
     },
     {
         "timezone": "America/Kentucky/Louisville",
-        "timezone_old": "America/Louisville",
+        "country_name": "United States",
+        "country_code": "us",
+        "cities": [
+            "Louisville",
+            "Jeffersonville",
+            "New Albany",
+            "Jeffersontown",
+            "Pleasure Ridge Park"
+        ]
+    },
+    {
+        "timezone": "America/Louisville",
+        "old": true,
         "country_name": "United States",
         "country_code": "us",
         "cities": [
@@ -910,6 +934,16 @@
         ]
     },
     {
+        "timezone": "America/Kralendijk",
+        "country_name": "Bonaire, Saint Eustatius and Saba",
+        "country_code": "bq",
+        "cities": [
+            "Kralendijk",
+            "Oranjestad",
+            "The Bottom"
+        ]
+    },
+    {
         "timezone": "America/La_Paz",
         "country_name": "Bolivia",
         "country_code": "bo",
@@ -922,6 +956,17 @@
         ]
     },
     {
+        "timezone": "America/Lower_Princes",
+        "country_name": "Sint Maarten",
+        "country_code": "sx",
+        "cities": [
+            "Cul de Sac",
+            "Lower Prince’s Quarter",
+            "Koolbaai",
+            "Philipsburg"
+        ]
+    },
+    {
         "timezone": "America/Manaus",
         "country_name": "Brazil",
         "country_code": "br",
@@ -931,6 +976,14 @@
             "Parintins",
             "Manacapuru",
             "Coari"
+        ]
+    },
+    {
+        "timezone": "America/Marigot",
+        "country_name": "Saint Martin",
+        "country_code": "mf",
+        "cities": [
+            "Marigot"
         ]
     },
     {
@@ -1028,6 +1081,14 @@
         ]
     },
     {
+        "timezone": "America/St_Barthelemy",
+        "country_name": "Saint Barthelemy",
+        "country_code": "bl",
+        "cities": [
+            "Gustavia"
+        ]
+    },
+    {
         "timezone": "America/St_Kitts",
         "country_name": "Saint Kitts and Nevis",
         "country_code": "kn",
@@ -1115,7 +1176,19 @@
     },
     {
         "timezone": "America/Argentina/Buenos_Aires",
-        "timezone_old": "America/Buenos_Aires",
+        "country_name": "Argentina",
+        "country_code": "ar",
+        "cities": [
+            "Buenos Aires",
+            "Mar del Plata",
+            "Bahía Blanca",
+            "Merlo",
+            "Quilmes"
+        ]
+    },
+    {
+        "timezone": "America/Buenos_Aires",
+        "old": true,
         "country_name": "Argentina",
         "country_code": "ar",
         "cities": [
@@ -1128,7 +1201,19 @@
     },
     {
         "timezone": "America/Argentina/Catamarca",
-        "timezone_old": "America/Catamarca",
+        "country_name": "Argentina",
+        "country_code": "ar",
+        "cities": [
+            "Catamarca",
+            "Comodoro Rivadavia",
+            "Trelew",
+            "Puerto Madryn",
+            "Esquel"
+        ]
+    },
+    {
+        "timezone": "America/Catamarca",
+        "old": true,
         "country_name": "Argentina",
         "country_code": "ar",
         "cities": [
@@ -1141,7 +1226,19 @@
     },
     {
         "timezone": "America/Argentina/Cordoba",
-        "timezone_old": "America/Cordoba",
+        "country_name": "Argentina",
+        "country_code": "ar",
+        "cities": [
+            "Córdoba",
+            "Rosario",
+            "Santa Fe",
+            "Corrientes",
+            "Posadas"
+        ]
+    },
+    {
+        "timezone": "America/Cordoba",
+        "old": true,
         "country_name": "Argentina",
         "country_code": "ar",
         "cities": [
@@ -1154,7 +1251,19 @@
     },
     {
         "timezone": "America/Argentina/Jujuy",
-        "timezone_old": "America/Jujuy",
+        "country_name": "Argentina",
+        "country_code": "ar",
+        "cities": [
+            "San Salvador de Jujuy",
+            "San Pedro de Jujuy",
+            "Libertador General San Martín",
+            "Palpalá",
+            "La Quiaca"
+        ]
+    },
+    {
+        "timezone": "America/Jujuy",
+        "old": true,
         "country_name": "Argentina",
         "country_code": "ar",
         "cities": [
@@ -1178,7 +1287,17 @@
     },
     {
         "timezone": "America/Argentina/Mendoza",
-        "timezone_old": "America/Mendoza",
+        "country_name": "Argentina",
+        "country_code": "ar",
+        "cities": [
+            "San Rafael",
+            "Mendoza",
+            "San Martín"
+        ]
+    },
+    {
+        "timezone": "America/Mendoza",
+        "old": true,
         "country_name": "Argentina",
         "country_code": "ar",
         "cities": [
@@ -1339,7 +1458,19 @@
     },
     {
         "timezone": "America/Nuuk",
-        "timezone_old": "America/Godthab",
+        "country_name": "Greenland",
+        "country_code": "gl",
+        "cities": [
+            "Nuuk",
+            "Sisimiut",
+            "Ilulissat",
+            "Qaqortoq",
+            "Aasiaat"
+        ]
+    },
+    {
+        "timezone": "America/Godthab",
+        "old": true,
         "country_name": "Greenland",
         "country_code": "gl",
         "cities": [
@@ -1637,7 +1768,19 @@
     },
     {
         "timezone": "Atlantic/Faroe",
-        "timezone_old": "Atlantic/Faeroe",
+        "country_name": "Faroe Islands",
+        "country_code": "fo",
+        "cities": [
+            "Tórshavn",
+            "Klaksvík",
+            "Fuglafjørður",
+            "Miðvágur",
+            "Tvøroyri"
+        ]
+    },
+    {
+        "timezone": "Atlantic/Faeroe",
+        "old": true,
         "country_name": "Faroe Islands",
         "country_code": "fo",
         "cities": [
@@ -1928,6 +2071,15 @@
         ]
     },
     {
+        "timezone": "Arctic/Longyearbyen",
+        "country_name": "Svalbard and Jan Mayen",
+        "country_code": "sj",
+        "cities": [
+            "Longyearbyen",
+            "Olonkinbyen"
+        ]
+    },
+    {
         "timezone": "Europe/Amsterdam",
         "country_name": "Netherlands",
         "country_code": "nl",
@@ -1973,6 +2125,18 @@
             "Munich",
             "Köln",
             "Frankfurt am Main"
+        ]
+    },
+    {
+        "timezone": "Europe/Bratislava",
+        "country_name": "Slovakia",
+        "country_code": "sk",
+        "cities": [
+            "Bratislava",
+            "Košice",
+            "Nitra",
+            "Prešov",
+            "Žilina"
         ]
     },
     {
@@ -2102,6 +2266,18 @@
         ]
     },
     {
+        "timezone": "Europe/Podgorica",
+        "country_name": "Montenegro",
+        "country_code": "me",
+        "cities": [
+            "Podgorica",
+            "Nikšić",
+            "Herceg Novi",
+            "Pljevlja",
+            "Budva"
+        ]
+    },
+    {
         "timezone": "Europe/Prague",
         "country_name": "Czechia",
         "country_code": "cz",
@@ -2123,6 +2299,18 @@
             "Naples",
             "Turin",
             "Palermo"
+        ]
+    },
+    {
+        "timezone": "Europe/San_Marino",
+        "country_name": "San Marino",
+        "country_code": "sm",
+        "cities": [
+            "Serravalle",
+            "Borgo Maggiore",
+            "San Marino",
+            "Domagnano",
+            "Fiorentino"
         ]
     },
     {
@@ -2183,6 +2371,14 @@
             "Triesen",
             "Balzers",
             "Eschen"
+        ]
+    },
+    {
+        "timezone": "Europe/Vatican",
+        "country_name": "Vatican",
+        "country_code": "va",
+        "cities": [
+            "Vatican City"
         ]
     },
     {
@@ -2547,7 +2743,6 @@
     },
     {
         "timezone": "Europe/Kyiv",
-        "timezone_old": "Europe/Kiev",
         "country_name": "Ukraine",
         "country_code": "ua",
         "cities": [
@@ -2556,6 +2751,27 @@
             "Odesa",
             "Dnipro",
             "Donetsk"
+        ]
+    },
+    {
+        "timezone": "Europe/Kiev",
+        "old": true,
+        "country_name": "Ukraine",
+        "country_code": "ua",
+        "cities": [
+            "Kyiv",
+            "Kharkiv",
+            "Odesa",
+            "Dnipro",
+            "Donetsk"
+        ]
+    },
+    {
+        "timezone": "Europe/Mariehamn",
+        "country_name": "Aland Islands",
+        "country_code": "ax",
+        "cities": [
+            "Mariehamn"
         ]
     },
     {
@@ -2620,7 +2836,19 @@
     },
     {
         "timezone": "Africa/Asmara",
-        "timezone_old": "Africa/Asmera",
+        "country_name": "Eritrea",
+        "country_code": "er",
+        "cities": [
+            "Asmara",
+            "Keren",
+            "Massawa",
+            "Assab",
+            "Mendefera"
+        ]
+    },
+    {
+        "timezone": "Africa/Asmera",
+        "old": true,
         "country_name": "Eritrea",
         "country_code": "er",
         "cities": [
@@ -3229,12 +3457,22 @@
     },
     {
         "timezone": "Asia/Kolkata",
-        "timezone_old": "Asia/Calcutta",
         "country_name": "India",
         "country_code": "in",
         "cities": [
-            "Kolkata",
-            "Calcutta",
+            "Mumbai",
+            "Delhi",
+            "Bengaluru",
+            "Hyderābād",
+            "Ahmedabad"
+        ]
+    },
+    {
+        "timezone": "Asia/Calcutta",
+        "old": true,
+        "country_name": "India",
+        "country_code": "in",
+        "cities": [
             "Mumbai",
             "Delhi",
             "Bengaluru",
@@ -3244,7 +3482,19 @@
     },
     {
         "timezone": "Asia/Kathmandu",
-        "timezone_old": "Asia/Katmandu",
+        "country_name": "Nepal",
+        "country_code": "np",
+        "cities": [
+            "Kathmandu",
+            "Bharatpur",
+            "Pātan",
+            "Birgañj",
+            "Biratnagar"
+        ]
+    },
+    {
+        "timezone": "Asia/Katmandu",
+        "old": true,
         "country_name": "Nepal",
         "country_code": "np",
         "cities": [
@@ -3341,7 +3591,19 @@
     },
     {
         "timezone": "Asia/Yangon",
-        "timezone_old": "Asia/Rangoon",
+        "country_name": "Myanmar",
+        "country_code": "mm",
+        "cities": [
+            "Yangon",
+            "Mandalay",
+            "Nay Pyi Taw",
+            "Mawlamyine",
+            "Kyain Seikgyi Township"
+        ]
+    },
+    {
+        "timezone": "Asia/Rangoon",
+        "old": true,
         "country_name": "Myanmar",
         "country_code": "mm",
         "cities": [
@@ -3398,7 +3660,19 @@
     },
     {
         "timezone": "Asia/Ho_Chi_Minh",
-        "timezone_old": "Asia/Saigon",
+        "country_name": "Vietnam",
+        "country_code": "vn",
+        "cities": [
+            "Ho Chi Minh City",
+            "Da Nang",
+            "Biên Hòa",
+            "Cần Thơ",
+            "Thuận An"
+        ]
+    },
+    {
+        "timezone": "Asia/Saigon",
+        "old": true,
         "country_name": "Vietnam",
         "country_code": "vn",
         "cities": [
@@ -3863,7 +4137,16 @@
     },
     {
         "timezone": "Pacific/Chuuk",
-        "timezone_old": "Pacific/Truk",
+        "country_name": "Micronesia",
+        "country_code": "fm",
+        "cities": [
+            "Weno",
+            "Colonia"
+        ]
+    },
+    {
+        "timezone": "Pacific/Truk",
+        "old": true,
         "country_name": "Micronesia",
         "country_code": "fm",
         "cities": [
@@ -3990,7 +4273,17 @@
     },
     {
         "timezone": "Pacific/Pohnpei",
-        "timezone_old": "Pacific/Ponape",
+        "country_name": "Micronesia",
+        "country_code": "fm",
+        "cities": [
+            "Kolonia",
+            "Kolonia Town",
+            "Palikir - National Government Center"
+        ]
+    },
+    {
+        "timezone": "Pacific/Ponape",
+        "old": true,
         "country_name": "Micronesia",
         "country_code": "fm",
         "cities": [
