@@ -3,71 +3,12 @@
  */
 
 /**
- * Convert a `Date` to ['HH', 'mm'] in the specific timezone
+ * Create a new `Date` object from a given `date`, but with a different timezone
  */
-export function dateToTime(date: Date, tz: string): string[] {
-    const timeStr = new Intl.DateTimeFormat('en-US', {
-        timeZone: tz,
-        hour: '2-digit',
-        minute: '2-digit',
-        hourCycle: 'h23',
-
-    }).format(date);
-    return timeStr.split(':');
-}
-
-export function dateToTimestamp(date: Date, tz: string): number {
-    const tzDate = new Date(date.toLocaleString('en-US', { timeZone: tz }));
-    return tzDate.getTime();
-}
-
-/**
- * Convert a `Date` to 'Mon 28', 'Fri 1', etc. in the specific timezone
- */
-export function dateToDay(date: Date, tz: string): string {
-    const dayStr = new Intl.DateTimeFormat('en-GB', {
-        timeZone: tz,
-        weekday: 'short',
-        day: 'numeric',
-    }).format(date);
-    return dayStr;
-}
-
-/**
- * Get the hour as a number between 0 and 23
- */
-export function dateToHours(date: Date, tz: string): number {
-    const dateStr = new Intl.DateTimeFormat('en-US', {
-        timeZone: tz,
-        hour: '2-digit',
-        hourCycle: 'h23',
-    }).format(date);
-
-    return parseInt(dateStr);
-}
-
-/**
- * Get the hour difference vs local time as '-8', '+5.5', '0', etc.
- */
-export function getHourDiff(date: Date, tz: string): string {
-    // Hours and minutes in local time
-    const localTotalMinutes = date.getUTCHours() * 60 + date.getUTCMinutes() + date.getTimezoneOffset();
-
-    // Hours and minutes in target timezone
-    const tzDate = new Date(date.toLocaleString('en-US', { timeZone: tz }));
-    const tzTotalMinutes = tzDate.getUTCHours() * 60 + tzDate.getUTCMinutes() + tzDate.getTimezoneOffset();
-
-    // Compute the difference in minutes
-    let differenceInMinutes = tzTotalMinutes - localTotalMinutes;
-
-    // Adjust for day overlap
-    if (differenceInMinutes > 720) differenceInMinutes -= 1440; // 720 minutes = 12 hours, 1440 minutes = 24 hours
-    if (differenceInMinutes < -720) differenceInMinutes += 1440;
-
-    // Convert difference to hours with possible decimal for half-hours
-    const diff = differenceInMinutes / 60;
-
-    return (diff >= 0 ? '+' : '') + diff;
+export function newDateInTimezone(date: Date, tz: string): Date {
+    return new Date(
+        date.toLocaleString('en-US', { timeZone: tz })
+    );
 }
 
 /**
@@ -76,10 +17,32 @@ export function getHourDiff(date: Date, tz: string): string {
  * Return a negative value if the first argument is less than the second argument,
  * zero if they're equal, and a positive value otherwise.
  */
-export function compareTimezones(a: string, b: string): number
-{
-    const now = new Date();
-    const dateA = new Date(now.toLocaleString('en-US', { timeZone: a }));
-    const dateB = new Date(now.toLocaleString('en-US', { timeZone: b }));
+export function compareTimezones(tzA: string, tzB: string): number {
+    const localDate = new Date();
+    const dateA = newDateInTimezone(localDate, tzA);
+    const dateB = newDateInTimezone(localDate, tzB);
     return dateA.getTime() - dateB.getTime(); // sort in ascending order
+}
+
+/**
+ * Get the difference in hours between two dates
+ */
+export function getHourDiff(dateA: Date, dateB: Date): number {
+    // Hours and minutes in local time
+    const minutesA = dateA.getUTCHours() * 60 + dateA.getUTCMinutes() + dateA.getTimezoneOffset();
+
+    // Hours and minutes in target timezone
+    const minutesB = dateB.getUTCHours() * 60 + dateB.getUTCMinutes() + dateB.getTimezoneOffset();
+
+    // Compute the difference in minutes
+    let diffInMinutes = minutesB - minutesA;
+
+    // Adjust for day overlap
+    if (diffInMinutes > 720) diffInMinutes -= 1440; // 720 minutes = 12 hours, 1440 minutes = 24 hours
+    if (diffInMinutes < -720) diffInMinutes += 1440;
+
+    // Convert difference to hours with possible decimal for half-hours
+    const diff = diffInMinutes / 60;
+
+    return diff;
 }
