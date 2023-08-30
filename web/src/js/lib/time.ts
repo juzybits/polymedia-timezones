@@ -64,3 +64,17 @@ export function getHourDiff(date: Date, tz: string): string {
 
     return (diff >= 0 ? '+' : '') + diff;
 }
+
+/**
+ * Sort timezones from earliest local time to latest local time (New York < Paris < Tokyo).
+ *
+ * Return a negative value if the first argument is less than the second argument,
+ * zero if they're equal, and a positive value otherwise.
+ */
+export function compareTimezones(a: string, b: string): number
+{
+    const now = new Date();
+    const dateA = new Date(now.toLocaleString('en-US', { timeZone: a }));
+    const dateB = new Date(now.toLocaleString('en-US', { timeZone: b }));
+    return dateA.getTime() - dateB.getTime(); // sort in ascending order
+}
