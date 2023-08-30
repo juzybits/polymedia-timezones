@@ -10,32 +10,51 @@ TODO: load/save config from local storage
 */
 
 type City = {
-    city: string;
+    name: string;
     tz: string;
+};
+
+type Column = {
+    cities: string[];
+    tz: string;
+    time: string[];
+    day: string;
+    diff: string;
+    hour: number;
 };
 
 export const App: React.FC = () =>
 {
     const [cities, _setCities] = useState<City[]>([
-        { city: 'Osaka', tz: 'Asia/Tokyo' },
-        { city: 'Mumbai', tz: 'Asia/Kolkata' },
-        { city: 'Munich', tz: 'Europe/Berlin' },
-        { city: 'Austin', tz: 'America/Chicago' },
+        { name: 'Osaka', tz: 'Asia/Tokyo' },
+        { name: 'Mumbai', tz: 'Asia/Kolkata' },
+        { name: 'Munich', tz: 'Europe/Berlin' },
+        // { name: 'Munich', tz: 'Europe/Berlin' },
+        // { name: 'Milan', tz: 'Europe/Rome' },
+        { name: 'Austin', tz: 'America/Chicago' },
     ]);
 
-    const [timezones, setTimezones] = useState<string[]>([]);
+    const [columns, setColumns] = useState<Column[]>([]);
 
     useEffect(() => {
-        const sortedTimezones = cities
-            .map(city => city.tz)
-            .sort(compareTimezones);
-        setTimezones(sortedTimezones);
+        const sortedCities = cities.sort((a, b) => compareTimezones(a.tz, b.tz));
+
+        const now = new Date();
+        const sortedColumns: Column[] = sortedCities.map(city => ({
+            cities: [city.name],
+            tz: city.tz,
+            time: dateToTime(now, city.tz),
+            day: dateToDay(now, city.tz),
+            diff: getHourDiff(now, city.tz),
+            hour: dateToHours(now, city.tz),
+        }));
+        setColumns(sortedColumns);
     }, [cities]);
 
     return (
         <div id='layout'>
             <ButtonAddCity />
-            <ColumnsPanel timezones={timezones} />
+            <ColumnsPanel columns={columns} />
         </div>
     );
 }
@@ -51,9 +70,9 @@ const ButtonAddCity: React.FC = () =>
  * Full-screen panel with a column for each timezone
  */
 const ColumnsPanel: React.FC<{
-    timezones: string[];
+    columns: Column[];
 }> = ({
-    timezones,
+    columns,
 }) =>
 {
     const [now, setNow] = useState(new Date());
@@ -71,12 +90,11 @@ const ColumnsPanel: React.FC<{
         return () => clearInterval(intervalId);
     }, []);
 
-    const columns = timezones.map(tz => (
-        <Column now={now} tz={tz} key={tz} />
-    ));
     return (
         <div id='columns-panel'>
-            {columns}
+            {columns.map(column => (
+                <Column column={column} key={column.tz} />
+            ))}
         </div>
     );
 }
@@ -85,28 +103,22 @@ const ColumnsPanel: React.FC<{
  * Colorful column showing the timezone and city info
  */
 const Column: React.FC<{
-    now: Date;
-    tz: string;
+    column: Column;
 }> = ({
-    now,
-    tz,
+    column,
 }) =>
 {
-    const time = dateToTime(now, tz);
-    const day = dateToDay(now, tz);
-    const diff = getHourDiff(now, tz);
-    const hour = dateToHours(now, tz);
-    const backgroundImage = gradients[hour];
-    const color = (hour >= 8 && hour <= 16) ? 'rgb(67, 67, 67)' : 'rgb(255, 255, 255)';
+    const backgroundImage = gradients[column.hour];
+    const color = (column.hour >= 8 && column.hour <= 16) ? 'rgb(67, 67, 67)' : 'rgb(255, 255, 255)';
     return (
         <div
             className='column'
             style={{ backgroundImage, color}}
         >
-            <div className='column-time'><b>{time[0]}</b> : {time[1]}</div>
-            <div className='column-day'>{day}</div>
-            <div className='column-tz'>{tz}</div>
-            <div className='column-diff'>{diff}</div>
+            <div className='column-time'><b>{column.time[0]}</b> : {column.time[1]}</div>
+            <div className='column-day'>{column.day}</div>
+            <div className='column-tz'>{column.tz}</div>
+            <div className='column-diff'>{column.diff}</div>
         </div>
     );
 }
