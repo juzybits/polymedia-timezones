@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useReducer, useRef, useState } from 'react';
 import { dateToTime, dateToDay, dateToHours, getHourDiff, compareTimezones } from './lib/time';
 import '../css/App.less';
 
@@ -34,22 +34,39 @@ export const App: React.FC = () =>
         { name: 'Austin', tz: 'America/Chicago' },
     ]);
 
-    const [columns, setColumns] = useState<Column[]>([]);
-
+    const [elapsedMinutes, increaseMinutes] = useReducer(minute => minute + 1, 0);
+    const nowRef = useRef(new Date()); // we use a ref because setInterval() doesn't notice state changes
     useEffect(() => {
-        const sortedCities = cities.sort((a, b) => compareTimezones(a.tz, b.tz));
+        function repaintColumnsEveryMinute() {
+            const newDate = new Date();
+            // Only repaint the UI if the minute has changed
+            if (newDate.getMinutes() !== nowRef.current.getMinutes()) {
+                nowRef.current = newDate;
+                increaseMinutes();
+            }
+        }
+        const intervalId = setInterval(repaintColumnsEveryMinute, 1_000);
+        return () => clearInterval(intervalId);
+    }, []);
 
-        const now = new Date();
-        const sortedColumns: Column[] = sortedCities.map(city => ({
-            cities: [city.name],
-            tz: city.tz,
-            time: dateToTime(now, city.tz),
-            day: dateToDay(now, city.tz),
-            diff: getHourDiff(now, city.tz),
-            hour: dateToHours(now, city.tz),
-        }));
-        setColumns(sortedColumns);
-    }, [cities]);
+    const [columns, setColumns] = useState<Column[]>([]);
+    useEffect(() => {
+        function rebuildColumns() {
+            const sortedCities = cities.sort((a, b) => compareTimezones(a.tz, b.tz));
+
+            const now = new Date();
+            const sortedColumns: Column[] = sortedCities.map(city => ({
+                cities: [city.name],
+                tz: city.tz,
+                time: dateToTime(now, city.tz),
+                day: dateToDay(now, city.tz),
+                diff: getHourDiff(now, city.tz),
+                hour: dateToHours(now, city.tz),
+            }));
+            setColumns(sortedColumns);
+        }
+        rebuildColumns();
+    }, [cities, elapsedMinutes]);
 
     return (
         <div id='layout'>
@@ -75,21 +92,6 @@ const ColumnsPanel: React.FC<{
     columns,
 }) =>
 {
-    const [now, setNow] = useState(new Date());
-    const nowRef = useRef(now); // we need a ref because setInterval() doesn't notice state changes
-
-    useEffect(() => {
-        const intervalId = setInterval(() => {
-            const newDate = new Date();
-            // Only repaint the UI if the minute has changed
-            if (newDate.getMinutes() !== nowRef.current.getMinutes()) {
-                nowRef.current = newDate;
-                setNow(newDate);
-            }
-        }, 1_000);
-        return () => clearInterval(intervalId);
-    }, []);
-
     return (
         <div id='columns-panel'>
             {columns.map(column => (
