@@ -16,6 +16,11 @@ export function dateToTime(date: Date, tz: string): string[] {
     return timeStr.split(':');
 }
 
+export function dateToTimestamp(date: Date, tz: string): number {
+    const tzDate = new Date(date.toLocaleString('en-US', { timeZone: tz }));
+    return tzDate.getTime();
+}
+
 /**
  * Convert a `Date` to 'Mon 28', 'Fri 1', etc. in the specific timezone
  */

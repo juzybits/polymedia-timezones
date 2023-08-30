@@ -1,5 +1,5 @@
 import { useEffect, useReducer, useRef, useState } from 'react';
-import { dateToTime, dateToDay, dateToHours, getHourDiff, compareTimezones } from './lib/time';
+import { dateToTime, dateToDay, dateToHours, getHourDiff, compareTimezones, dateToTimestamp } from './lib/time';
 import '../css/App.less';
 
 /*
@@ -29,8 +29,8 @@ export const App: React.FC = () =>
         { name: 'Osaka', tz: 'Asia/Tokyo' },
         { name: 'Mumbai', tz: 'Asia/Kolkata' },
         { name: 'Munich', tz: 'Europe/Berlin' },
-        // { name: 'Munich', tz: 'Europe/Berlin' },
-        // { name: 'Milan', tz: 'Europe/Rome' },
+        { name: 'Munich', tz: 'Europe/Berlin' },
+        { name: 'Milan', tz: 'Europe/Rome' },
         { name: 'Austin', tz: 'America/Chicago' },
     ]);
 
@@ -53,17 +53,22 @@ export const App: React.FC = () =>
     useEffect(() => {
         function rebuildColumns() {
             const sortedCities = cities.sort((a, b) => compareTimezones(a.tz, b.tz));
-
+            const sortedColumns = new Map<number, Column>();
             const now = new Date();
-            const sortedColumns: Column[] = sortedCities.map(city => ({
-                cities: [city.name],
-                tz: city.tz,
-                time: dateToTime(now, city.tz),
-                day: dateToDay(now, city.tz),
-                diff: getHourDiff(now, city.tz),
-                hour: dateToHours(now, city.tz),
-            }));
-            setColumns(sortedColumns);
+            for (const city of sortedCities) {
+                const timestamp = dateToTimestamp(now, city.tz);
+                const column: Column = sortedColumns.get(timestamp) || {
+                    cities: [],
+                    tz: city.tz,
+                    time: dateToTime(now, city.tz),
+                    day: dateToDay(now, city.tz),
+                    diff: getHourDiff(now, city.tz),
+                    hour: dateToHours(now, city.tz),
+                };
+                column.cities.push(city.name);
+                sortedColumns.set(timestamp, column);
+            }
+            setColumns([...sortedColumns.values()]);
         }
         rebuildColumns();
     }, [cities, elapsedMinutes]);
@@ -120,6 +125,7 @@ const Column: React.FC<{
             <div className='column-time'><b>{column.time[0]}</b> : {column.time[1]}</div>
             <div className='column-day'>{column.day}</div>
             <div className='column-tz'>{column.tz}</div>
+            <div className='column-tz'>{column.cities.join(', ')}</div>
             <div className='column-diff'>{column.diff}</div>
         </div>
     );
