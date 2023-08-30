@@ -1,11 +1,5 @@
 [
     {
-        "timezone": "Pacific/Midway",
-        "country_name": "United States Minor Outlying Islands",
-        "country_code": "um",
-        "cities": []
-    },
-    {
         "timezone": "Pacific/Niue",
         "country_name": "Niue",
         "country_code": "nu",
@@ -23,12 +17,6 @@
             "Ta`ū",
             "Taulaga"
         ]
-    },
-    {
-        "timezone": "America/Adak",
-        "country_name": "United States",
-        "country_code": "us",
-        "cities": []
     },
     {
         "timezone": "Pacific/Honolulu",
@@ -91,18 +79,6 @@
         ]
     },
     {
-        "timezone": "America/Metlakatla",
-        "country_name": "United States",
-        "country_code": "us",
-        "cities": []
-    },
-    {
-        "timezone": "America/Nome",
-        "country_name": "United States",
-        "country_code": "us",
-        "cities": []
-    },
-    {
         "timezone": "America/Sitka",
         "country_name": "United States",
         "country_code": "us",
@@ -110,18 +86,6 @@
             "Sitka",
             "Ketchikan"
         ]
-    },
-    {
-        "timezone": "America/Yakutat",
-        "country_name": "United States",
-        "country_code": "us",
-        "cities": []
-    },
-    {
-        "timezone": "Pacific/Gambier",
-        "country_name": "French Polynesia",
-        "country_code": "pf",
-        "cities": []
     },
     {
         "timezone": "America/Los_Angeles",
@@ -180,12 +144,6 @@
         ]
     },
     {
-        "timezone": "America/Cambridge_Bay",
-        "country_name": "Canada",
-        "country_code": "ca",
-        "cities": []
-    },
-    {
         "timezone": "America/Ciudad_Juarez",
         "country_name": "Mexico",
         "country_code": "mx",
@@ -203,12 +161,6 @@
         "cities": [
             "Creston"
         ]
-    },
-    {
-        "timezone": "America/Dawson",
-        "country_name": "Canada",
-        "country_code": "ca",
-        "cities": []
     },
     {
         "timezone": "America/Dawson_Creek",
@@ -244,12 +196,6 @@
         ]
     },
     {
-        "timezone": "America/Fort_Nelson",
-        "country_name": "Canada",
-        "country_code": "ca",
-        "cities": []
-    },
-    {
         "timezone": "America/Hermosillo",
         "country_name": "Mexico",
         "country_code": "mx",
@@ -260,12 +206,6 @@
             "San Luis Río Colorado",
             "Navojoa"
         ]
-    },
-    {
-        "timezone": "America/Inuvik",
-        "country_name": "Canada",
-        "country_code": "ca",
-        "cities": []
     },
     {
         "timezone": "America/Mazatlan",
@@ -391,12 +331,6 @@
         ]
     },
     {
-        "timezone": "America/Indiana/Knox",
-        "country_name": "United States",
-        "country_code": "us",
-        "cities": []
-    },
-    {
         "timezone": "America/Indiana/Tell_City",
         "country_name": "United States",
         "country_code": "us",
@@ -476,18 +410,6 @@
         ]
     },
     {
-        "timezone": "America/North_Dakota/Beulah",
-        "country_name": "United States",
-        "country_code": "us",
-        "cities": []
-    },
-    {
-        "timezone": "America/North_Dakota/Center",
-        "country_name": "United States",
-        "country_code": "us",
-        "cities": []
-    },
-    {
         "timezone": "America/North_Dakota/New_Salem",
         "country_name": "United States",
         "country_code": "us",
@@ -505,12 +427,6 @@
         ]
     },
     {
-        "timezone": "America/Rankin_Inlet",
-        "country_name": "Canada",
-        "country_code": "ca",
-        "cities": []
-    },
-    {
         "timezone": "America/Regina",
         "country_name": "Canada",
         "country_code": "ca",
@@ -521,12 +437,6 @@
             "Moose Jaw",
             "North Battleford"
         ]
-    },
-    {
-        "timezone": "America/Resolute",
-        "country_name": "Canada",
-        "country_code": "ca",
-        "cities": []
     },
     {
         "timezone": "America/Swift_Current",
@@ -559,12 +469,6 @@
             "Kenora",
             "Thompson"
         ]
-    },
-    {
-        "timezone": "Pacific/Easter",
-        "country_name": "Chile",
-        "country_code": "cl",
-        "cities": []
     },
     {
         "timezone": "Pacific/Galapagos",
@@ -679,24 +583,6 @@
         ]
     },
     {
-        "timezone": "America/Indiana/Marengo",
-        "country_name": "United States",
-        "country_code": "us",
-        "cities": []
-    },
-    {
-        "timezone": "America/Indiana/Petersburg",
-        "country_name": "United States",
-        "country_code": "us",
-        "cities": []
-    },
-    {
-        "timezone": "America/Indiana/Vevay",
-        "country_name": "United States",
-        "country_code": "us",
-        "cities": []
-    },
-    {
         "timezone": "America/Indiana/Vincennes",
         "country_name": "United States",
         "country_code": "us",
@@ -705,12 +591,6 @@
             "Washington",
             "Huntingburg"
         ]
-    },
-    {
-        "timezone": "America/Indiana/Winamac",
-        "country_name": "United States",
-        "country_code": "us",
-        "cities": []
     },
     {
         "timezone": "America/Iqaluit",
@@ -896,12 +776,6 @@
             "Bathsheba",
             "Holetown"
         ]
-    },
-    {
-        "timezone": "America/Blanc-Sablon",
-        "country_name": "Canada",
-        "country_code": "ca",
-        "cities": []
     },
     {
         "timezone": "America/Boa_Vista",
@@ -1198,12 +1072,6 @@
             "Barrouallie",
             "Port Elizabeth"
         ]
-    },
-    {
-        "timezone": "America/Thule",
-        "country_name": "Greenland",
-        "country_code": "gl",
-        "cities": []
     },
     {
         "timezone": "America/Tortola",
@@ -1540,18 +1408,6 @@
         ]
     },
     {
-        "timezone": "Antarctica/Palmer",
-        "country_name": "Antarctica",
-        "country_code": "aq",
-        "cities": []
-    },
-    {
-        "timezone": "Antarctica/Rothera",
-        "country_name": "Antarctica",
-        "country_code": "aq",
-        "cities": []
-    },
-    {
         "timezone": "Atlantic/Stanley",
         "country_name": "Falkland Islands",
         "country_code": "fk",
@@ -1560,24 +1416,12 @@
         ]
     },
     {
-        "timezone": "America/Noronha",
-        "country_name": "Brazil",
-        "country_code": "br",
-        "cities": []
-    },
-    {
         "timezone": "Atlantic/South_Georgia",
         "country_name": "South Georgia and the South Sandwich Islands",
         "country_code": "gs",
         "cities": [
             "Grytviken"
         ]
-    },
-    {
-        "timezone": "America/Scoresbysund",
-        "country_name": "Greenland",
-        "country_code": "gl",
-        "cities": []
     },
     {
         "timezone": "Atlantic/Azores",
@@ -1778,18 +1622,6 @@
             "São Tomé",
             "Santo António"
         ]
-    },
-    {
-        "timezone": "America/Danmarkshavn",
-        "country_name": "Greenland",
-        "country_code": "gl",
-        "cities": []
-    },
-    {
-        "timezone": "Antarctica/Troll",
-        "country_name": "Antarctica",
-        "country_code": "aq",
-        "cities": []
     },
     {
         "timezone": "Atlantic/Canary",
@@ -2860,12 +2692,6 @@
         ]
     },
     {
-        "timezone": "Antarctica/Syowa",
-        "country_name": "Antarctica",
-        "country_code": "aq",
-        "cities": []
-    },
-    {
         "timezone": "Asia/Aden",
         "country_name": "Yemen",
         "country_code": "ye",
@@ -3238,12 +3064,6 @@
         ]
     },
     {
-        "timezone": "Antarctica/Mawson",
-        "country_name": "Antarctica",
-        "country_code": "aq",
-        "cities": []
-    },
-    {
         "timezone": "Asia/Aqtau",
         "country_name": "Kazakhstan",
         "country_code": "kz",
@@ -3436,12 +3256,6 @@
         ]
     },
     {
-        "timezone": "Antarctica/Vostok",
-        "country_name": "Antarctica",
-        "country_code": "aq",
-        "cities": []
-    },
-    {
         "timezone": "Asia/Almaty",
         "country_name": "Kazakhstan",
         "country_code": "kz",
@@ -3526,12 +3340,6 @@
         ]
     },
     {
-        "timezone": "Indian/Chagos",
-        "country_name": "British Indian Ocean Territory",
-        "country_code": "io",
-        "cities": []
-    },
-    {
         "timezone": "Asia/Yangon",
         "timezone_old": "Asia/Rangoon",
         "country_name": "Myanmar",
@@ -3551,12 +3359,6 @@
         "cities": [
             "West Island"
         ]
-    },
-    {
-        "timezone": "Antarctica/Davis",
-        "country_name": "Antarctica",
-        "country_code": "aq",
-        "cities": []
     },
     {
         "timezone": "Asia/Bangkok",
@@ -3873,12 +3675,6 @@
         ]
     },
     {
-        "timezone": "Australia/Eucla",
-        "country_name": "Australia",
-        "country_code": "au",
-        "cities": []
-    },
-    {
         "timezone": "Asia/Chita",
         "country_name": "Russia",
         "country_code": "ru",
@@ -3913,12 +3709,6 @@
             "Ternate",
             "Manokwari"
         ]
-    },
-    {
-        "timezone": "Asia/Khandyga",
-        "country_name": "Russia",
-        "country_code": "ru",
-        "cities": []
     },
     {
         "timezone": "Asia/Pyongyang",
@@ -4012,24 +3802,6 @@
         ]
     },
     {
-        "timezone": "Antarctica/DumontDUrville",
-        "country_name": "Antarctica",
-        "country_code": "aq",
-        "cities": []
-    },
-    {
-        "timezone": "Antarctica/Macquarie",
-        "country_name": "Australia",
-        "country_code": "au",
-        "cities": []
-    },
-    {
-        "timezone": "Asia/Ust-Nera",
-        "country_name": "Russia",
-        "country_code": "ru",
-        "cities": []
-    },
-    {
         "timezone": "Asia/Vladivostok",
         "country_name": "Russia",
         "country_code": "ru",
@@ -4064,12 +3836,6 @@
             "Devonport",
             "Sandy Bay"
         ]
-    },
-    {
-        "timezone": "Australia/Lindeman",
-        "country_name": "Australia",
-        "country_code": "au",
-        "cities": []
     },
     {
         "timezone": "Australia/Melbourne",
@@ -4139,18 +3905,6 @@
         ]
     },
     {
-        "timezone": "Australia/Lord_Howe",
-        "country_name": "Australia",
-        "country_code": "au",
-        "cities": []
-    },
-    {
-        "timezone": "Antarctica/Casey",
-        "country_name": "Antarctica",
-        "country_code": "aq",
-        "cities": []
-    },
-    {
         "timezone": "Asia/Magadan",
         "country_name": "Russia",
         "country_code": "ru",
@@ -4172,12 +3926,6 @@
             "Okha",
             "Nevel’sk"
         ]
-    },
-    {
-        "timezone": "Asia/Srednekolymsk",
-        "country_name": "Russia",
-        "country_code": "ru",
-        "cities": []
     },
     {
         "timezone": "Pacific/Bougainville",
@@ -4250,12 +3998,6 @@
             "Kolonia Town",
             "Palikir - National Government Center"
         ]
-    },
-    {
-        "timezone": "Antarctica/McMurdo",
-        "country_name": "Antarctica",
-        "country_code": "aq",
-        "cities": []
     },
     {
         "timezone": "Asia/Anadyr",
@@ -4358,12 +4100,6 @@
         ]
     },
     {
-        "timezone": "Pacific/Wake",
-        "country_name": "United States Minor Outlying Islands",
-        "country_code": "um",
-        "cities": []
-    },
-    {
         "timezone": "Pacific/Wallis",
         "country_name": "Wallis and Futuna",
         "country_code": "wf",
@@ -4414,11 +4150,5 @@
             "Pangai",
             "‘Ohonua"
         ]
-    },
-    {
-        "timezone": "Pacific/Kiritimati",
-        "country_name": "Kiribati",
-        "country_code": "ki",
-        "cities": []
     }
 ]
