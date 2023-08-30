@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { dateToTime, dateToDay, dateToHours, getHourDiff } from './lib/time';
+import { dateToTime, dateToDay, dateToHours, getHourDiff, compareTimezones } from './lib/time';
 import '../css/App.less';
 
 /*
@@ -9,14 +9,28 @@ TODO: let user select timezones.
 TODO: load/save config from local storage
 */
 
+type City = {
+    city: string;
+    tz: string;
+};
+
 export const App: React.FC = () =>
 {
-    const [timezones, _setTimezones] = useState<string[]>([
-        'America/Los_Angeles',
-        'Europe/London',
-        'Asia/Kolkata',
-        'Asia/Tokyo',
+    const [cities, _setCities] = useState<City[]>([
+        { city: 'Osaka', tz: 'Asia/Tokyo' },
+        { city: 'Mumbai', tz: 'Asia/Kolkata' },
+        { city: 'Munich', tz: 'Europe/Berlin' },
+        { city: 'Austin', tz: 'America/Chicago' },
     ]);
+
+    const [timezones, setTimezones] = useState<string[]>([]);
+
+    useEffect(() => {
+        const sortedTimezones = cities
+            .map(city => city.tz)
+            .sort(compareTimezones);
+        setTimezones(sortedTimezones);
+    }, [cities]);
 
     return (
         <div id='layout'>
