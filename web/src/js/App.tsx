@@ -19,15 +19,6 @@ type Column = {
 
 export const App: React.FC = () =>
 {
-    const [cities, _setCities] = useState<City[]>([
-        { name: 'Osaka', tz: 'Asia/Tokyo', country_code: 'jp' },
-        { name: 'Mumbai', tz: 'Asia/Kolkata', country_code: 'in' },
-        { name: 'Munich', tz: 'Europe/Berlin', country_code: 'de' },
-        { name: 'Munich', tz: 'Europe/Berlin', country_code: 'de' },
-        { name: 'Milan', tz: 'Europe/Rome', country_code: 'it' },
-        { name: 'Austin', tz: 'America/Chicago', country_code: 'us' },
-    ]);
-
     const [localDate, setLocalDate] = useState(new Date());
     const localDateRef = useRef(localDate); // we use a ref because setInterval() doesn't notice state changes
     useEffect(() => {
@@ -44,6 +35,14 @@ export const App: React.FC = () =>
         return () => clearInterval(intervalId);
     }, []);
 
+    const [cities, _setCities] = useState<City[]>([
+        { name: 'Osaka', tz: 'Asia/Tokyo', country_code: 'jp' },
+        { name: 'Mumbai', tz: 'Asia/Kolkata', country_code: 'in' },
+        { name: 'Munich', tz: 'Europe/Berlin', country_code: 'de' },
+        { name: 'Munich', tz: 'Europe/Berlin', country_code: 'de' },
+        { name: 'Milan', tz: 'Europe/Rome', country_code: 'it' },
+        { name: 'Austin', tz: 'America/Chicago', country_code: 'us' },
+    ]);
     const [columns, setColumns] = useState<Column[]>([]);
     useEffect(() => {
         function rebuildColumns() {
@@ -105,8 +104,28 @@ const ColumnsPanel: React.FC<{
     localDate,
 }) =>
 {
+    const [orientation, setOrientation] = useState<string>('horizontal');
+
+    useEffect(() => {
+        function updateOrientationOnResize() {
+            if (window.innerHeight > window.innerWidth) {
+                setOrientation('vertical');
+            } else {
+                setOrientation('horizontal');
+            }
+        }
+
+        updateOrientationOnResize();
+
+        window.addEventListener('resize', updateOrientationOnResize);
+
+        return () => { // cleanup listener on component unmount
+            window.removeEventListener('resize', updateOrientationOnResize);
+        }
+    }, []);
+
     return (
-        <div id='columns-panel'>
+        <div id='columns-panel' className={orientation}>
             {columns.map((column, index) => (
                 <Column column={column} localDate={localDate} key={index} />
             ))}
