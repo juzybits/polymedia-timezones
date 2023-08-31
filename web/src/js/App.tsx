@@ -13,8 +13,7 @@ type City = {
 };
 
 type Column = {
-    cities: string[];
-    tz: string;
+    cities: City[];
 };
 
 export const App: React.FC = () =>
@@ -53,8 +52,8 @@ export const App: React.FC = () =>
             for (const city of sortedCities) {
                 const tzDate = newDateInTimezone(localDate, city.tz);
                 const colKey = tzDate.getTime();
-                const column: Column = sortedColumns.get(colKey) || { cities: [], tz: city.tz };
-                column.cities.push(city.name);
+                const column: Column = sortedColumns.get(colKey) || { cities: [] };
+                column.cities.push(city);
                 sortedColumns.set(colKey, column);
             }
             setColumns([...sortedColumns.values()]);
@@ -90,8 +89,8 @@ const ColumnsPanel: React.FC<{
 {
     return (
         <div id='columns-panel'>
-            {columns.map(column => (
-                <Column column={column} localDate={localDate} key={column.tz} />
+            {columns.map((column, index) => (
+                <Column column={column} localDate={localDate} key={index} />
             ))}
         </div>
     );
@@ -108,7 +107,10 @@ const Column: React.FC<{
     localDate,
 }) =>
 {
-    const tzDate = newDateInTimezone(localDate, column.tz);
+    // The cities in a column may be on different timezones, but it is the same time in all of them,
+    // e.g. 'Europe/Paris' and 'Europe/Rome'. So we can use any of those timezones to create `tzDate`.
+    const tz = column.cities[0].tz;
+    const tzDate = newDateInTimezone(localDate, tz);
 
     // Format the day as 'Mon 28', 'Fri 1', etc
     const dayStr = new Intl.DateTimeFormat('en-GB', {
@@ -128,7 +130,7 @@ const Column: React.FC<{
     const minuteStr = hourAndMinutes[1];
     // const secondStr = hourAndMinutes[2];
 
-    // Hour difference as '-8', '+5.5', '0', etc
+    // Format the hour difference vs local time as '-8', '+5.5', '0', etc
     const hourDiff = getHourDiff(localDate, tzDate);
     const hourDiffStr = (hourDiff >= 0 ? '+' : '') + hourDiff;
 
@@ -173,8 +175,9 @@ const Column: React.FC<{
             <div className='column-time'><b>{hourStr}</b> : {minuteStr}</div>
             {/* <div className='column-time'><b>{hourStr}</b> : {minuteStr} : {secondStr}</div> */}
             <div className='column-day'>{dayStr}</div>
-            <div className='column-tz'>{column.tz}</div>
-            <div className='column-tz'>{column.cities.join(', ')}</div>
+            <div className='column-cities'>{
+                column.cities.map(city => <div className='column-city'>{city.name}</div>)
+            }</div>
             <div className='column-diff'>{hourDiffStr}</div>
         </div>
     );
