@@ -7,13 +7,15 @@ TODO: let user select cities
 TODO: load/save config from local storage
 */
 
+// A city chosen by the user
 type City = {
     name: string;
     country_code: string;
     tz: string;
 };
 
-type Column = {
+// A colorful column/row (in landscape/portrait) showing the time, day, city names...
+type Slot = {
     cities: City[];
 };
 
@@ -22,7 +24,7 @@ export const App: React.FC = () =>
     const [localDate, setLocalDate] = useState(new Date());
     const localDateRef = useRef(localDate); // we use a ref because setInterval() doesn't notice state changes
     useEffect(() => {
-        // Repaint the columns when the minute changes
+        // Repaint the slots when the minute changes
         function updateLocalDateEveryMinute() {
             const newDate = new Date();
             if (newDate.getMinutes() !== localDateRef.current.getMinutes()) {
@@ -43,9 +45,9 @@ export const App: React.FC = () =>
         { name: 'Milan', tz: 'Europe/Rome', country_code: 'it' },
         { name: 'Austin', tz: 'America/Chicago', country_code: 'us' },
     ]);
-    const [columns, setColumns] = useState<Column[]>([]);
+    const [slot, setSlots] = useState<Slot[]>([]);
     useEffect(() => {
-        function rebuildColumns() {
+        function rebuildSlots() {
             // Deduplicate cities by name
             const cityMap: Map<string, City> = new Map();
             for (const city of cities) {
@@ -63,25 +65,25 @@ export const App: React.FC = () =>
                 }
             );
 
-            // Group cities into columns when they have the same time
-            const sortedColumns = new Map<number, Column>();
+            // Group cities into slots when they have the same time
+            const sortedSlots = new Map<number, Slot>();
             const localDate = new Date();
             for (const city of sortedCities) {
                 const tzDate = newDateInTimezone(localDate, city.tz);
                 const colKey = tzDate.getTime();
-                const column: Column = sortedColumns.get(colKey) || { cities: [] };
-                column.cities.push(city);
-                sortedColumns.set(colKey, column);
+                const slot: Slot = sortedSlots.get(colKey) || { cities: [] };
+                slot.cities.push(city);
+                sortedSlots.set(colKey, slot);
             }
-            setColumns([...sortedColumns.values()]);
+            setSlots([...sortedSlots.values()]);
         }
-        rebuildColumns();
+        rebuildSlots();
     }, [cities]);
 
     return (
         <div id='layout'>
             <ButtonAddCity />
-            <ColumnsPanel columns={columns} localDate={localDate} />
+            <SlotsPanel slots={slot} localDate={localDate} />
         </div>
     );
 }
@@ -94,13 +96,13 @@ const ButtonAddCity: React.FC = () =>
 }
 
 /**
- * Full-screen panel with a column for each timezone
+ * Full-screen panel with a column/row for each timezone
  */
-const ColumnsPanel: React.FC<{
-    columns: Column[];
+const SlotsPanel: React.FC<{
+    slots: Slot[];
     localDate: Date,
 }> = ({
-    columns,
+    slots,
     localDate,
 }) =>
 {
@@ -125,28 +127,28 @@ const ColumnsPanel: React.FC<{
     }, []);
 
     return (
-        <div id='columns-panel' className={orientation}>
-            {columns.map((column, index) => (
-                <Column column={column} localDate={localDate} key={index} />
+        <div id='slots-panel' className={orientation}>
+            {slots.map((slot, index) => (
+                <Slot slot={slot} localDate={localDate} key={index} />
             ))}
         </div>
     );
 }
 
 /**
- * Colorful column showing the timezone and city info
+ * Colorful slot showing the timezone and city info
  */
-const Column: React.FC<{
-    column: Column;
+const Slot: React.FC<{
+    slot: Slot;
     localDate: Date,
 }> = ({
-    column,
+    slot,
     localDate,
 }) =>
 {
-    // The cities in a column may be on different timezones, but it is the same time in all of them,
+    // The cities in a slot may be on different timezones, but it is the same time in all of them,
     // e.g. 'Europe/Paris' and 'Europe/Rome'. So we can use any of those timezones to create `tzDate`.
-    const tz = column.cities[0].tz;
+    const tz = slot.cities[0].tz;
     const tzDate = newDateInTimezone(localDate, tz);
 
     // Format the day as 'Mon 28', 'Fri 1', etc
@@ -174,7 +176,7 @@ const Column: React.FC<{
     // Get the hour as a number between 0 and 23
     const hour = tzDate.getHours();
 
-    // Depending on the hour, choose the column background and text color
+    // Depending on the hour, choose the slot background and text color
     const gradients = [
         'linear-gradient(rgb(3, 12, 27), rgb(8, 9, 35))', // 00
         'linear-gradient(rgb(3, 12, 27), rgb(8, 9, 35))', // 01
@@ -206,15 +208,15 @@ const Column: React.FC<{
 
     return (
         <div
-            className='column'
+            className='slot'
             style={{ backgroundImage, color}}
         >
-            <div className='column-time'><b>{hourStr}</b> : {minuteStr}</div>
-            {/* <div className='column-time'><b>{hourStr}</b> : {minuteStr} : {secondStr}</div> */}
-            <div className='column-day'>{dayStr}</div>
-            <div className='column-diff'>{hourDiffStr}</div>
-            <div className='column-cities'>
-                {column.cities.map(city => (
+            <div className='slot-time'><b>{hourStr}</b> : {minuteStr}</div>
+            {/* <div className='slot-time'><b>{hourStr}</b> : {minuteStr} : {secondStr}</div> */}
+            <div className='slot-day'>{dayStr}</div>
+            <div className='slot-diff'>{hourDiffStr}</div>
+            <div className='slot-cities'>
+                {slot.cities.map(city => (
                 <div className='city'>
                     <span className='flag'>{getFlagEmoji(city.country_code)}</span>
                     <span>{city.name}</span>
