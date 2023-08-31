@@ -30,7 +30,7 @@ a {
     align-items: stretch;
     &.horizontal {
         flex-direction: row;
-        height: 100svh;
+        min-height: 100svh;
     }
     &.vertical {
         flex-direction: column;
@@ -41,21 +41,34 @@ a {
     .slot {
         flex: 1;
         display: flex;
-        flex-direction: column;   // stack children vertically
-        justify-content: center;  // center children vertically
-        align-items: center;      // center children horizontally
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 1em 0;
 
-        .slot-time {
-            font-size: 2.4em;
+        .slot-top-filler {
+            flex: 1;
         }
-        .slot-day {
-            margin: 0.5em 0 1em 0;
-        }
-        .slot-diff {
-            margin: 0.6em 0 2em 0;
-            letter-spacing: 0.04em;
+        .slot-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            .slot-time {
+                font-size: 2.4em;
+            }
+            .slot-day {
+                margin-top: 0.5em;
+            }
+            .slot-diff {
+                margin-top: 0.5em;
+                margin-bottom: 0.5em;
+                letter-spacing: 0.04em;
+            }
         }
         .slot-cities {
+            flex: 1;
             .city {
                 .flag {
                     margin-right: 5px;

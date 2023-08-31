@@ -42,8 +42,14 @@ export const App: React.FC = () =>
         { name: 'Mumbai', tz: 'Asia/Kolkata', country_code: 'in' },
         { name: 'Munich', tz: 'Europe/Berlin', country_code: 'de' },
         { name: 'Munich', tz: 'Europe/Berlin', country_code: 'de' },
+        { name: 'Frankfurt', tz: 'Europe/Berlin', country_code: 'de' },
         { name: 'Milan', tz: 'Europe/Rome', country_code: 'it' },
+        { name: 'Naples', tz: 'Europe/Rome', country_code: 'it' },
+        { name: 'Budapest', tz: 'Europe/Budapest', country_code: 'hu' },
         { name: 'Austin', tz: 'America/Chicago', country_code: 'us' },
+        { name: 'Honolulu', tz: 'Pacific/Honolulu', country_code: 'us' },
+        { name: 'Singapore', tz: 'Asia/Singapore', country_code: 'sg' },
+        { name: 'Auckland', tz: 'Pacific/Auckland', country_code: 'nz' },
     ]);
     const [slot, setSlots] = useState<Slot[]>([]);
     useEffect(() => {
@@ -204,17 +210,20 @@ const Slot: React.FC<{
         'linear-gradient(rgb(12, 6, 43), rgb(16, 2, 51))', // 23
     ];
     const backgroundImage = gradients[hour];
-    const color = (hour >= 8 && hour <= 16) ? 'rgb(50, 50, 50)' : 'rgb(255, 255, 255)';
+    const color = (hour >= 8 && hour <= 17) ? 'rgb(50, 50, 50)' : 'rgb(255, 255, 255)';
 
     return (
         <div
             className='slot'
             style={{ backgroundImage, color}}
         >
-            <div className='slot-time'><b>{hourStr}</b> : {minuteStr}</div>
-            {/* <div className='slot-time'><b>{hourStr}</b> : {minuteStr} : {secondStr}</div> */}
-            <div className='slot-day'>{dayStr}</div>
-            <div className='slot-diff'>{hourDiffStr}</div>
+            <div className='slot-top-filler'></div>
+            <div className='slot-main'>
+                <div className='slot-time'><b>{hourStr}</b> : {minuteStr}</div>
+                {/* <div className='slot-time'><b>{hourStr}</b> : {minuteStr} : {secondStr}</div> */}
+                <div className='slot-day'>{dayStr}</div>
+                <div className='slot-diff'>{hourDiffStr}</div>
+            </div>
             <div className='slot-cities'>
                 {slot.cities.map(city => (
                 <div className='city'>
