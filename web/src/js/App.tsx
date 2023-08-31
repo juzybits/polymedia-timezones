@@ -9,6 +9,7 @@ TODO: load/save config from local storage
 
 type City = {
     name: string;
+    country_code: string;
     tz: string;
 };
 
@@ -19,12 +20,12 @@ type Column = {
 export const App: React.FC = () =>
 {
     const [cities, _setCities] = useState<City[]>([
-        { name: 'Osaka', tz: 'Asia/Tokyo' },
-        { name: 'Mumbai', tz: 'Asia/Kolkata' },
-        { name: 'Munich', tz: 'Europe/Berlin' },
-        { name: 'Munich', tz: 'Europe/Berlin' },
-        { name: 'Milan', tz: 'Europe/Rome' },
-        { name: 'Austin', tz: 'America/Chicago' },
+        { name: 'Osaka', tz: 'Asia/Tokyo', country_code: 'jp' },
+        { name: 'Mumbai', tz: 'Asia/Kolkata', country_code: 'in' },
+        { name: 'Munich', tz: 'Europe/Berlin', country_code: 'de' },
+        { name: 'Munich', tz: 'Europe/Berlin', country_code: 'de' },
+        { name: 'Milan', tz: 'Europe/Rome', country_code: 'it' },
+        { name: 'Austin', tz: 'America/Chicago', country_code: 'us' },
     ]);
 
     const [localDate, setLocalDate] = useState(new Date());
@@ -192,10 +193,23 @@ const Column: React.FC<{
             <div className='column-time'><b>{hourStr}</b> : {minuteStr}</div>
             {/* <div className='column-time'><b>{hourStr}</b> : {minuteStr} : {secondStr}</div> */}
             <div className='column-day'>{dayStr}</div>
-            <div className='column-cities'>{
-                column.cities.map(city => <div className='column-city'>{city.name}</div>)
-            }</div>
             <div className='column-diff'>{hourDiffStr}</div>
+            <div className='column-cities'>
+                {column.cities.map(city => (
+                <div className='city'>
+                    <span className='flag'>{getFlagEmoji(city.country_code)}</span>
+                    <span>{city.name}</span>
+                </div>
+                ))}
+            </div>
         </div>
     );
+}
+
+function getFlagEmoji(countryCode: string): string {
+    const codePoints = countryCode
+        .toUpperCase()
+        .split('')
+        .map(char =>  127397 + char.charCodeAt(0));
+    return String.fromCodePoint(...codePoints);
 }
