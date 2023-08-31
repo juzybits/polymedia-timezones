@@ -113,29 +113,30 @@ const SlotsPanel: React.FC<{
 }) =>
 {
     const [orientation, setOrientation] = useState<string>('horizontal');
+    const [narrow, setNarrow] = useState<boolean>(false);
 
     useEffect(() => {
-        function updateOrientationOnResize() {
-            if (window.innerHeight > window.innerWidth) {
-                setOrientation('vertical');
-            } else {
-                setOrientation('horizontal');
-            }
+        // Update `orientation` and `narrow`
+        function onResize() {
+            const orientation = (window.innerHeight > window.innerWidth) ? 'vertical' : 'horizontal';
+            setOrientation(orientation);
+            const firstSlot = document.querySelector('#slots-panel > .slot:first-child');
+            setNarrow(!!firstSlot && firstSlot.clientWidth < 168);
         }
 
-        updateOrientationOnResize();
+        onResize();
 
-        window.addEventListener('resize', updateOrientationOnResize);
+        window.addEventListener('resize', onResize);
 
         return () => { // cleanup listener on component unmount
-            window.removeEventListener('resize', updateOrientationOnResize);
+            window.removeEventListener('resize', onResize);
         }
     }, []);
 
     return (
         <div id='slots-panel' className={orientation}>
             {slots.map((slot, index) => (
-                <Slot slot={slot} localDate={localDate} key={index} />
+                <Slot slot={slot} localDate={localDate} narrow={narrow} key={index} />
             ))}
         </div>
     );
@@ -147,9 +148,11 @@ const SlotsPanel: React.FC<{
 const Slot: React.FC<{
     slot: Slot;
     localDate: Date,
+    narrow: boolean,
 }> = ({
     slot,
     localDate,
+    narrow,
 }) =>
 {
     // The cities in a slot may be on different timezones, but it is the same time in all of them,
@@ -219,7 +222,7 @@ const Slot: React.FC<{
         >
             <div className='slot-top-filler'></div>
             <div className='slot-main'>
-                <div className='slot-time'><b>{hourStr}</b> : {minuteStr}</div>
+                <div className='slot-time'><b>{hourStr}</b>{narrow ? <br/> : <span> : </span>}{minuteStr}</div>
                 {/* <div className='slot-time'><b>{hourStr}</b> : {minuteStr} : {secondStr}</div> */}
                 <div className='slot-day'>{dayStr}</div>
                 <div className='slot-diff'>{hourDiffStr}</div>
