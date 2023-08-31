@@ -199,16 +199,18 @@ const Slot: React.FC<{
         >
             <div className='slot-top-filler'></div>
             <div className='slot-main'>
-                <div className='slot-time'><b>{hourStr}</b>{narrow ? <br/> : <span> : </span>}{minuteStr}</div>
+                <div className='slot-time'>
+                    <b>{hourStr}</b>{narrow ? <br/> : <span> : </span>}{minuteStr}
+                </div>
                 {/* <div className='slot-time'><b>{hourStr}</b> : {minuteStr} : {secondStr}</div> */}
                 <div className='slot-day'>{dayStr}</div>
                 <div className='slot-diff'>{hourDiffStr}</div>
             </div>
             <div className='slot-cities'>
-                {slot.cities.map(city => (
-                <div className='city'>
+                {slot.cities.map((city, index) => (
+                <div className='city' key={index}>
                     <span className='flag'>{getFlagEmoji(city.country_code)}</span>
-                    <span>{city.name}</span>
+                    <span className='name'>{city.name}</span>
                 </div>
                 ))}
             </div>
