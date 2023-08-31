@@ -46,7 +46,24 @@ export const App: React.FC = () =>
     const [columns, setColumns] = useState<Column[]>([]);
     useEffect(() => {
         function rebuildColumns() {
-            const sortedCities = cities.sort((a, b) => compareTimezones(a.tz, b.tz));
+            // Deduplicate cities by name
+            const cityMap: Map<string, City> = new Map();
+            for (const city of cities) {
+                cityMap.set(city.name, city);
+            }
+            const uniqueCities: City[] = [...cityMap.values()];
+
+            // Sort cities by timezone and name
+            const sortedCities = uniqueCities.sort(
+                (cityA, cityB) =>{
+                    const result = compareTimezones(cityA.tz, cityB.tz)
+                    if (result !== 0)
+                        return result;
+                    return cityA.name.localeCompare(cityB.name);
+                }
+            );
+
+            // Group cities into columns when they have the same time
             const sortedColumns = new Map<number, Column>();
             const localDate = new Date();
             for (const city of sortedCities) {
