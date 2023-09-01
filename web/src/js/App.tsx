@@ -136,7 +136,7 @@ const SlotsPanel: React.FC<{
     return (
         <div id='slots-panel' className={orientation}>
             {slots.map((slot, index) => (
-                <Slot slot={slot} localDate={localDate} narrow={narrow} key={index} />
+                <Slot slot={slot} localDate={localDate} orientation={orientation} narrow={narrow} key={index} />
             ))}
         </div>
     );
@@ -148,10 +148,12 @@ const SlotsPanel: React.FC<{
 const Slot: React.FC<{
     slot: Slot;
     localDate: Date,
+    orientation: string,
     narrow: boolean,
 }> = ({
     slot,
     localDate,
+    orientation,
     narrow,
 }) =>
 {
@@ -186,33 +188,8 @@ const Slot: React.FC<{
     const hour = tzDate.getHours();
 
     // Depending on the hour, choose the slot background and text color
-    const gradients = [
-        'linear-gradient(rgb(3, 12, 27), rgb(8, 9, 35))', // 00
-        'linear-gradient(rgb(3, 12, 27), rgb(8, 9, 35))', // 01
-        'linear-gradient(rgb(3, 12, 27), rgb(3, 12, 27))', // 02
-        'linear-gradient(rgb(4, 15, 34), rgb(3, 12, 27))', // 03
-        'linear-gradient(rgb(8, 28, 52), rgb(4, 15, 34))', // 04
-        'linear-gradient(rgb(33, 83, 102), rgb(8, 28, 52))', // 05
-        'linear-gradient(rgb(57, 138, 151), rgb(33, 83, 102))', // 06
-        'linear-gradient(rgb(89, 184, 188), rgb(57, 138, 151))', // 07
-        'linear-gradient(rgb(146, 205, 188), rgb(89, 184, 188))', // 08
-        'linear-gradient(rgb(203, 225, 188), rgb(146, 205, 188))', // 09
-        'linear-gradient(rgb(241, 237, 179), rgb(203, 225, 188))', // 10
-        'linear-gradient(rgb(245, 234, 154), rgb(241, 237, 179))', // 11
-        'linear-gradient(rgb(250, 231, 128), rgb(245, 234, 154))', // 12
-        'linear-gradient(rgb(254, 228, 103), rgb(250, 231, 128))', // 13
-        'linear-gradient(rgb(250, 201, 97), rgb(254, 228, 103))', // 14
-        'linear-gradient(rgb(246, 175, 90), rgb(250, 201, 97))', // 15
-        'linear-gradient(rgb(241, 149, 84), rgb(246, 175, 90))', // 16
-        'linear-gradient(rgb(202, 118, 94), rgb(241, 149, 84))', // 17
-        'linear-gradient(rgb(152, 87, 110), rgb(202, 118, 94))', // 18
-        'linear-gradient(rgb(101, 56, 126), rgb(152, 87, 110))', // 19
-        'linear-gradient(rgb(69, 36, 108), rgb(101, 56, 126))', // 20
-        'linear-gradient(rgb(43, 19, 79), rgb(69, 36, 108))', // 21
-        'linear-gradient(rgb(16, 2, 51), rgb(43, 19, 79))', // 22
-        'linear-gradient(rgb(12, 6, 43), rgb(16, 2, 51))', // 23
-    ];
-    const backgroundImage = gradients[hour];
+    const direction = orientation === 'horizontal' ? 'to bottom,' : 'to right,';
+    const backgroundImage = `linear-gradient(${direction} ${gradients[hour]})`;
     const color = (hour >= 8 && hour <= 17) ? 'rgb(50, 50, 50)' : 'rgb(255, 255, 255)';
 
     return (
@@ -238,6 +215,34 @@ const Slot: React.FC<{
         </div>
     );
 }
+
+// A gradient for every hour of the day
+const gradients = [
+    'rgb(3, 12, 27), rgb(8, 9, 35)', // 00
+    'rgb(3, 12, 27), rgb(8, 9, 35)', // 01
+    'rgb(3, 12, 27), rgb(3, 12, 27)', // 02
+    'rgb(4, 15, 34), rgb(3, 12, 27)', // 03
+    'rgb(8, 28, 52), rgb(4, 15, 34)', // 04
+    'rgb(33, 83, 102), rgb(8, 28, 52)', // 05
+    'rgb(57, 138, 151), rgb(33, 83, 102)', // 06
+    'rgb(89, 184, 188), rgb(57, 138, 151)', // 07
+    'rgb(146, 205, 188), rgb(89, 184, 188)', // 08
+    'rgb(203, 225, 188), rgb(146, 205, 188)', // 09
+    'rgb(241, 237, 179), rgb(203, 225, 188)', // 10
+    'rgb(245, 234, 154), rgb(241, 237, 179)', // 11
+    'rgb(250, 231, 128), rgb(245, 234, 154)', // 12
+    'rgb(254, 228, 103), rgb(250, 231, 128)', // 13
+    'rgb(250, 201, 97), rgb(254, 228, 103)', // 14
+    'rgb(246, 175, 90), rgb(250, 201, 97)', // 15
+    'rgb(241, 149, 84), rgb(246, 175, 90)', // 16
+    'rgb(202, 118, 94), rgb(241, 149, 84)', // 17
+    'rgb(152, 87, 110), rgb(202, 118, 94)', // 18
+    'rgb(101, 56, 126), rgb(152, 87, 110)', // 19
+    'rgb(69, 36, 108), rgb(101, 56, 126)', // 20
+    'rgb(43, 19, 79), rgb(69, 36, 108)', // 21
+    'rgb(16, 2, 51), rgb(43, 19, 79)', // 22
+    'rgb(12, 6, 43), rgb(16, 2, 51)', // 23
+];
 
 function getFlagEmoji(countryCode: string): string {
     const codePoints = countryCode
