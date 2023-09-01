@@ -111,7 +111,7 @@ const Slot: React.FC<{
             <div className='slot-cities'>
                 {slot.cities.map((city, index) => (
                 <div className='city' key={index}>
-                    <span className='flag'>{getFlagEmoji(city.country_code)}</span>
+                    <span className='flag'>{getFlagEmoji(city.country)}</span>
                     <span className='name'>{city.name}</span>
                 </div>
                 ))}

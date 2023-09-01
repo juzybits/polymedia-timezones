@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { City } from './App';
+import timezones from './timezones.json'; // TODO: remove timezones that don't exist in current browser
 import '../css/AddCity.less';
 
 export const AddCityButton: React.FC<{
@@ -17,9 +18,26 @@ export const AddCityButton: React.FC<{
 
 export const AddCityMenu: React.FC = () => {
     const [searchText, setSearchText] = useState('');
-    const [filteredCities, _setFilteredCities] = useState<City[]>([]);
+    const [filteredCities, setFilteredCities] = useState<City[]>([]);
 
     useEffect(() => {
+        if (searchText.length <= 2) {
+            setFilteredCities([]);
+            return;
+        }
+        const foundCities: City[] = [];
+        for (const tz of timezones) {
+            for (const city_name of tz.cities) {
+                if (city_name.startsWith(searchText)) {
+                    foundCities.push({
+                        name: city_name,
+                        country: tz.country_code,
+                        tz: tz.timezone
+                    });
+                }
+            }
+        }
+        setFilteredCities(foundCities);
     }, [searchText]);
 
     return (

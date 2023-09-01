@@ -13,7 +13,7 @@ TODO: load/save config from local storage
 // A city chosen by the user
 export type City = {
     name: string;
-    country_code: string;
+    country: string;
     tz: string;
 };
 
@@ -44,18 +44,18 @@ export const App: React.FC = () =>
     /* Rebuild the slots when the user adds or removes a city */
 
     const [cities, _setCities] = useState<City[]>([
-        { name: 'Osaka', tz: 'Asia/Tokyo', country_code: 'jp' },
-        { name: 'Mumbai', tz: 'Asia/Kolkata', country_code: 'in' },
-        { name: 'Munich', tz: 'Europe/Berlin', country_code: 'de' },
-        { name: 'Munich', tz: 'Europe/Berlin', country_code: 'de' },
-        { name: 'Frankfurt', tz: 'Europe/Berlin', country_code: 'de' },
-        { name: 'Milan', tz: 'Europe/Rome', country_code: 'it' },
-        { name: 'Naples', tz: 'Europe/Rome', country_code: 'it' },
-        { name: 'Budapest', tz: 'Europe/Budapest', country_code: 'hu' },
-        { name: 'Austin', tz: 'America/Chicago', country_code: 'us' },
-        { name: 'Honolulu', tz: 'Pacific/Honolulu', country_code: 'us' },
-        { name: 'Singapore', tz: 'Asia/Singapore', country_code: 'sg' },
-        { name: 'Auckland', tz: 'Pacific/Auckland', country_code: 'nz' },
+        { name: 'Osaka', tz: 'Asia/Tokyo', country: 'jp' },
+        { name: 'Mumbai', tz: 'Asia/Kolkata', country: 'in' },
+        { name: 'Munich', tz: 'Europe/Berlin', country: 'de' },
+        { name: 'Munich', tz: 'Europe/Berlin', country: 'de' },
+        { name: 'Frankfurt', tz: 'Europe/Berlin', country: 'de' },
+        { name: 'Milan', tz: 'Europe/Rome', country: 'it' },
+        { name: 'Naples', tz: 'Europe/Rome', country: 'it' },
+        { name: 'Budapest', tz: 'Europe/Budapest', country: 'hu' },
+        { name: 'Austin', tz: 'America/Chicago', country: 'us' },
+        { name: 'Honolulu', tz: 'Pacific/Honolulu', country: 'us' },
+        { name: 'Singapore', tz: 'Asia/Singapore', country: 'sg' },
+        { name: 'Auckland', tz: 'Pacific/Auckland', country: 'nz' },
     ]);
     const [slots, setSlots] = useState<Slot[]>([]);
     useEffect(() => {
