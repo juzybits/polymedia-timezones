@@ -33,13 +33,14 @@ export const AddCityMenu: React.FC = () => {
                 placeholder='Search for a city...'
                 spellCheck='false' autoCorrect='off' autoComplete='off'
             />
-            <div>
-                {filteredCities.map(city => (
-                    <div key={city.name}>
+            {filteredCities.length > 0 &&
+            <div id='add-city-results'>
+                {filteredCities.map((city, index) => (
+                    <div className='result' key={index}>
                         {city.name}
                     </div>
                 ))}
-            </div>
+            </div>}
         </div>
     );
 }
