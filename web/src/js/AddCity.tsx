@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { City } from './App';
-import { loadTimezones } from './lib/timezones';
+import { getLatinCityName, loadTimezones } from './lib/timezones';
 import '../css/AddCity.less';
 
 export const AddCityButton: React.FC<{
@@ -26,14 +26,17 @@ export const AddCityMenu: React.FC = () => {
             setFilteredCities([]);
             return;
         }
+        const citySearch = getLatinCityName(searchText);
         const foundCities: City[] = [];
         for (const tz of timezones) {
-            for (const city_name of tz.cities) {
-                if (city_name.startsWith(searchText)) {
+            let citiesCount = tz.citiesLatin.length;
+            for (let i = 0; i < citiesCount; i++) {
+                const cityLatin = tz.citiesLatin[i];
+                if (cityLatin.startsWith(citySearch)) {
                     foundCities.push({
-                        name: city_name,
-                        country: tz.country_code,
-                        tz: tz.timezone
+                        name: tz.cities[i], // use the original city name
+                        country: tz.countryCode,
+                        tz: tz.name
                     });
                 }
             }
