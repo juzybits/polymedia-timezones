@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { City } from './App';
-import timezones from './timezones.json'; // TODO: remove timezones that don't exist in current browser
+import { loadTimezones } from './lib/timezones';
 import '../css/AddCity.less';
 
 export const AddCityButton: React.FC<{
@@ -16,6 +16,7 @@ export const AddCityButton: React.FC<{
     );
 }
 
+const timezones = loadTimezones();
 export const AddCityMenu: React.FC = () => {
     const [searchText, setSearchText] = useState('');
     const [filteredCities, setFilteredCities] = useState<City[]>([]);
