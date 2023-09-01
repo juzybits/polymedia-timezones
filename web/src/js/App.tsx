@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { getHourDiff, compareTimezones, newDateInTimezone } from './lib/time';
 import '../css/App.less';
+import { Modal } from './Modal';
 
 /*
 TODO: let user select cities
@@ -86,17 +87,31 @@ export const App: React.FC = () =>
         rebuildSlots();
     }, [cities]);
 
+    const [modalContent, setModalContent] = useState<React.ReactNode | null>(null);
+    const openModal = (content: React.ReactNode) => {
+        setModalContent(content);
+    };
+    const closeModal = () => {
+        setModalContent(null);
+    };
+
+
     return (
         <div id='layout'>
-            <ButtonAddCity />
             <SlotsPanel slots={slot} localDate={localDate} />
+            <ButtonAddCity openModal={openModal} />
+            <Modal content={modalContent} onClose={closeModal} />
         </div>
     );
 }
 
-const ButtonAddCity: React.FC = () =>
+const ButtonAddCity: React.FC<{
+    openModal: (content: React.ReactNode) => void;
+}> = ({
+    openModal,
+}) =>
 {
-    return <div id='btn-add-city'>
+    return <div id='btn-add-city' onClick={() => openModal(<div>Hello from the modal!</div>)}>
         <span>+</span>
     </div>;
 }
