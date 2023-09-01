@@ -51,14 +51,21 @@ export const AddCityMenu: React.FC = () => {
                 placeholder='Search for a city...'
                 spellCheck='false' autoCorrect='off' autoComplete='off'
             />
-            {filteredCities.length > 0 &&
+            {
+            filteredCities.length > 0
+            ?
             <div id='add-city-results'>
                 {filteredCities.map((city, index) => (
                     <div className='result' key={index}>
                         {city.name}
                     </div>
                 ))}
-            </div>}
+            </div>
+            : (
+                searchText.length <= 2
+                ? null
+                : <div id='add-city-no-results'>No results. Try searching for a big city nearby.</div>
+            )}
         </div>
     );
 }

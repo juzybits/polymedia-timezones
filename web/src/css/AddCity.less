@@ -29,6 +29,7 @@
 }
 
 #add-city-menu {
+    max-width: 400px;
 }
 
 @border-radius: 8px;
@@ -41,6 +42,8 @@
     margin-top: 1em;
     border: 1px solid @border-color;
     outline-color: green;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 #add-city-results {
@@ -65,4 +68,8 @@
             border-radius: 0 0 @border-radius @border-radius;
         }
     }
+}
+
+#add-city-no-results {
+    margin-top: 1em;
 }
