@@ -47,12 +47,17 @@ export const App: React.FC = () =>
     const [cities, setCities] = useState<Map<string, City>>(loadCitiesFromStorage());
     const [slots, setSlots] = useState<Slot[]>([]);
     useEffect(() => {
-        /* Sort cities by timezone and name */
+        /* Sort cities by timezone, country, and name */
         const sortedCities = [...cities.values()].sort(
             (cityA, cityB) =>{
-                const result = compareTimezones(cityA.tz, cityB.tz)
-                if (result !== 0)
-                    return result;
+                const cityDiff = compareTimezones(cityA.tz, cityB.tz)
+                if (cityDiff !== 0) {
+                    return cityDiff;
+                }
+                const countryDiff = cityA.country.localeCompare(cityB.country);
+                if (countryDiff !== 0) {
+                    return countryDiff;
+                }
                 return cityA.name.localeCompare(cityB.name);
             }
         );
