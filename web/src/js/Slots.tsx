@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Slot } from './App';
 import { getHourDiff, newDateInTimezone } from './lib/time';
+import { getFlagEmoji } from './lib/utils';
 import '../css/Slots.less';
 
 /**
@@ -147,11 +148,3 @@ const gradients = [
     'rgb(16, 2, 51), rgb(43, 19, 79)', // 22
     'rgb(12, 6, 43), rgb(16, 2, 51)', // 23
 ];
-
-function getFlagEmoji(countryCode: string): string {
-    const codePoints = countryCode
-        .toUpperCase()
-        .split('')
-        .map(char =>  127397 + char.charCodeAt(0));
-    return String.fromCodePoint(...codePoints);
-}

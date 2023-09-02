@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { City } from './App';
-import { getLatinCityName, loadTimezones } from './lib/timezones';
+import { loadTimezones } from './lib/timezones';
+import { toLatinString } from './lib/utils';
 import '../css/AddCity.less';
 
 export const AddCityButton: React.FC<{
@@ -32,7 +33,7 @@ export const AddCityMenu: React.FC<{
             setFilteredCities([]);
             return;
         }
-        const citySearch = getLatinCityName(searchText);
+        const citySearch = toLatinString(searchText);
         const foundCities: City[] = [];
         for (const tz of timezones) {
             let citiesCount = tz.citiesLatin.length;

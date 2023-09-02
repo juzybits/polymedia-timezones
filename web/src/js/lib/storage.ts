@@ -4,7 +4,6 @@ const STORAGE_KEY = 'polymedia.timezones.cities';
 
 const DEFAULTS = new Map<string, City>([
     ['San Francisco', { name: 'San Francisco', tz: 'America/Los_Angeles', country: 'us' }],
-    ['New York City', { name: 'New York City', tz: 'America/New_York', country: 'us' }],
     ['London', { name: 'London', tz: 'Europe/London', country: 'gb' }],
     ['Dubai', { name: 'Dubai', tz: 'Asia/Dubai', country: 'ae' }],
     ['Bangkok', { name: 'Bangkok', tz: 'Asia/Bangkok', country: 'th' }],
