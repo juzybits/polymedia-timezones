@@ -43,31 +43,24 @@ export const App: React.FC = () =>
 
     /* Rebuild the slots when the user adds or removes a city */
 
-    const [cities, setCities] = useState<City[]>([
-        { name: 'Osaka', tz: 'Asia/Tokyo', country: 'jp' },
-        { name: 'Mumbai', tz: 'Asia/Kolkata', country: 'in' },
-        { name: 'Munich', tz: 'Europe/Berlin', country: 'de' },
-        { name: 'Frankfurt', tz: 'Europe/Berlin', country: 'de' },
-        { name: 'Milan', tz: 'Europe/Rome', country: 'it' },
-        { name: 'Naples', tz: 'Europe/Rome', country: 'it' },
-        { name: 'Budapest', tz: 'Europe/Budapest', country: 'hu' },
-        { name: 'Austin', tz: 'America/Chicago', country: 'us' },
-        { name: 'Honolulu', tz: 'Pacific/Honolulu', country: 'us' },
-        { name: 'Singapore', tz: 'Asia/Singapore', country: 'sg' },
-        { name: 'Auckland', tz: 'Pacific/Auckland', country: 'nz' },
-    ]);
+    const [cities, setCities] = useState(new Map<string, City>([
+        ['Osaka', { name: 'Osaka', tz: 'Asia/Tokyo', country: 'jp' }],
+        ['Mumbai', { name: 'Mumbai', tz: 'Asia/Kolkata', country: 'in' }],
+        ['Munich', { name: 'Munich', tz: 'Europe/Berlin', country: 'de' }],
+        ['Frankfurt', { name: 'Frankfurt', tz: 'Europe/Berlin', country: 'de' }],
+        ['Milan', { name: 'Milan', tz: 'Europe/Rome', country: 'it' }],
+        ['Naples', { name: 'Naples', tz: 'Europe/Rome', country: 'it' }],
+        ['Budapest', { name: 'Budapest', tz: 'Europe/Budapest', country: 'hu' }],
+        ['Austin', { name: 'Austin', tz: 'America/Chicago', country: 'us' }],
+        ['Honolulu', { name: 'Honolulu', tz: 'Pacific/Honolulu', country: 'us' }],
+        ['Singapore', { name: 'Singapore', tz: 'Asia/Singapore', country: 'sg' }],
+        ['Auckland', { name: 'Auckland', tz: 'Pacific/Auckland', country: 'nz' }],
+    ]));
     const [slots, setSlots] = useState<Slot[]>([]);
     useEffect(() => {
         function rebuildSlots() {
-            // Deduplicate cities by name
-            const cityMap: Map<string, City> = new Map();
-            for (const city of cities) {
-                cityMap.set(city.name, city);
-            }
-            const uniqueCities: City[] = [...cityMap.values()];
-
             // Sort cities by timezone and name
-            const sortedCities = uniqueCities.sort(
+            const sortedCities = [...cities.values()].sort(
                 (cityA, cityB) =>{
                     const result = compareTimezones(cityA.tz, cityB.tz)
                     if (result !== 0)
@@ -92,7 +85,7 @@ export const App: React.FC = () =>
     }, [cities]);
 
     function addCity(city: City): void {
-        setCities([...cities, city]);
+        setCities(new Map(cities.set(city.name, city)))
     }
 
     /* Modal menu */
