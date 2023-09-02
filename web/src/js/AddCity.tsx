@@ -51,36 +51,41 @@ export const AddCityMenu: React.FC<{
         setFilteredCities(foundCities);
     }, [searchText]);
 
+    const hasResults = filteredCities.length > 0;
     return (
         <div id='add-city-menu'>
             <h2>Add City</h2>
             <input
                 id='add-city-input'
+                className={hasResults ? 'has-results' : ''}
                 type='text'
                 value={searchText}
+                autoFocus
                 onChange={(e) => setSearchText(e.target.value)}
                 placeholder='Search for a city...'
                 spellCheck='false' autoCorrect='off' autoComplete='off'
             />
             {
-            filteredCities.length > 0
-            ?
-            <div id='add-city-results'>
-                {filteredCities.map((city, index) => (
-                    <div
-                        className='result'
-                        onClick={() => addCity(city)}
-                        key={index}
-                    >
-                        {city.name}
-                    </div>
-                ))}
-            </div>
-            : (
-                searchText.length <= 2
-                ? null
-                : <div id='add-city-no-results'>No results. Try searching for a big city nearby.</div>
-            )}
+                hasResults
+                ?
+                <div id='add-city-results' >
+                    {filteredCities.map((city, index) => (
+                        <div
+                            className='result'
+                            onClick={() => addCity(city)}
+                            key={index}
+                        >
+                            {city.name} ({city.country.toUpperCase()})
+                        </div>
+                    ))}
+                </div>
+                :
+                (
+                    searchText.length <= 2
+                    ? null
+                    : <div id='add-city-no-results'>No results. Try searching for a big city nearby.</div>
+                )
+            }
         </div>
     );
 }
