@@ -5,19 +5,25 @@ import '../css/AddCity.less';
 
 export const AddCityButton: React.FC<{
     openModal: (content: React.ReactNode) => void;
+    addCity: (city: City) => void;
 }> = ({
     openModal,
+    addCity,
 }) =>
 {
     return (
-        <div id='add-city-btn' onClick={() => openModal(<AddCityMenu />)}>
+        <div id='add-city-btn' onClick={() => openModal(<AddCityMenu addCity={addCity} />)}>
             <span>+</span>
         </div>
     );
 }
 
 const timezones = loadTimezones();
-export const AddCityMenu: React.FC = () => {
+export const AddCityMenu: React.FC<{
+    addCity: (city: City) => void;
+}> = ({
+    addCity,
+}) => {
     const [searchText, setSearchText] = useState('');
     const [filteredCities, setFilteredCities] = useState<City[]>([]);
 
@@ -60,7 +66,11 @@ export const AddCityMenu: React.FC = () => {
             ?
             <div id='add-city-results'>
                 {filteredCities.map((city, index) => (
-                    <div className='result' key={index}>
+                    <div
+                        className='result'
+                        onClick={() => addCity(city)}
+                        key={index}
+                    >
                         {city.name}
                     </div>
                 ))}

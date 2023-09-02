@@ -43,10 +43,9 @@ export const App: React.FC = () =>
 
     /* Rebuild the slots when the user adds or removes a city */
 
-    const [cities, _setCities] = useState<City[]>([
+    const [cities, setCities] = useState<City[]>([
         { name: 'Osaka', tz: 'Asia/Tokyo', country: 'jp' },
         { name: 'Mumbai', tz: 'Asia/Kolkata', country: 'in' },
-        { name: 'Munich', tz: 'Europe/Berlin', country: 'de' },
         { name: 'Munich', tz: 'Europe/Berlin', country: 'de' },
         { name: 'Frankfurt', tz: 'Europe/Berlin', country: 'de' },
         { name: 'Milan', tz: 'Europe/Rome', country: 'it' },
@@ -92,6 +91,10 @@ export const App: React.FC = () =>
         rebuildSlots();
     }, [cities]);
 
+    function addCity(city: City): void {
+        setCities([...cities, city]);
+    }
+
     /* Modal menu */
 
     const [modalContent, setModalContent] = useState<React.ReactNode | null>(null);
@@ -107,7 +110,7 @@ export const App: React.FC = () =>
     return (
         <div id='layout'>
             <SlotsPanel slots={slots} localDate={localDate} />
-            <AddCityButton openModal={openModal} />
+            <AddCityButton openModal={openModal} addCity={addCity} />
             <Modal content={modalContent} onClose={closeModal} />
         </div>
     );
