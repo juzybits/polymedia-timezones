@@ -4,6 +4,7 @@ import '../css/App.less';
 import { Modal } from './Modal';
 import { AddCityButton } from './AddCity';
 import { SlotsPanel } from './Slots';
+import { loadCitiesFromStorage, saveCitiesToStorage } from './lib/storage';
 
 /*
 TODO: let user select cities
@@ -43,45 +44,33 @@ export const App: React.FC = () =>
 
     /* Rebuild the slots when the user adds or removes a city */
 
-    const [cities, setCities] = useState(new Map<string, City>([
-        ['Osaka', { name: 'Osaka', tz: 'Asia/Tokyo', country: 'jp' }],
-        ['Mumbai', { name: 'Mumbai', tz: 'Asia/Kolkata', country: 'in' }],
-        ['Munich', { name: 'Munich', tz: 'Europe/Berlin', country: 'de' }],
-        ['Frankfurt', { name: 'Frankfurt', tz: 'Europe/Berlin', country: 'de' }],
-        ['Milan', { name: 'Milan', tz: 'Europe/Rome', country: 'it' }],
-        ['Naples', { name: 'Naples', tz: 'Europe/Rome', country: 'it' }],
-        ['Budapest', { name: 'Budapest', tz: 'Europe/Budapest', country: 'hu' }],
-        ['Austin', { name: 'Austin', tz: 'America/Chicago', country: 'us' }],
-        ['Honolulu', { name: 'Honolulu', tz: 'Pacific/Honolulu', country: 'us' }],
-        ['Singapore', { name: 'Singapore', tz: 'Asia/Singapore', country: 'sg' }],
-        ['Auckland', { name: 'Auckland', tz: 'Pacific/Auckland', country: 'nz' }],
-    ]));
+    const [cities, setCities] = useState<Map<string, City>>(loadCitiesFromStorage());
     const [slots, setSlots] = useState<Slot[]>([]);
     useEffect(() => {
-        function rebuildSlots() {
-            // Sort cities by timezone and name
-            const sortedCities = [...cities.values()].sort(
-                (cityA, cityB) =>{
-                    const result = compareTimezones(cityA.tz, cityB.tz)
-                    if (result !== 0)
-                        return result;
-                    return cityA.name.localeCompare(cityB.name);
-                }
-            );
-
-            // Group cities into slots when they have the same time
-            const sortedSlots = new Map<number, Slot>();
-            const localDate = new Date();
-            for (const city of sortedCities) {
-                const tzDate = newDateInTimezone(localDate, city.tz);
-                const colKey = tzDate.getTime();
-                const slot: Slot = sortedSlots.get(colKey) || { cities: [] };
-                slot.cities.push(city);
-                sortedSlots.set(colKey, slot);
+        /* Sort cities by timezone and name */
+        const sortedCities = [...cities.values()].sort(
+            (cityA, cityB) =>{
+                const result = compareTimezones(cityA.tz, cityB.tz)
+                if (result !== 0)
+                    return result;
+                return cityA.name.localeCompare(cityB.name);
             }
-            setSlots([...sortedSlots.values()]);
+        );
+
+        /* Update local storage */
+        saveCitiesToStorage(sortedCities);
+
+        /* Rebuild slots. Cities with the same time are grouped into one slot. */
+        const newSlots = new Map<number, Slot>();
+        const localDate = new Date();
+        for (const city of sortedCities) {
+            const tzDate = newDateInTimezone(localDate, city.tz);
+            const colKey = tzDate.getTime();
+            const slot: Slot = newSlots.get(colKey) || { cities: [] };
+            slot.cities.push(city);
+            newSlots.set(colKey, slot);
         }
-        rebuildSlots();
+        setSlots([...newSlots.values()]);
     }, [cities]);
 
     function addCity(city: City): void {
