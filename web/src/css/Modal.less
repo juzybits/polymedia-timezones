@@ -12,6 +12,7 @@
 }
 
 .modal-content {
+    position: relative;
     background-color: rgb(255 255 255);
     padding: 1.7em 1.9em 2.1em;
     border-radius: 10px;
@@ -19,4 +20,14 @@
     max-height: 90%;
     overflow-y: scroll;
     box-sizing: border-box;
+}
+
+.modal-close {
+    position: absolute;
+    top: 1em;
+    right: 1.3em;
+    font-size: 1.1em;
+    &:hover {
+        cursor: pointer;
+    }
 }
