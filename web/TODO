@@ -1,0 +1,13 @@
+TODO: Polymedia info button and modal on top-right corner
+
+MAYBE: support arrows and enter keys in .add-city-results
+MAYBE: support escape key in .add-city-menu
+MAYBE: support + key to open .add-city-menu
+
+MAYBE: export/import config file
+MAYBE: sync config via Sui
+
+MAYBE: preview other time with scroll / manual input
+MAYBE: customize city name
+
+MAYBE: installable PWA

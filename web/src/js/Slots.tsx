@@ -92,7 +92,7 @@ const Slot: React.FC<{
 
     // Format the hour difference vs local time as '-8', '+5.5', '0', etc
     const hourDiff = getHourDiff(localDate, tzDate);
-    const hourDiffStr = (hourDiff >= 0 ? '+' : '') + hourDiff;
+    const hourDiffStr = hourDiff === 0 ? '🏠' : (hourDiff > 0 ? '+' : '') + hourDiff;
 
     // Get the hour as a number between 0 and 23
     const hour = tzDate.getHours();
