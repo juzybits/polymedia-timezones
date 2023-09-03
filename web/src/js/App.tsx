@@ -4,7 +4,7 @@ import '../css/App.less';
 import { Modal } from './Modal';
 import { AddCityButton } from './AddCity';
 import { SlotsPanel } from './Slots';
-import { loadCitiesFromStorage, saveCitiesToStorage } from './lib/storage';
+import { getCityKey, loadCitiesFromStorage, saveCitiesToStorage } from './lib/storage';
 
 /*
 TODO: let user select cities
@@ -79,7 +79,8 @@ export const App: React.FC = () =>
     }, [cities]);
 
     function addCity(city: City): void {
-        setCities(new Map(cities.set(city.name, city)))
+        const key = getCityKey(city);
+        setCities(new Map(cities.set(key, city)))
     }
 
     /* Modal menu */

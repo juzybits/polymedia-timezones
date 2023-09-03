@@ -24,7 +24,12 @@ export function loadCitiesFromStorage(): Map<string, City>
     const cityArr: City[] = JSON.parse(rawValue);
     const cityMap = new Map<string, City>();
     for (const city of cityArr) {
-        cityMap.set(city.name, city);
+        const key = getCityKey(city);
+        cityMap.set(key, city);
     }
     return cityMap;
+}
+
+export function getCityKey(city: City): string {
+    return city.name + '.' + city.country;
 }
