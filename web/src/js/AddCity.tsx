@@ -4,6 +4,9 @@ import { loadTimezones } from './lib/timezones';
 import { toLatinString } from './lib/utils';
 import '../css/AddCity.less';
 
+// TODO: support arrows and enter keys in .add-city-results
+// TODO: support escape key in .add-city-menu
+
 export const AddCityButton: React.FC<{
     openModal: (content: React.ReactNode) => void;
     addCity: (city: City) => void;

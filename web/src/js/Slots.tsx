@@ -18,23 +18,18 @@ export const SlotsPanel: React.FC<{
 }) =>
 {
     const [orientation, setOrientation] = useState<string>('horizontal');
-    const [narrow, setNarrow] = useState<boolean>(false);
-
     useEffect(() => {
-        // Update `orientation` and `narrow`
-        function onResize() {
+        function onResizeUpdateOrientation() {
             const orientation = (window.innerHeight > window.innerWidth) ? 'vertical' : 'horizontal';
             setOrientation(orientation);
-            const firstSlot = document.querySelector('#slots-panel > .slot:first-child');
-            setNarrow(!!firstSlot && firstSlot.clientWidth < 168);
         }
 
-        onResize();
+        onResizeUpdateOrientation();
 
-        window.addEventListener('resize', onResize);
+        window.addEventListener('resize', onResizeUpdateOrientation);
 
         return () => { // cleanup listener on component unmount
-            window.removeEventListener('resize', onResize);
+            window.removeEventListener('resize', onResizeUpdateOrientation);
         }
     }, []);
 
@@ -45,7 +40,6 @@ export const SlotsPanel: React.FC<{
                     slot={slot}
                     localDate={localDate}
                     orientation={orientation}
-                    narrow={narrow}
                     delCity={delCity}
                     key={index}
                 />
@@ -61,13 +55,11 @@ const Slot: React.FC<{
     slot: Slot;
     localDate: Date;
     orientation: string;
-    narrow: boolean;
     delCity: (city: City) => void;
 }> = ({
     slot,
     localDate,
     orientation,
-    narrow,
     delCity,
 }) =>
 {
@@ -114,7 +106,7 @@ const Slot: React.FC<{
             <div className='slot-top-filler'></div>
             <div className='slot-main'>
                 <div className='slot-time'>
-                    <b>{hourStr}</b>{narrow ? <br/> : <span> : </span>}{minuteStr}
+                    <b>{hourStr}</b> : {minuteStr}
                 </div>
                 {/* <div className='slot-time'><b>{hourStr}</b> : {minuteStr} : {secondStr}</div> */}
                 <div className='slot-day'>{dayStr}</div>

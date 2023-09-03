@@ -7,8 +7,8 @@ import { SlotsPanel } from './Slots';
 import { getCityKey, loadCitiesFromStorage, saveCitiesToStorage } from './lib/storage';
 
 /*
-TODO: let user select cities
-TODO: load/save config from local storage
+TODO: Polymedia info button and modal on top-right corner
+TODO: Support + key to open .add-city-menu
 */
 
 // A city chosen by the user
