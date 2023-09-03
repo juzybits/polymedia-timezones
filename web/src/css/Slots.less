@@ -52,11 +52,15 @@
             flex: 1;
             padding: 0 1em;
             .city {
-                white-space: nowrap;
+                padding: 0.25em 0;
                 .flag {
                     display: inline-block;
                     transform: translateY(1px);
                     margin-right: 5px;
+                }
+                &:hover {
+                    cursor: pointer;
+                    color: red;
                 }
             }
         }

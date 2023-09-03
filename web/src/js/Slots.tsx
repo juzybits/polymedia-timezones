@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Slot } from './App';
+import { City, Slot } from './App';
 import { getHourDiff, newDateInTimezone } from './lib/time';
 import { getFlagEmoji } from './lib/utils';
 import '../css/Slots.less';
@@ -9,10 +9,12 @@ import '../css/Slots.less';
  */
 export const SlotsPanel: React.FC<{
     slots: Slot[];
-    localDate: Date,
+    localDate: Date;
+    delCity: (city: City) => void;
 }> = ({
     slots,
     localDate,
+    delCity,
 }) =>
 {
     const [orientation, setOrientation] = useState<string>('horizontal');
@@ -39,7 +41,14 @@ export const SlotsPanel: React.FC<{
     return (
         <div id='slots-panel' className={orientation}>
             {slots.map((slot, index) => (
-                <Slot slot={slot} localDate={localDate} orientation={orientation} narrow={narrow} key={index} />
+                <Slot
+                    slot={slot}
+                    localDate={localDate}
+                    orientation={orientation}
+                    narrow={narrow}
+                    delCity={delCity}
+                    key={index}
+                />
             ))}
         </div>
     );
@@ -50,14 +59,16 @@ export const SlotsPanel: React.FC<{
  */
 const Slot: React.FC<{
     slot: Slot;
-    localDate: Date,
-    orientation: string,
-    narrow: boolean,
+    localDate: Date;
+    orientation: string;
+    narrow: boolean;
+    delCity: (city: City) => void;
 }> = ({
     slot,
     localDate,
     orientation,
     narrow,
+    delCity,
 }) =>
 {
     // The cities in a slot may be on different timezones, but it is the same time in all of them,
@@ -111,7 +122,11 @@ const Slot: React.FC<{
             </div>
             <div className='slot-cities'>
                 {slot.cities.map((city, index) => (
-                <div className='city' key={index}>
+                <div
+                    className='city'
+                    key={index}
+                    onClick={() => delCity(city)}
+                >
                     <span className='flag'>{getFlagEmoji(city.country)}</span>
                     <span className='name'>{city.name}</span>
                 </div>

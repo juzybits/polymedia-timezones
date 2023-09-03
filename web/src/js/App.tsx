@@ -83,6 +83,12 @@ export const App: React.FC = () =>
         setCities(new Map(cities.set(key, city)))
     }
 
+    function delCity(city: City): void {
+        const key = getCityKey(city);
+        cities.delete(key);
+        setCities(new Map(cities));
+    }
+
     /* Modal menu */
 
     const [modalContent, setModalContent] = useState<React.ReactNode | null>(null);
@@ -97,7 +103,7 @@ export const App: React.FC = () =>
 
     return (
         <div id='layout'>
-            <SlotsPanel slots={slots} localDate={localDate} />
+            <SlotsPanel slots={slots} localDate={localDate} delCity={delCity} />
             <AddCityButton openModal={openModal} addCity={addCity} />
             <Modal content={modalContent} onClose={closeModal} />
         </div>
