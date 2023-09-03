@@ -44,6 +44,10 @@ export const SlotsPanel: React.FC<{
                     key={index}
                 />
             ))}
+            {slots.length === 0 &&
+            <div id='slots-empty'>
+                Click the<span className='plus'>&nbsp;+&nbsp;</span>to add your first location.
+            </div>}
         </div>
     );
 }

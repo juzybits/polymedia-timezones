@@ -9,6 +9,8 @@ import { getCityKey, loadCitiesFromStorage, saveCitiesToStorage } from './lib/st
 /*
 TODO: Polymedia info button and modal on top-right corner
 TODO: Support + key to open .add-city-menu
+TODO: Export/import config file
+TODO: Sync config via Sui
 */
 
 // A city chosen by the user
