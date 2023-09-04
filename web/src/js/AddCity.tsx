@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { City } from './App';
 import { loadTimezones } from './lib/timezones';
 import { toLatinString } from './lib/utils';
@@ -55,12 +55,14 @@ export const AddCityMenu: React.FC<{
         setFilteredCities(foundCities);
     }, [searchText]);
 
+    const inputRef = useRef<HTMLInputElement>(null);
     const hasResults = filteredCities.length > 0;
     return (
         <div id='add-city-menu'>
             <h2>Add City</h2>
             <input
                 id='add-city-input'
+                ref={inputRef}
                 className={hasResults ? 'has-results' : ''}
                 type='text'
                 value={searchText}
@@ -76,7 +78,10 @@ export const AddCityMenu: React.FC<{
                     {filteredCities.map((city, index) => (
                         <div
                             className='result'
-                            onClick={() => addCity(city)}
+                            onClick={() => {
+                                addCity(city);
+                                inputRef.current?.focus();
+                            }}
                             key={index}
                         >
                             {city.name} ({city.country.toUpperCase()})
