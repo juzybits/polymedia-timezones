@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { City } from './App';
+import { getCityKey } from './lib/storage';
 import { loadTimezones } from './lib/timezones';
 import { toLatinString } from './lib/utils';
 
@@ -46,7 +47,8 @@ export const AddCityMenu: React.FC<{
                     foundCities.push({
                         name: tz.cities[i], // use the original city name
                         country: tz.countryCode,
-                        tz: tz.name
+                        tz: tz.name,
+                        key: getCityKey(tz.cities[i], tz.countryCode),
                     });
                 }
             }

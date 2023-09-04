@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
-import { compareTimezones, newDateInTimezone } from './lib/time';
-import { Modal } from './Modal';
-import { AddCityButton } from './AddCity';
 import { AboutButton } from './About';
+import { AddCityButton } from './AddCity';
+import { Modal } from './Modal';
 import { SlotsPanel } from './Slots';
-import { getCityKey, loadCitiesFromStorage, saveCitiesToStorage } from './lib/storage';
+import { loadCitiesFromStorage, saveCitiesToStorage } from './lib/storage';
+import { compareTimezones, newDateInTimezone } from './lib/time';
 import '../css/App.less';
 
 // A city chosen by the user
@@ -12,6 +12,7 @@ export type City = {
     name: string;
     country: string;
     tz: string;
+    key: string;
 };
 
 // A colorful column/row (in landscape/portrait) showing the time, day, city names...
@@ -75,13 +76,11 @@ export const App: React.FC = () =>
     }, [cities]);
 
     function addCity(city: City): void {
-        const key = getCityKey(city);
-        setCities(new Map(cities.set(key, city)))
+        setCities(new Map(cities.set(city.key, city)))
     }
 
     function delCity(city: City): void {
-        const key = getCityKey(city);
-        cities.delete(key);
+        cities.delete(city.key);
         setCities(new Map(cities));
     }
 
