@@ -6,9 +6,11 @@ import { toLatinString } from './lib/utils';
 
 export const AddCityButton: React.FC<{
     openModal: (content: React.ReactNode) => void;
+    hasCity: (city: City) => boolean;
     addCity: (city: City) => void;
 }> = ({
     openModal,
+    hasCity,
     addCity,
 }) =>
 {
@@ -16,48 +18,60 @@ export const AddCityButton: React.FC<{
         <div
             id='add-city-btn'
             className='big-btn'
-            onClick={() => openModal(<AddCityMenu addCity={addCity} />)}
+            onClick={() => openModal(
+                <AddCityMenu hasCity={hasCity} addCity={addCity} />
+            )}
         >
             <span>+</span>
         </div>
     );
 }
 
+type UICity = City & {
+    selected: boolean;
+};
 const timezones = loadTimezones();
+
 export const AddCityMenu: React.FC<{
+    hasCity: (city: City) => boolean;
     addCity: (city: City) => void;
 }> = ({
+    hasCity,
     addCity,
 }) => {
     const [searchText, setSearchText] = useState('');
-    const [filteredCities, setFilteredCities] = useState<City[]>([]);
+    const [foundCities, setFoundCities] = useState<UICity[]>([]);
 
     useEffect(() => {
         if (searchText.length <= 2) {
-            setFilteredCities([]);
+            setFoundCities([]);
             return;
         }
-        const citySearch = toLatinString(searchText);
-        const foundCities: City[] = [];
+        const searchLatin = toLatinString(searchText);
+        const newFoundCities: UICity[] = [];
         for (const tz of timezones) {
             let citiesCount = tz.citiesLatin.length;
             for (let i = 0; i < citiesCount; i++) {
                 const cityLatin = tz.citiesLatin[i];
-                if (cityLatin.startsWith(citySearch)) {
-                    foundCities.push({
-                        name: tz.cities[i], // use the original city name
-                        country: tz.countryCode,
-                        tz: tz.name,
-                        key: getCityKey(tz.cities[i], tz.countryCode),
-                    });
+                if (!cityLatin.startsWith(searchLatin)) {
+                    continue;
                 }
+                const city: UICity = {
+                    name: tz.cities[i], // the actual city name with special characters
+                    country: tz.countryCode,
+                    tz: tz.name,
+                    key: getCityKey(tz.cities[i], tz.countryCode),
+                    selected: false,
+                };
+                city.selected = hasCity(city);
+                newFoundCities.push(city);
             }
         }
-        setFilteredCities(foundCities);
+        setFoundCities(newFoundCities);
     }, [searchText]);
 
     const inputRef = useRef<HTMLInputElement>(null);
-    const hasResults = filteredCities.length > 0;
+    const hasResults = foundCities.length > 0;
     return (
         <div id='add-city-menu'>
             <h2>Add City</h2>
@@ -76,16 +90,19 @@ export const AddCityMenu: React.FC<{
                 hasResults
                 ?
                 <div id='add-city-results' >
-                    {filteredCities.map((city, index) => (
+                    {foundCities.map((city, index) => (
                         <div
-                            className='result'
+                            className={`city-result ${city.selected ? 'selected' : ''}`}
                             onClick={() => {
+                                city.selected = true;
                                 addCity(city);
+                                setFoundCities([...foundCities]);
                                 inputRef.current?.focus();
                             }}
                             key={index}
                         >
-                            {city.name} ({city.country.toUpperCase()})
+                            <span>{city.name} ({city.country.toUpperCase()})</span>
+                            {city.selected && <span className='city-checkmark'>✓</span>}
                         </div>
                     ))}
                 </div>

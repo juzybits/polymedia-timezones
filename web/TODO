@@ -1,5 +1,3 @@
-MAYBE: mark already added cities in .add-city-results
-
 MAYBE: support arrows and enter keys in .add-city-results
 MAYBE: support escape key in .add-city-menu
 MAYBE: support + key to open .add-city-menu

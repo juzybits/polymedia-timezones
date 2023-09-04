@@ -168,10 +168,16 @@ a {
 
 #add-city-results {
     border: 1px solid @border-color;
-    .result {
+    .city-result {
         padding: 0.6em 0.8em;
         &:nth-child(even) {
             background-color: rgb(250 250 250);
+        }
+        .city-checkmark {
+            float: right;
+        }
+        &.selected {
+            background-color: rgb(224 248 224);
         }
         &:hover {
             cursor: pointer;

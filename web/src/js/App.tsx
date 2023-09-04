@@ -75,6 +75,10 @@ export const App: React.FC = () =>
         setSlots([...newSlots.values()]);
     }, [cities]);
 
+    function hasCity(city: City): boolean {
+        return cities.has(city.key);
+    }
+
     function addCity(city: City): void {
         setCities(new Map(cities.set(city.key, city)))
     }
@@ -99,7 +103,7 @@ export const App: React.FC = () =>
     return (
         <div id='layout'>
             <SlotsPanel slots={slots} localDate={localDate} delCity={delCity} />
-            <AddCityButton openModal={openModal} addCity={addCity} />
+            <AddCityButton openModal={openModal} hasCity={hasCity} addCity={addCity} />
             <AboutButton openModal={openModal} />
             <Modal content={modalContent} onClose={closeModal} />
         </div>
