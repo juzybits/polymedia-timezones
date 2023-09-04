@@ -8,10 +8,12 @@ export const AddCityButton: React.FC<{
     openModal: (content: React.ReactNode) => void;
     hasCity: (city: City) => boolean;
     addCity: (city: City) => void;
+    delCity: (city: City) => void;
 }> = ({
     openModal,
     hasCity,
     addCity,
+    delCity,
 }) =>
 {
     return (
@@ -19,7 +21,7 @@ export const AddCityButton: React.FC<{
             id='add-city-btn'
             className='big-btn'
             onClick={() => openModal(
-                <AddCityMenu hasCity={hasCity} addCity={addCity} />
+                <AddCityMenu hasCity={hasCity} addCity={addCity} delCity={delCity} />
             )}
         >
             <span>+</span>
@@ -35,9 +37,11 @@ const timezones = loadTimezones();
 export const AddCityMenu: React.FC<{
     hasCity: (city: City) => boolean;
     addCity: (city: City) => void;
+    delCity: (city: City) => void;
 }> = ({
     hasCity,
     addCity,
+    delCity,
 }) => {
     const [searchText, setSearchText] = useState('');
     const [foundCities, setFoundCities] = useState<UICity[]>([]);
@@ -94,9 +98,15 @@ export const AddCityMenu: React.FC<{
                         <div
                             className={`city-result ${city.selected ? 'selected' : ''}`}
                             onClick={() => {
-                                city.selected = true;
-                                addCity(city);
-                                setFoundCities([...foundCities]);
+                                if (!city.selected) {
+                                    city.selected = true;
+                                    addCity(city);
+                                    setFoundCities([...foundCities]);
+                                } else {
+                                    city.selected = false;
+                                    delCity(city);
+                                    setFoundCities([...foundCities]);
+                                }
                                 inputRef.current?.focus();
                             }}
                             key={index}
