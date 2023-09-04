@@ -93,10 +93,17 @@
         "country_code": "us",
         "cities": [
             "Los Angeles",
-            "San Diego",
-            "San Jose",
+            "Seattle",
             "San Francisco",
-            "Seattle"
+            "San Diego",
+            "Las Vegas",
+            "Portland",
+            "Riverside",
+            "Sacramento",
+            "San Jose",
+            "Fresno",
+            "Palo Alto",
+            "Menlo Park"
         ]
     },
     {
@@ -180,7 +187,8 @@
             "El Paso",
             "Albuquerque",
             "Colorado Springs",
-            "Aurora"
+            "Aurora",
+            "Salt Lake City"
         ]
     },
     {
@@ -276,10 +284,18 @@
         "country_code": "us",
         "cities": [
             "Chicago",
-            "Houston",
-            "San Antonio",
             "Dallas",
-            "Austin"
+            "Houston",
+            "Minneapolis",
+            "St Louis",
+            "San Antonio",
+            "Austin",
+            "Kansas City",
+            "Milwaukee",
+            "Nashville",
+            "Memphis",
+            "Oklahoma City",
+            "New Orleans"
         ]
     },
     {
@@ -686,11 +702,26 @@
         "country_name": "United States",
         "country_code": "us",
         "cities": [
-            "New York City",
-            "Brooklyn",
-            "Queens",
+            "New York",
+            "Miami",
             "Philadelphia",
-            "Manhattan"
+            "Atlanta",
+            "Washington DC",
+            "Boston",
+            "Tampa",
+            "Baltimore",
+            "Orlando",
+            "Pittsburgh",
+            "Cincinnati",
+            "Cleveland",
+            "Columbus",
+            "Charlotte",
+            "Providence",
+            "Jacksonville",
+            "Raleigh",
+            "Louisville",
+            "Richmond",
+            "Buffalo"
         ]
     },
     {
@@ -1350,7 +1381,6 @@
             "San Luis",
             "Villa Mercedes",
             "La Punta",
-            "Merlo",
             "Justo Daract"
         ]
     },
@@ -1559,6 +1589,7 @@
         "country_name": "Portugal",
         "country_code": "pt",
         "cities": [
+            "Azores",
             "Ponta Delgada",
             "Lagoa",
             "Angra do Heroísmo",
@@ -1796,6 +1827,7 @@
         "country_name": "Portugal",
         "country_code": "pt",
         "cities": [
+            "Madeira",
             "Funchal",
             "Câmara de Lobos",
             "São Martinho",
@@ -1831,7 +1863,6 @@
         "country_code": "ie",
         "cities": [
             "Dublin",
-            "South Dublin",
             "Cork",
             "Limerick",
             "Gaillimh"
@@ -2096,11 +2127,7 @@
         "country_name": "Andorra",
         "country_code": "ad",
         "cities": [
-            "Andorra la Vella",
-            "les Escaldes",
-            "Encamp",
-            "Sant Julià de Lòria",
-            "la Massana"
+            "Andorra"
         ]
     },
     {
@@ -2124,7 +2151,7 @@
             "Hamburg",
             "Munich",
             "Köln",
-            "Frankfurt am Main"
+            "Frankfurt"
         ]
     },
     {
@@ -2224,6 +2251,7 @@
         "country_name": "Malta",
         "country_code": "mt",
         "cities": [
+            "Malta",
             "San Pawl il-Baħar",
             "Birkirkara",
             "Mosta",
@@ -2237,8 +2265,7 @@
         "country_code": "mc",
         "cities": [
             "Monaco",
-            "Monte-Carlo",
-            "La Condamine"
+            "Monte-Carlo"
         ]
     },
     {
@@ -2366,6 +2393,7 @@
         "country_name": "Liechtenstein",
         "country_code": "li",
         "cities": [
+            "Liechtenstein",
             "Schaan",
             "Vaduz",
             "Triesen",
@@ -2414,7 +2442,8 @@
             "Split",
             "Rijeka",
             "Osijek",
-            "Zadar"
+            "Zadar",
+            "Dubrovnik"
         ]
     },
     {
@@ -2626,6 +2655,7 @@
         "country_name": "Cyprus",
         "country_code": "cy",
         "cities": [
+            "Cyprus",
             "Famagusta",
             "Kyrenia",
             "Protaras",
@@ -2699,10 +2729,10 @@
         "country_code": "ro",
         "cities": [
             "Bucharest",
-            "Sector 3",
             "Iaşi",
-            "Sector 6",
-            "Sector 2"
+            "Cluj-Napoca",
+            "Timișoara",
+            "Constanța"
         ]
     },
     {
@@ -2795,7 +2825,8 @@
             "Plovdiv",
             "Varna",
             "Burgas",
-            "Stara Zagora"
+            "Stara Zagora",
+            "Bansko"
         ]
     },
     {
@@ -3463,8 +3494,43 @@
             "Mumbai",
             "Delhi",
             "Bengaluru",
+            "Bangalore",
             "Hyderābād",
-            "Ahmedabad"
+            "Ahmedabad",
+            "Chennai",
+            "Calcutta",
+            "Kolkata",
+            "Surat",
+            "Pune",
+            "Jaipur",
+            "Lucknow",
+            "Kanpur",
+            "Nagpur",
+            "Indore",
+            "Thane",
+            "Bhopal",
+            "Visakhapatnam",
+            "Pimpri-Chinchwad",
+            "Patna",
+            "Vadodara",
+            "Ghaziabad",
+            "Ludhiana",
+            "Agra",
+            "Nashik",
+            "Faridabad",
+            "Meerut",
+            "Rajkot",
+            "Kalyan-Dombivali",
+            "Vasai-Virar",
+            "Varanasi",
+            "Srinagar",
+            "Aurangabad",
+            "Dhanbad",
+            "Amritsar",
+            "Navi",
+            "Allahabad",
+            "Howrah",
+            "Ranchi"
         ]
     },
     {
@@ -3476,8 +3542,51 @@
             "Mumbai",
             "Delhi",
             "Bengaluru",
+            "Bangalore",
             "Hyderābād",
-            "Ahmedabad"
+            "Ahmedabad",
+            "Chennai",
+            "Calcutta",
+            "Kolkata",
+            "Surat",
+            "Pune",
+            "Jaipur",
+            "Lucknow",
+            "Kanpur",
+            "Nagpur",
+            "Indore",
+            "Thane",
+            "Bhopal",
+            "Visakhapatnam",
+            "Pimpri-Chinchwad",
+            "Patna",
+            "Vadodara",
+            "Ghaziabad",
+            "Ludhiana",
+            "Agra",
+            "Nashik",
+            "Faridabad",
+            "Meerut",
+            "Rajkot",
+            "Kalyan-Dombivali",
+            "Vasai-Virar",
+            "Varanasi",
+            "Srinagar",
+            "Aurangabad",
+            "Dhanbad",
+            "Amritsar",
+            "Navi",
+            "Allahabad",
+            "Howrah",
+            "Ranchi",
+            "Jabalpur",
+            "Gwalior",
+            "Coimbatore",
+            "Vijayawada",
+            "Jodhpur",
+            "Madurai",
+            "Raipur",
+            "Kota"
         ]
     },
     {
@@ -3631,7 +3740,8 @@
             "Bangkok",
             "Haiphong",
             "Samut Prakan",
-            "Huế"
+            "Huế",
+            "Chiang Mai"
         ]
     },
     {
@@ -3869,6 +3979,7 @@
         "country_name": "Indonesia",
         "country_code": "id",
         "cities": [
+            "Bali",
             "Makassar",
             "Samarinda",
             "Denpasar",
@@ -3897,7 +4008,42 @@
             "Beijing",
             "Shenzhen",
             "Guangzhou",
-            "Chengdu"
+            "Chengdu",
+            "Tianjin",
+            "Chongqing",
+            "Nanjing",
+            "Wuhan",
+            "Xi'an",
+            "Hangzhou",
+            "Shenyang",
+            "Dongguan",
+            "Foshan",
+            "Harbin",
+            "Dalian",
+            "Qingdao",
+            "Zhengzhou",
+            "Jinan",
+            "Changsha",
+            "Kunming",
+            "Changchun",
+            "Shantou†",
+            "Suzhou",
+            "Hefei",
+            "Shijiazhuang",
+            "Ningbo",
+            "Taiyuan",
+            "Nanning",
+            "Xiamen",
+            "Fuzhou",
+            "Wenzhou",
+            "Changzhou",
+            "Nanchang",
+            "Tangshan",
+            "Guiyang",
+            "Wuxi",
+            "Lanzhou",
+            "Zhongshan",
+            "Handan"
         ]
     },
     {
