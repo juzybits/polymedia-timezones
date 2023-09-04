@@ -13,7 +13,11 @@ export const AddCityButton: React.FC<{
 }) =>
 {
     return (
-        <div id='add-city-btn' onClick={() => openModal(<AddCityMenu addCity={addCity} />)}>
+        <div
+            id='add-city-btn'
+            className='big-btn'
+            onClick={() => openModal(<AddCityMenu addCity={addCity} />)}
+        >
             <span>+</span>
         </div>
     );

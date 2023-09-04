@@ -3,6 +3,7 @@ import { compareTimezones, newDateInTimezone } from './lib/time';
 import '../css/App.less';
 import { Modal } from './Modal';
 import { AddCityButton } from './AddCity';
+import { AboutButton } from './About';
 import { SlotsPanel } from './Slots';
 import { getCityKey, loadCitiesFromStorage, saveCitiesToStorage } from './lib/storage';
 
@@ -100,6 +101,7 @@ export const App: React.FC = () =>
         <div id='layout'>
             <SlotsPanel slots={slots} localDate={localDate} delCity={delCity} />
             <AddCityButton openModal={openModal} addCity={addCity} />
+            <AboutButton openModal={openModal} />
             <Modal content={modalContent} onClose={closeModal} />
         </div>
     );
