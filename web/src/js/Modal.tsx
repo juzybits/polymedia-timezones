@@ -1,5 +1,3 @@
-import '../css/Modal.less';
-
 export const Modal: React.FC<{
     content: React.ReactNode;
     onClose: () => void;

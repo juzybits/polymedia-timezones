@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { City, Slot } from './App';
 import { getHourDiff, newDateInTimezone } from './lib/time';
 import { getFlagEmoji } from './lib/utils';
-import '../css/Slots.less';
 
 /**
  * Full-screen panel with a column/row for each timezone

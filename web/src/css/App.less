@@ -53,3 +53,186 @@ a {
         border-color: #444;
     }
 }
+
+/* Slots */
+
+#slots-panel {
+    display: flex;
+    align-items: stretch;
+    min-height: 100dvh;
+    &.horizontal {
+        flex-direction: row;
+    }
+    &.vertical {
+        flex-direction: column;
+        height: auto;
+        .slot-cities {
+            text-align: center;
+            .city {
+                display: inline-block;
+                margin: 0 0.5em;
+            }
+        }
+    }
+
+    .slot {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 1em;
+
+        .slot-top-filler {
+            flex: 1;
+        }
+        .slot-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            .slot-time {
+                font-size: 2.4em;
+                white-space: nowrap;
+            }
+            .slot-day {
+                margin-top: 0.5em;
+            }
+            .slot-diff {
+                margin-top: 0.5em;
+                margin-bottom: 0.8em;
+                letter-spacing: 0.04em;
+            }
+        }
+        .slot-cities {
+            flex: 1;
+            .city {
+                padding: 0.25em 0;
+                .flag {
+                    display: inline-block;
+                    transform: translateY(1px);
+                    margin-right: 5px;
+                }
+                &:hover {
+                    cursor: pointer;
+                    color: red;
+                }
+            }
+        }
+    }
+}
+
+#slots-empty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100dvh;
+    font-size: 1em;
+    background-color: pink;
+    .plus {
+        font-size: 1.5em;
+    }
+}
+
+/* AddCity */
+
+#add-city-btn {
+    left: 22px;
+    > span { // The "+" symbol
+        font-size: 3em;
+        line-height: 100%;
+        transform: translateY(-7%);
+    }
+}
+
+@border-radius: 8px;
+@border-color: rgb(120 120 120);
+
+#add-city-input {
+    padding: 0.8em 1.1em;
+    font-size: 1em;
+    margin-top: 1em;
+    border: 1px solid @border-color;
+    outline-color: green;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: @border-radius;
+    &.has-results {
+        border-radius: @border-radius @border-radius 0 0;
+        border-bottom: 0;
+    }
+}
+
+#add-city-results {
+    border: 1px solid @border-color;
+    .result {
+        padding: 0.6em 0.8em;
+        &:nth-child(even) {
+            background-color: rgb(250 250 250);
+        }
+        &:hover {
+            cursor: pointer;
+            background-color: green;
+            color: white;
+        }
+    }
+}
+
+#add-city-no-results {
+    margin-top: 1em;
+}
+
+/* About */
+
+#about-btn {
+    right: 22px;
+    #about-logo {
+        width: 35px;
+        transform: translateY(-1px);
+    }
+}
+
+#about-menu {
+    p {
+        margin-top: 1em;
+    }
+}
+
+/* Modal */
+
+.modal-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    overflow-y: auto;
+    padding: 1em;
+    box-sizing: border-box;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-content {
+    position: relative;
+    margin: 0 auto;
+    width: min(450px, 100%);
+    overflow-y: scroll;
+    border-radius: 10px;
+    padding: 1.7em 1.9em 2.1em;
+    box-sizing: border-box;
+    background-color: rgb(255 255 255);
+}
+
+.modal-close {
+    position: absolute;
+    top: 16px;
+    right: 25px;
+    font-size: 1.5em;
+    &:hover {
+        cursor: pointer;
+    }
+}

@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react';
 import { City } from './App';
 import { loadTimezones } from './lib/timezones';
 import { toLatinString } from './lib/utils';
-import '../css/AddCity.less';
 
 export const AddCityButton: React.FC<{
     openModal: (content: React.ReactNode) => void;

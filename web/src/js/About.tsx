@@ -1,4 +1,3 @@
-import '../css/About.less';
 import imgLogo from '../img/logo.png';
 
 export const AboutButton: React.FC<{

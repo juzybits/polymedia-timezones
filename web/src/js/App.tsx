@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 import { compareTimezones, newDateInTimezone } from './lib/time';
-import '../css/App.less';
 import { Modal } from './Modal';
 import { AddCityButton } from './AddCity';
 import { AboutButton } from './About';
 import { SlotsPanel } from './Slots';
 import { getCityKey, loadCitiesFromStorage, saveCitiesToStorage } from './lib/storage';
+import '../css/App.less';
 
 // A city chosen by the user
 export type City = {
