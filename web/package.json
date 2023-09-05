@@ -15,7 +15,9 @@
         "react-dom": "^18.2.0"
     },
     "devDependencies": {
+        "@parcel/packager-raw-url": "2.9.3",
         "@parcel/transformer-less": "latest",
+        "@parcel/transformer-webmanifest": "2.9.3",
         "@types/react": "^18.2.21",
         "@types/react-dom": "^18.2.7",
         "@typescript-eslint/eslint-plugin": "^6.4.1",

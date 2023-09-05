@@ -13,8 +13,14 @@ dependencies:
     version: 18.2.0(react@18.2.0)
 
 devDependencies:
+  '@parcel/packager-raw-url':
+    specifier: 2.9.3
+    version: 2.9.3(@parcel/core@2.9.3)
   '@parcel/transformer-less':
     specifier: latest
+    version: 2.9.3(@parcel/core@2.9.3)
+  '@parcel/transformer-webmanifest':
+    specifier: 2.9.3
     version: 2.9.3(@parcel/core@2.9.3)
   '@types/react':
     specifier: ^18.2.21
@@ -623,6 +629,16 @@ packages:
       - '@parcel/core'
     dev: true
 
+  /@parcel/packager-raw-url@2.9.3(@parcel/core@2.9.3):
+    resolution: {integrity: sha512-4kYOwYsnkfjIj4gew0xLNUcxfV+7tyCvp3FO0XIxo31JJMHCJpEL5BZjoUWHsmfSBNX27iOAG1iu5hu6j4W8TQ==}
+    engines: {node: '>= 12.0.0', parcel: ^2.9.3}
+    dependencies:
+      '@parcel/plugin': 2.9.3(@parcel/core@2.9.3)
+      '@parcel/utils': 2.9.3
+    transitivePeerDependencies:
+      - '@parcel/core'
+    dev: true
+
   /@parcel/packager-raw@2.9.3(@parcel/core@2.9.3):
     resolution: {integrity: sha512-oPQTNoYanQ2DdJyL61uPYK2py83rKOT8YVh2QWAx0zsSli6Kiy64U3+xOCYWgDVCrHw9+9NpQMuAdSiFg4cq8g==}
     engines: {node: '>= 12.0.0', parcel: ^2.9.3}
@@ -924,6 +940,18 @@ packages:
       posthtml-parser: 0.10.2
       posthtml-render: 3.0.0
       semver: 7.5.4
+    transitivePeerDependencies:
+      - '@parcel/core'
+    dev: true
+
+  /@parcel/transformer-webmanifest@2.9.3(@parcel/core@2.9.3):
+    resolution: {integrity: sha512-xkerfb+5OnCJFwOjN8PJQcitCvNuZxg+NIWjG2hMjKfeyqWT00C8uXTSTu8gYTrg0fdQd2c+URdoT/iv/Y7tPQ==}
+    engines: {parcel: ^2.9.3}
+    dependencies:
+      '@mischnic/json-sourcemap': 0.1.0
+      '@parcel/diagnostic': 2.9.3
+      '@parcel/plugin': 2.9.3(@parcel/core@2.9.3)
+      '@parcel/utils': 2.9.3
     transitivePeerDependencies:
       - '@parcel/core'
     dev: true
