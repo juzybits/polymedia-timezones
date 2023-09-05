@@ -16,19 +16,29 @@ export const SlotsPanel: React.FC<{
     delCity,
 }) =>
 {
-    const [orientation, setOrientation] = useState<string>('horizontal');
+    const [orientation, setOrientation] = useState<string>('landscape');
     useEffect(() => {
-        function onResizeUpdateOrientation() {
-            const orientation = (window.innerHeight > window.innerWidth) ? 'vertical' : 'horizontal';
-            setOrientation(orientation);
+        function onWindowResize() {
+            if (window.innerHeight !== window.innerWidth) {
+                return;
+            }
+            const newOrientation = (window.innerHeight > window.innerWidth) ? 'portrait' : 'landscape';
+            setOrientation(newOrientation);
+        }
+        function onScreenChange(this: ScreenOrientation, _event: Event) {
+            const newOrientation = this.type.split('-')[0]; // 'landscape' or 'portrait'
+            setOrientation(newOrientation);
         }
 
-        onResizeUpdateOrientation();
+        onWindowResize();
 
-        window.addEventListener('resize', onResizeUpdateOrientation);
+        window.addEventListener('resize', onWindowResize);
+        screen.orientation.addEventListener('change', onScreenChange);
 
         return () => { // cleanup listener on component unmount
-            window.removeEventListener('resize', onResizeUpdateOrientation);
+            window.removeEventListener('resize', onWindowResize);
+            screen.orientation.removeEventListener('change', onScreenChange);
+
         }
     }, []);
 
@@ -97,7 +107,7 @@ const Slot: React.FC<{
     const hour = tzDate.getHours();
 
     // Depending on the hour, choose the slot background and text color
-    const direction = orientation === 'horizontal' ? 'to bottom,' : 'to right,';
+    const direction = orientation === 'landscape' ? 'to bottom,' : 'to right,';
     const backgroundImage = `linear-gradient(${direction} ${gradients[hour]})`;
     const color = (hour >= 8 && hour <= 17) ? 'rgb(50, 50, 50)' : 'rgb(255, 255, 255)';
 
