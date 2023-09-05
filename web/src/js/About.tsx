@@ -1,4 +1,4 @@
-import imgLogo from '../img/logo.png';
+import imgLogo from '../img/logo_polymedia.png';
 
 export const AboutButton: React.FC<{
     openModal: (content: React.ReactNode) => void;
