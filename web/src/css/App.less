@@ -60,10 +60,10 @@ a {
     display: flex;
     align-items: stretch;
     min-height: 100dvh;
-    &.landscape {
+    @media (orientation: landscape) {
         flex-direction: row;
     }
-    &.portrait {
+    @media (orientation: portrait) {
         flex-direction: column;
         height: auto;
         .slot-cities {

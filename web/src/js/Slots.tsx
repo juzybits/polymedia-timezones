@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { City, Slot } from './App';
 import { getHourDiff, newDateInTimezone } from './lib/time';
 import { getFlagEmoji } from './lib/utils';
@@ -16,39 +15,12 @@ export const SlotsPanel: React.FC<{
     delCity,
 }) =>
 {
-    const [orientation, setOrientation] = useState<string>('landscape');
-    useEffect(() => {
-        function onWindowResize() {
-            if (window.innerHeight !== window.innerWidth) {
-                return;
-            }
-            const newOrientation = (window.innerHeight > window.innerWidth) ? 'portrait' : 'landscape';
-            setOrientation(newOrientation);
-        }
-        function onScreenChange(this: ScreenOrientation, _event: Event) {
-            const newOrientation = this.type.split('-')[0]; // 'landscape' or 'portrait'
-            setOrientation(newOrientation);
-        }
-
-        onWindowResize();
-
-        window.addEventListener('resize', onWindowResize);
-        screen.orientation.addEventListener('change', onScreenChange);
-
-        return () => { // cleanup listener on component unmount
-            window.removeEventListener('resize', onWindowResize);
-            screen.orientation.removeEventListener('change', onScreenChange);
-
-        }
-    }, []);
-
     return (
-        <div id='slots-panel' className={orientation}>
+        <div id='slots-panel'>
             {slots.map((slot, index) => (
                 <Slot
                     slot={slot}
                     localDate={localDate}
-                    orientation={orientation}
                     delCity={delCity}
                     key={index}
                 />
@@ -67,12 +39,10 @@ export const SlotsPanel: React.FC<{
 const Slot: React.FC<{
     slot: Slot;
     localDate: Date;
-    orientation: string;
     delCity: (city: City) => void;
 }> = ({
     slot,
     localDate,
-    orientation,
     delCity,
 }) =>
 {
@@ -107,7 +77,7 @@ const Slot: React.FC<{
     const hour = tzDate.getHours();
 
     // Depending on the hour, choose the slot background and text color
-    const direction = orientation === 'landscape' ? 'to bottom,' : 'to right,';
+    const direction = (window.innerWidth > window.innerHeight) ? 'to bottom,' : 'to right,';
     const backgroundImage = `linear-gradient(${direction} ${gradients[hour]})`;
     const color = (hour >= 8 && hour <= 17) ? 'rgb(50, 50, 50)' : 'rgb(255, 255, 255)';
 
