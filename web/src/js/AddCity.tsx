@@ -16,14 +16,27 @@ export const AddCityButton: React.FC<{
     closeModal,
 }) =>
 {
+    function openMenu(): void {
+        openModal(<AddCityMenu hasCity={hasCity} addCity={addCity} closeModal={closeModal} />);
+    }
+
+    useEffect(() => {
+        function handleKeyPress(event: KeyboardEvent) {
+            if (event.key === '+') {
+                event.preventDefault();
+                openMenu();
+            } else if (event.key === 'Escape') {
+                closeModal();
+            }
+        }
+        document.addEventListener('keydown', handleKeyPress);
+        return () => {
+            document.removeEventListener('keydown', handleKeyPress);
+        }
+    }, [openModal, hasCity, addCity, closeModal]);
+
     return (
-        <div
-            id='add-city-btn'
-            className='big-btn'
-            onClick={() => openModal(
-                <AddCityMenu hasCity={hasCity} addCity={addCity} closeModal={closeModal} />
-            )}
-        >
+        <div id='add-city-btn' className='big-btn' onClick={openMenu}>
             <span>+</span>
         </div>
     );
