@@ -58,7 +58,9 @@ export const AddCityMenu: React.FC<{
 }) => {
     const [searchText, setSearchText] = useState('');
     const [foundCities, setFoundCities] = useState<UICity[]>([]);
+    const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
+    // On search input change, update `foundCities`
     useEffect(() => {
         if (searchText.length <= 2) {
             setFoundCities([]);
@@ -87,6 +89,48 @@ export const AddCityMenu: React.FC<{
         setFoundCities(newFoundCities);
     }, [searchText]);
 
+    // On ArrowUp/ArrowDown/Enter, navigate and select cities
+    useEffect(() => {
+        function handleKeyPress(event: KeyboardEvent) {
+            switch (event.key) {
+                case 'ArrowUp':
+                    if (activeIndex !== null && activeIndex > 0) {
+                        setActiveIndex(activeIndex - 1);
+                    }
+                    break;
+                case 'ArrowDown':
+                    if (activeIndex === null) {
+                        setActiveIndex(0);
+                    } else if (activeIndex < foundCities.length - 1) {
+                        setActiveIndex(activeIndex + 1);
+                    }
+                    break;
+                case 'Enter':
+                    if (activeIndex !== null) {
+                        const selectedCity = foundCities[activeIndex];
+                        selectCity(selectedCity);
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        document.addEventListener('keydown', handleKeyPress);
+        return () => {
+            document.removeEventListener('keydown', handleKeyPress);
+        }
+    }, [activeIndex, foundCities]);
+
+    function selectCity(city: UICity): void {
+        if (!city.selected) {
+            city.selected = true;
+            addCity(city);
+            setFoundCities([...foundCities]);
+        }
+        closeModal();
+    }
+
     const inputRef = useRef<HTMLInputElement>(null);
     const hasResults = foundCities.length > 0;
     return (
@@ -109,15 +153,8 @@ export const AddCityMenu: React.FC<{
                 <div id='add-city-results' >
                     {foundCities.map((city, index) => (
                         <div
-                            className={`city-result ${city.selected ? 'selected' : ''}`}
-                            onClick={() => {
-                                if (!city.selected) {
-                                    city.selected = true;
-                                    addCity(city);
-                                    setFoundCities([...foundCities]);
-                                }
-                                closeModal();
-                            }}
+                            className={`city-result ${city.selected ? 'selected' : ''} ${index === activeIndex ? 'active' : ''}`}
+                            onClick={() => selectCity(city)}
                             key={index}
                         >
                             <span>{city.name} ({city.country.toUpperCase()})</span>
