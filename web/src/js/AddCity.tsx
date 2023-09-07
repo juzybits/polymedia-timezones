@@ -8,12 +8,12 @@ export const AddCityButton: React.FC<{
     openModal: (content: React.ReactNode) => void;
     hasCity: (city: City) => boolean;
     addCity: (city: City) => void;
-    delCity: (city: City) => void;
+    closeModal: () => void;
 }> = ({
     openModal,
     hasCity,
     addCity,
-    delCity,
+    closeModal,
 }) =>
 {
     return (
@@ -21,7 +21,7 @@ export const AddCityButton: React.FC<{
             id='add-city-btn'
             className='big-btn'
             onClick={() => openModal(
-                <AddCityMenu hasCity={hasCity} addCity={addCity} delCity={delCity} />
+                <AddCityMenu hasCity={hasCity} addCity={addCity} closeModal={closeModal} />
             )}
         >
             <span>+</span>
@@ -37,11 +37,11 @@ const timezones = loadTimezones();
 export const AddCityMenu: React.FC<{
     hasCity: (city: City) => boolean;
     addCity: (city: City) => void;
-    delCity: (city: City) => void;
+    closeModal: () => void;
 }> = ({
     hasCity,
     addCity,
-    delCity,
+    closeModal,
 }) => {
     const [searchText, setSearchText] = useState('');
     const [foundCities, setFoundCities] = useState<UICity[]>([]);
@@ -102,12 +102,8 @@ export const AddCityMenu: React.FC<{
                                     city.selected = true;
                                     addCity(city);
                                     setFoundCities([...foundCities]);
-                                } else {
-                                    city.selected = false;
-                                    delCity(city);
-                                    setFoundCities([...foundCities]);
                                 }
-                                inputRef.current?.focus();
+                                closeModal();
                             }}
                             key={index}
                         >

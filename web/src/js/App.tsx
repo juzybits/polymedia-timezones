@@ -103,7 +103,7 @@ export const App: React.FC = () =>
     return (
         <div id='layout'>
             <SlotsPanel slots={slots} localDate={localDate} delCity={delCity} />
-            <AddCityButton openModal={openModal} hasCity={hasCity} addCity={addCity} delCity={delCity} />
+            <AddCityButton openModal={openModal} hasCity={hasCity} addCity={addCity} closeModal={closeModal} />
             <AboutButton openModal={openModal} />
             <Modal content={modalContent} onClose={closeModal} />
         </div>
