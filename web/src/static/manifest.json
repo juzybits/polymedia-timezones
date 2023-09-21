@@ -26,7 +26,7 @@
 
     "screenshots": [
         {
-            "src": "../img/open_graph.webp",
+            "src": "../img/open-graph.webp",
             "type": "image/webp",
             "sizes": "2400x1200",
             "form_factor": "wide"
