@@ -63,7 +63,6 @@ const Slot: React.FC<{
         minute: '2-digit',
         // second: '2-digit',
         hourCycle: 'h23',
-
     }).format(tzDate).split(':');;
     const hourStr = hourAndMinutes[0];
     const minuteStr = hourAndMinutes[1];
