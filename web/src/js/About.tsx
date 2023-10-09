@@ -1,5 +1,3 @@
-import imgLogo from '../img/logo_polymedia.png';
-
 export const AboutButton: React.FC<{
     openModal: (content: React.ReactNode) => void;
 }> = ({
@@ -12,7 +10,7 @@ export const AboutButton: React.FC<{
             className='big-btn'
             onClick={() => openModal(<AboutMenu />)}
         >
-            <img id='about-logo' src={imgLogo} alt='Polymedia Profile' />
+            <img id='about-logo' src='https://assets.polymedia.app/img/all/logo-nomargin-transparent-512x512.webp' alt='Polymedia logo' />
         </div>
     );
 }
