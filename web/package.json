@@ -6,7 +6,7 @@
     "scripts": {
         "clean": "rm -rf .parcel-cache/ dist/",
         "lint": "eslint ./src --ext .ts,.tsx",
-        "serve": "pnpm clean && parcel src/index.html",
+        "dev": "pnpm clean && parcel src/index.html",
         "build": "pnpm clean && parcel build --no-source-maps src/index.html && cp src/static/* dist/ && mkdir -p dist/img/ && cp src/img/open-graph.webp dist/img/",
         "deploy-dev": "pnpm build && wrangler pages deploy dist/ --project-name polymedia-timezones --branch dev",
         "deploy-prod": "pnpm build && wrangler pages deploy dist/ --project-name polymedia-timezones --branch main"
