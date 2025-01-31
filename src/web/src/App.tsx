@@ -5,7 +5,7 @@ import { Modal } from './Modal';
 import { SlotsPanel } from './Slots';
 import { loadCitiesFromStorage, saveCitiesToStorage } from './lib/storage';
 import { compareTimezones, newDateInTimezone } from './lib/time';
-import '../css/App.less';
+import './styles/App.less';
 
 // A city chosen by the user
 export type City = {

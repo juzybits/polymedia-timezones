@@ -18,7 +18,7 @@ export const SlotsPanel: React.FC<{
     return (
         <div id='slots-panel'>
             {slots.map((slot, index) => (
-                <Slot
+                <SlotComp
                     slot={slot}
                     localDate={localDate}
                     delCity={delCity}
@@ -36,7 +36,7 @@ export const SlotsPanel: React.FC<{
 /**
  * Colorful slot showing the timezone and city info
  */
-const Slot: React.FC<{
+const SlotComp: React.FC<{
     slot: Slot;
     localDate: Date;
     delCity: (city: City) => void;

@@ -1,32 +1,48 @@
 {
     "private": true,
+    "version": "0.0.0",
     "name": "@polymedia/timezones-web",
     "author": "@juzybits (https://polymedia.app)",
+    "homepage": "https://timezones.polymedia.app",
     "description": "https://timezones.polymedia.app",
+    "license": "Apache-2.0",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/juzybits/polymedia-timezones"
+    },
+    "keywords": [],
     "scripts": {
-        "clean": "rm -rf .parcel-cache/ dist/",
-        "lint": "eslint ./src --ext .ts,.tsx",
-        "dev": "pnpm clean && parcel src/index.html",
-        "build": "pnpm clean && parcel build --no-source-maps src/index.html && cp src/static/* dist/ && mkdir -p dist/img/ && cp src/img/open-graph.webp dist/img/",
+        "build": "vite build",
+        "clean": "rm -rf dist/ node_modules/ .turbo/ .wrangler/",
         "deploy-dev": "pnpm build && wrangler pages deploy dist/ --project-name polymedia-timezones --branch dev",
-        "deploy-prod": "pnpm build && wrangler pages deploy dist/ --project-name polymedia-timezones --branch main"
+        "deploy-prod": "pnpm build && wrangler pages deploy dist/ --project-name polymedia-timezones --branch main",
+        "dev": "vite",
+        "host": "vite --host",
+        "lint": "eslint src/ --report-unused-disable-directives --max-warnings 0",
+        "preview": "pnpm build && vite preview",
+        "typecheck": "tsc -b"
     },
     "dependencies": {
         "react": "^18.2.0",
         "react-dom": "^18.2.0"
     },
     "devDependencies": {
-        "@parcel/packager-raw-url": "latest",
-        "@parcel/transformer-less": "latest",
-        "@parcel/transformer-webmanifest": "latest",
-        "@types/react": "^18.2.55",
-        "@types/react-dom": "^18.2.19",
-        "@typescript-eslint/eslint-plugin": "latest",
-        "@typescript-eslint/parser": "latest",
-        "eslint": "latest",
-        "eslint-plugin-deprecation": "latest",
-        "parcel": "latest",
-        "process": "latest",
-        "react-devtools": "latest"
-    }
+        "@eslint/compat": "^1.2.5",
+        "@eslint/js": "^9.19.0",
+        "@stylistic/eslint-plugin": "^3.0.0",
+        "@types/react-dom": "^18.3.5",
+        "@types/react": "^18.3.18",
+        "@vitejs/plugin-react-swc": "^3.7.2",
+        "eslint-plugin-import": "^2.31.0",
+        "eslint-plugin-react": "^7.37.4",
+        "eslint-plugin-unused-imports": "^4.1.4",
+        "eslint": "^9.19.0",
+        "less": "^4.2.2",
+        "typescript-eslint": "^8.21.0",
+        "typescript": "^5.7.3",
+        "vite": "^6.0.11",
+        "wrangler": "^3.105.1"
+    },
+    "type": "module",
+    "sideEffects": false
 }
