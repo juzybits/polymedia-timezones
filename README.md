@@ -1,5 +1,5 @@
 # Polymedia Timezones
 
-![Polymedia Timezones](./web/src/img/open-graph.webp)
+The easiest way to keep track of time around the world.
 
-This is the code for the https://timezones.polymedia.app web app.
+![Polymedia Timezones](https://timezones.polymedia.app/img/open-graph.webp)
