@@ -88,7 +88,7 @@ const SlotComp = ({
             <div className="slot-top-filler"></div>
             <div className="slot-main">
                 <div className="slot-time">
-                    <b>{hourStr}</b> : {minuteStr}
+                    <b>{hourStr}</b>:{minuteStr}
                 </div>
                 {/* <div className='slot-time'><b>{hourStr}</b> : {minuteStr} : {secondStr}</div> */}
                 <div className="slot-day">{dayStr}</div>

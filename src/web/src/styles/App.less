@@ -2,13 +2,20 @@
 
 @import "../../node_modules/normalize.css/normalize.css";
 
+// === constants ===
+
+@font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+@font-system: system-ui, sans-serif;
+
+// === styles ===
+
 html {
     font-size: 110%;
     user-select: none;
 }
 
 html, body, p, h1, h2, h3, h4, h5, input, button, div, textarea {
-    font-family: system-ui;
+    font-family: @font-system;
     margin: 0;
     padding: 0;
 }
@@ -101,6 +108,7 @@ a {
             .slot-time {
                 font-size: 2.4em;
                 white-space: nowrap;
+                font-family: @font-mono;
             }
             .slot-day {
                 margin-top: 0.5em;
