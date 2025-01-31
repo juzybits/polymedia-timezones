@@ -21,6 +21,8 @@ export type Slot = {
     cities: City[];
 };
 
+const SCROLL_THRESHOLD = 30;
+
 export const App = () =>
 {
     const [localDate, setLocalDate] = useState(new Date());
@@ -42,7 +44,7 @@ export const App = () =>
                 if (Math.abs(event.deltaX) > Math.abs(event.deltaY)) return;
 
                 scrollAccumulatorRef.current += event.deltaY;
-                const threshold = 30;
+                const threshold = SCROLL_THRESHOLD;
 
                 if (Math.abs(scrollAccumulatorRef.current) >= threshold) {
                     const direction = Math.sign(scrollAccumulatorRef.current);
@@ -54,7 +56,7 @@ export const App = () =>
                 if (Math.abs(event.deltaY) > Math.abs(event.deltaX)) return;
 
                 scrollAccumulatorRef.current += event.deltaX;
-                const threshold = 30;
+                const threshold = SCROLL_THRESHOLD;
 
                 if (Math.abs(scrollAccumulatorRef.current) >= threshold) {
                     const direction = Math.sign(scrollAccumulatorRef.current);
@@ -80,13 +82,13 @@ export const App = () =>
 
             if (isLandscape()) {
                 // In landscape, only respond to vertical swipes
-                if (Math.abs(deltaY) > 30 && Math.abs(deltaY) > Math.abs(deltaX) * 2) {
+                if (Math.abs(deltaY) > SCROLL_THRESHOLD && Math.abs(deltaY) > Math.abs(deltaX) * 2) {
                     const direction = Math.sign(deltaY);
                     setTimeOffset(prev => prev - direction);
                 }
             } else {
                 // In portrait, only respond to horizontal swipes
-                if (Math.abs(deltaX) > 30 && Math.abs(deltaX) > Math.abs(deltaY) * 2) {
+                if (Math.abs(deltaX) > SCROLL_THRESHOLD && Math.abs(deltaX) > Math.abs(deltaY) * 2) {
                     const direction = Math.sign(deltaX);
                     setTimeOffset(prev => prev + direction);
                 }
