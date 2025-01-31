@@ -26,51 +26,73 @@ export const App: React.FC = () =>
     const [timeOffset, setTimeOffset] = useState(0); // milliseconds offset from current time
     const localDateRef = useRef(localDate); // use a ref because setInterval() doesn't notice state changes
     const touchStartXRef = useRef<number | null>(null);
+    const touchStartYRef = useRef<number | null>(null);
     const scrollAccumulatorRef = useRef(0);
 
     // handle scroll and touch events
     useEffect(() =>
     {
+        const isLandscape = () => window.innerWidth > window.innerHeight;
+
         // desktop
         function handleScroll(event: WheelEvent) {
-            const isLandscape = window.innerWidth > window.innerHeight;
-            // use deltaY for landscape, deltaX for portrait
-            const delta = isLandscape ? event.deltaY : event.deltaX;
+            if (isLandscape()) {
+                // In landscape, only respond to vertical scrolling (deltaY)
+                if (Math.abs(event.deltaX) > Math.abs(event.deltaY)) return;
 
-            if (isLandscape) {
-                // accumulate scroll delta until threshold
-                scrollAccumulatorRef.current += delta;
-                const threshold = 30; // adjust this value to change sensitivity
+                scrollAccumulatorRef.current += event.deltaY;
+                const threshold = 30;
 
                 if (Math.abs(scrollAccumulatorRef.current) >= threshold) {
                     const direction = Math.sign(scrollAccumulatorRef.current);
                     setTimeOffset(prev => prev - direction);
-                    scrollAccumulatorRef.current = 0; // reset accumulator
+                    scrollAccumulatorRef.current = 0;
                 }
             } else {
-                // keep portrait mode (horizontal scroll) as is
-                const direction = Math.sign(delta);
-                setTimeOffset(prev => prev - direction);
+                // In portrait, only respond to horizontal scrolling (deltaX)
+                if (Math.abs(event.deltaY) > Math.abs(event.deltaX)) return;
+
+                scrollAccumulatorRef.current += event.deltaX;
+                const threshold = 30;
+
+                if (Math.abs(scrollAccumulatorRef.current) >= threshold) {
+                    const direction = Math.sign(scrollAccumulatorRef.current);
+                    setTimeOffset(prev => prev - direction);
+                    scrollAccumulatorRef.current = 0;
+                }
             }
         }
 
         // mobile
         function handleTouchStart(event: TouchEvent) {
             touchStartXRef.current = event.touches[0].clientX;
+            touchStartYRef.current = event.touches[0].clientY;
         }
+
         function handleTouchEnd(event: TouchEvent) {
-            if (touchStartXRef.current === null) return;
+            if (touchStartXRef.current === null || touchStartYRef.current === null) return;
 
-            const touchEnd = event.changedTouches[0].clientX;
-            const deltaX = touchEnd - touchStartXRef.current;
+            const touchEndX = event.changedTouches[0].clientX;
+            const touchEndY = event.changedTouches[0].clientY;
+            const deltaX = touchEndX - touchStartXRef.current;
+            const deltaY = touchEndY - touchStartYRef.current;
 
-            // only trigger if the swipe is significant enough (30px)
-            if (Math.abs(deltaX) > 30) {
-                const direction = Math.sign(deltaX);
-                setTimeOffset(prev => prev + direction); // swipe right increases time, left decreases
+            if (isLandscape()) {
+                // In landscape, only respond to vertical swipes
+                if (Math.abs(deltaY) > 30 && Math.abs(deltaY) > Math.abs(deltaX) * 2) {
+                    const direction = Math.sign(deltaY);
+                    setTimeOffset(prev => prev - direction);
+                }
+            } else {
+                // In portrait, only respond to horizontal swipes
+                if (Math.abs(deltaX) > 30 && Math.abs(deltaX) > Math.abs(deltaY) * 2) {
+                    const direction = Math.sign(deltaX);
+                    setTimeOffset(prev => prev + direction);
+                }
             }
 
             touchStartXRef.current = null;
+            touchStartYRef.current = null;
         }
 
         window.addEventListener('wheel', handleScroll, { passive: true });
