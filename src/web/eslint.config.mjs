@@ -36,7 +36,7 @@ export default [
             "@stylistic/semi": [ "error", "always" ],
 
             // === imports ===
-            "import/extensions": ["error", "ignorePackages", { ts: "never", tsx: "never" }], // require .js
+            // "import/extensions": ["error", "ignorePackages", { ts: "never", tsx: "never" }], // require .js
             "import/first": "error",
             "import/newline-after-import": "error",
             "import/no-duplicates": "error",

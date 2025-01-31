@@ -1,11 +1,12 @@
-import { useEffect, useRef, useState } from 'react';
-import { AboutButton } from './About';
-import { AddCityButton } from './AddCity';
-import { Modal } from './Modal';
-import { SlotsPanel } from './Slots';
-import { loadCitiesFromStorage, saveCitiesToStorage } from './lib/storage';
-import { compareTimezones, newDateInTimezone } from './lib/time';
-import './styles/App.less';
+import { useEffect, useRef, useState } from "react";
+
+import { AboutButton } from "./About";
+import { AddCityButton } from "./AddCity";
+import { loadCitiesFromStorage, saveCitiesToStorage } from "./lib/storage";
+import { compareTimezones, newDateInTimezone } from "./lib/time";
+import { Modal } from "./Modal";
+import { SlotsPanel } from "./Slots";
+import "./styles/App.less";
 
 // A city chosen by the user
 export type City = {
@@ -95,14 +96,14 @@ export const App: React.FC = () =>
             touchStartYRef.current = null;
         }
 
-        window.addEventListener('wheel', handleScroll, { passive: true });
-        window.addEventListener('touchstart', handleTouchStart, { passive: true });
-        window.addEventListener('touchend', handleTouchEnd, { passive: true });
+        window.addEventListener("wheel", handleScroll, { passive: true });
+        window.addEventListener("touchstart", handleTouchStart, { passive: true });
+        window.addEventListener("touchend", handleTouchEnd, { passive: true });
 
         return () => {
-            window.removeEventListener('wheel', handleScroll);
-            window.removeEventListener('touchstart', handleTouchStart);
-            window.removeEventListener('touchend', handleTouchEnd);
+            window.removeEventListener("wheel", handleScroll);
+            window.removeEventListener("touchstart", handleTouchStart);
+            window.removeEventListener("touchend", handleTouchEnd);
         };
     }, []);
 
@@ -130,7 +131,7 @@ export const App: React.FC = () =>
         /* Sort cities by timezone, country, and name */
         const sortedCities = [...cities.values()].sort(
             (cityA, cityB) =>{
-                const cityDiff = compareTimezones(cityA.tz, cityB.tz)
+                const cityDiff = compareTimezones(cityA.tz, cityB.tz);
                 if (cityDiff !== 0) {
                     return cityDiff;
                 }
@@ -163,7 +164,7 @@ export const App: React.FC = () =>
     }
 
     function addCity(city: City): void {
-        setCities(new Map(cities.set(city.key, city)))
+        setCities(new Map(cities.set(city.key, city)));
     }
 
     function delCity(city: City): void {
@@ -184,11 +185,11 @@ export const App: React.FC = () =>
     /* Render */
 
     return (
-        <div id='layout'>
+        <div id="layout">
             <SlotsPanel slots={slots} localDate={displayDate} delCity={delCity} />
             <AddCityButton openModal={openModal} hasCity={hasCity} addCity={addCity} closeModal={closeModal} />
             <AboutButton openModal={openModal} />
             <Modal content={modalContent} onClose={closeModal} />
         </div>
     );
-}
+};

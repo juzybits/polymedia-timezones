@@ -1,8 +1,9 @@
-import { useEffect, useRef, useState } from 'react';
-import { City } from './App';
-import { getCityKey } from './lib/storage';
-import { loadTimezones } from './lib/timezones';
-import { toLatinString } from './lib/utils';
+import { useEffect, useRef, useState } from "react";
+
+import { City } from "./App";
+import { getCityKey } from "./lib/storage";
+import { loadTimezones } from "./lib/timezones";
+import { toLatinString } from "./lib/utils";
 
 export const AddCityButton: React.FC<{
     openModal: (content: React.ReactNode) => void;
@@ -22,25 +23,25 @@ export const AddCityButton: React.FC<{
 
     useEffect(() => {
         function handleKeyPress(event: KeyboardEvent) {
-            if (event.key === '+') {
+            if (event.key === "+") {
                 event.preventDefault();
                 openMenu();
-            } else if (event.key === 'Escape') {
+            } else if (event.key === "Escape") {
                 closeModal();
             }
         }
-        document.addEventListener('keydown', handleKeyPress);
+        document.addEventListener("keydown", handleKeyPress);
         return () => {
-            document.removeEventListener('keydown', handleKeyPress);
-        }
+            document.removeEventListener("keydown", handleKeyPress);
+        };
     }, [openModal, hasCity, addCity, closeModal]);
 
     return (
-        <div id='add-city-btn' className='big-btn' onClick={openMenu}>
+        <div id="add-city-btn" className="big-btn" onClick={openMenu}>
             <span>+</span>
         </div>
     );
-}
+};
 
 type UICity = City & {
     selected: boolean;
@@ -56,7 +57,7 @@ export const AddCityMenu: React.FC<{
     addCity,
     closeModal,
 }) => {
-    const [searchText, setSearchText] = useState('');
+    const [searchText, setSearchText] = useState("");
     const [foundCities, setFoundCities] = useState<UICity[]>([]);
     const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
@@ -69,7 +70,7 @@ export const AddCityMenu: React.FC<{
         const searchLatin = toLatinString(searchText);
         const newFoundCities: UICity[] = [];
         for (const tz of timezones) {
-            let citiesCount = tz.citiesLatin.length;
+            const citiesCount = tz.citiesLatin.length;
             for (let i = 0; i < citiesCount; i++) {
                 const cityLatin = tz.citiesLatin[i];
                 if (!cityLatin.startsWith(searchLatin)) {
@@ -93,19 +94,19 @@ export const AddCityMenu: React.FC<{
     useEffect(() => {
         function handleKeyPress(event: KeyboardEvent) {
             switch (event.key) {
-                case 'ArrowUp':
+                case "ArrowUp":
                     if (activeIndex !== null && activeIndex > 0) {
                         setActiveIndex(activeIndex - 1);
                     }
                     break;
-                case 'ArrowDown':
+                case "ArrowDown":
                     if (activeIndex === null) {
                         setActiveIndex(0);
                     } else if (activeIndex < foundCities.length - 1) {
                         setActiveIndex(activeIndex + 1);
                     }
                     break;
-                case 'Enter':
+                case "Enter":
                     if (activeIndex !== null) {
                         const selectedCity = foundCities[activeIndex];
                         selectCity(selectedCity);
@@ -116,10 +117,10 @@ export const AddCityMenu: React.FC<{
             }
         }
 
-        document.addEventListener('keydown', handleKeyPress);
+        document.addEventListener("keydown", handleKeyPress);
         return () => {
-            document.removeEventListener('keydown', handleKeyPress);
-        }
+            document.removeEventListener("keydown", handleKeyPress);
+        };
     }, [activeIndex, foundCities]);
 
     function selectCity(city: UICity): void {
@@ -134,31 +135,31 @@ export const AddCityMenu: React.FC<{
     const inputRef = useRef<HTMLInputElement>(null);
     const hasResults = foundCities.length > 0;
     return (
-        <div id='add-city-menu'>
+        <div id="add-city-menu">
             <h2>Add City</h2>
             <input
-                id='add-city-input'
+                id="add-city-input"
                 ref={inputRef}
-                className={hasResults ? 'has-results' : ''}
-                type='text'
+                className={hasResults ? "has-results" : ""}
+                type="text"
                 value={searchText}
                 autoFocus
                 onChange={(e) => setSearchText(e.target.value)}
-                placeholder='Search for a city...'
-                spellCheck='false' autoCorrect='off' autoComplete='off'
+                placeholder="Search for a city..."
+                spellCheck="false" autoCorrect="off" autoComplete="off"
             />
             {
                 hasResults
                 ?
-                <div id='add-city-results' >
+                <div id="add-city-results" >
                     {foundCities.map((city, index) => (
                         <div
-                            className={`city-result ${city.selected ? 'selected' : ''} ${index === activeIndex ? 'active' : ''}`}
+                            className={`city-result ${city.selected ? "selected" : ""} ${index === activeIndex ? "active" : ""}`}
                             onClick={() => selectCity(city)}
                             key={index}
                         >
                             <span>{city.name} ({city.country.toUpperCase()})</span>
-                            {city.selected && <span className='city-checkmark'>✓</span>}
+                            {city.selected && <span className="city-checkmark">✓</span>}
                         </div>
                     ))}
                 </div>
@@ -166,9 +167,9 @@ export const AddCityMenu: React.FC<{
                 (
                     searchText.length <= 2
                     ? null
-                    : <div id='add-city-no-results'>No results. Try searching for a big city nearby.</div>
+                    : <div id="add-city-no-results">No results. Try searching for a big city nearby.</div>
                 )
             }
         </div>
     );
-}
+};

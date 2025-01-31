@@ -7,7 +7,7 @@
  */
 export function newDateInTimezone(date: Date, tz: string): Date {
     return new Date(
-        date.toLocaleString('en-US', { timeZone: tz })
+        date.toLocaleString("en-US", { timeZone: tz })
     );
 }
 

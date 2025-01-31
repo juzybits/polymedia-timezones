@@ -6,32 +6,31 @@ export const AboutButton: React.FC<{
 {
     return (
         <div
-            id='about-btn'
-            className='big-btn'
+            id="about-btn"
+            className="big-btn"
             onClick={() => openModal(<AboutMenu />)}
         >
-            <img id='about-logo' src='https://assets.polymedia.app/img/all/logo-nomargin-transparent-512x512.webp' alt='Polymedia logo' />
+            <img id="about-logo" src="https://assets.polymedia.app/img/all/logo-nomargin-transparent-512x512.webp" alt="Polymedia logo" />
         </div>
     );
-}
+};
 
-export const AboutMenu: React.FC<{
-}> = ({
+export const AboutMenu: React.FC = ({
 }) => {
 
     return (
-        <div id='about-menu'>
+        <div id="about-menu">
             <h2>About</h2>
-            <p>Polymedia Timezones is <a href='https://github.com/juzybits/polymedia-timezones' target='_blank' rel='noopener'>open-source</a></p>
-            <p>See my other work at <a href='https://polymedia.app' target='_blank' rel='noopener'>polymedia.app</a></p>
+            <p>Polymedia Timezones is <a href="https://github.com/juzybits/polymedia-timezones" target="_blank" rel="noopener noreferrer">open-source</a></p>
+            <p>See my other work at <a href="https://polymedia.app" target="_blank" rel="noopener noreferrer">polymedia.app</a></p>
             <p>Send your feedback/bugs/requests:
-                <br/><a href='https://twitter.com/juzybits' target='_blank' rel='noopener'>@juzybits</a>
-                <br/><a href='https://twitter.com/polymedia_app' target='_blank' rel='noopener'>@polymedia_app</a>
-                <br/><a href='https://discord.gg/3ZaE69Eq78' target='_blank' rel='noopener'>Polymedia Discord</a></p>
+                <br/><a href="https://twitter.com/juzybits" target="_blank" rel="noopener noreferrer">@juzybits</a>
+                <br/><a href="https://twitter.com/polymedia_app" target="_blank" rel="noopener noreferrer">@polymedia_app</a>
+                <br/><a href="https://discord.gg/3ZaE69Eq78" target="_blank" rel="noopener noreferrer">Polymedia Discord</a></p>
 
             <br/>
             <hr/>
-            <div id='about-keyboard'>
+            <div id="about-keyboard">
                 <h2>Keyboard shortcuts</h2>
                 <p><span>+</span>open city menu</p>
                 <p><span>Up/Down</span>navigate city menu</p>
@@ -41,4 +40,4 @@ export const AboutMenu: React.FC<{
 
         </div>
     );
-}
+};

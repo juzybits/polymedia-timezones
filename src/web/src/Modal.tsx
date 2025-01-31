@@ -11,12 +11,12 @@ export const Modal: React.FC<{
     }
 
     return (
-        <div className='modal-background' onClick={onClose}>
-            <div className='modal-content' onClick={e => e.stopPropagation()}>
-                <label className='modal-close' onClick={onClose}>✕</label>
+        <div className="modal-background" onClick={onClose}>
+            <div className="modal-content" onClick={e => e.stopPropagation()}>
+                <label className="modal-close" onClick={onClose}>✕</label>
                 {/* We stop propagation to prevent the modal from closing when its content is clicked */}
                 {content}
             </div>
         </div>
     );
-}
+};

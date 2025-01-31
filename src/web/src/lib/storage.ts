@@ -1,6 +1,6 @@
-import { City } from '../App';
+import { City } from "../App";
 
-const STORAGE_KEY = 'polymedia.timezones.cities';
+const STORAGE_KEY = "polymedia.timezones.cities";
 
 export function saveCitiesToStorage(cities: City[]): void
 {
@@ -27,7 +27,7 @@ export function getCityKey(
     city_name: string,
     city_country: string
     ): string {
-        return city_name + '.' + city_country;
+        return city_name + "." + city_country;
     }
 
 /*
