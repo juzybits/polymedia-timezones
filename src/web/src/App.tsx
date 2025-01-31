@@ -21,7 +21,7 @@ export type Slot = {
     cities: City[];
 };
 
-export const App: React.FC = () =>
+export const App = () =>
 {
     const [localDate, setLocalDate] = useState(new Date());
     const [timeOffset, setTimeOffset] = useState(0); // milliseconds offset from current time

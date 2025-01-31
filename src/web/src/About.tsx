@@ -1,7 +1,7 @@
-export const AboutButton: React.FC<{
-    openModal: (content: React.ReactNode) => void;
-}> = ({
+export const AboutButton = ({
     openModal,
+}: {
+    openModal: (content: React.ReactNode) => void;
 }) =>
 {
     return (
@@ -15,29 +15,25 @@ export const AboutButton: React.FC<{
     );
 };
 
-export const AboutMenu: React.FC = ({
-}) => {
+export const AboutMenu = () => (
+    <div id="about-menu">
+        <h2>About</h2>
+        <p>Polymedia Timezones is <a href="https://github.com/juzybits/polymedia-timezones" target="_blank" rel="noopener noreferrer">open-source</a></p>
+        <p>See my other work at <a href="https://polymedia.app" target="_blank" rel="noopener noreferrer">polymedia.app</a></p>
+        <p>Send your feedback/bugs/requests:
+            <br/><a href="https://twitter.com/juzybits" target="_blank" rel="noopener noreferrer">@juzybits</a>
+            <br/><a href="https://twitter.com/polymedia_app" target="_blank" rel="noopener noreferrer">@polymedia_app</a>
+            <br/><a href="https://discord.gg/3ZaE69Eq78" target="_blank" rel="noopener noreferrer">Polymedia Discord</a></p>
 
-    return (
-        <div id="about-menu">
-            <h2>About</h2>
-            <p>Polymedia Timezones is <a href="https://github.com/juzybits/polymedia-timezones" target="_blank" rel="noopener noreferrer">open-source</a></p>
-            <p>See my other work at <a href="https://polymedia.app" target="_blank" rel="noopener noreferrer">polymedia.app</a></p>
-            <p>Send your feedback/bugs/requests:
-                <br/><a href="https://twitter.com/juzybits" target="_blank" rel="noopener noreferrer">@juzybits</a>
-                <br/><a href="https://twitter.com/polymedia_app" target="_blank" rel="noopener noreferrer">@polymedia_app</a>
-                <br/><a href="https://discord.gg/3ZaE69Eq78" target="_blank" rel="noopener noreferrer">Polymedia Discord</a></p>
-
-            <br/>
-            <hr/>
-            <div id="about-keyboard">
-                <h2>Keyboard shortcuts</h2>
-                <p><span>+</span>open city menu</p>
-                <p><span>Up/Down</span>navigate city menu</p>
-                <p><span>Enter</span>add city to dashboard</p>
-                <p><span>Escape</span>close city menu</p>
-            </div>
-
+        <br/>
+        <hr/>
+        <div id="about-keyboard">
+            <h2>Keyboard shortcuts</h2>
+            <p><span>+</span>open city menu</p>
+            <p><span>Up/Down</span>navigate city menu</p>
+            <p><span>Enter</span>add city to dashboard</p>
+            <p><span>Escape</span>close city menu</p>
         </div>
-    );
-};
+
+    </div>
+);

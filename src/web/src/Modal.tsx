@@ -1,9 +1,9 @@
-export const Modal: React.FC<{
-    content: React.ReactNode;
-    onClose: () => void;
-}> = ({
+export const Modal = ({
     content,
     onClose,
+}: {
+    content: React.ReactNode;
+    onClose: () => void;
 }) =>
 {
     if (!content) {

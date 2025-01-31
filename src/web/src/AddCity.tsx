@@ -5,16 +5,16 @@ import { getCityKey } from "./lib/storage";
 import { loadTimezones } from "./lib/timezones";
 import { toLatinString } from "./lib/utils";
 
-export const AddCityButton: React.FC<{
-    openModal: (content: React.ReactNode) => void;
-    hasCity: (city: City) => boolean;
-    addCity: (city: City) => void;
-    closeModal: () => void;
-}> = ({
+export const AddCityButton = ({
     openModal,
     hasCity,
     addCity,
     closeModal,
+}: {
+    openModal: (content: React.ReactNode) => void;
+    hasCity: (city: City) => boolean;
+    addCity: (city: City) => void;
+    closeModal: () => void;
 }) =>
 {
     function openMenu(): void {
@@ -48,14 +48,14 @@ type UICity = City & {
 };
 const timezones = loadTimezones();
 
-export const AddCityMenu: React.FC<{
-    hasCity: (city: City) => boolean;
-    addCity: (city: City) => void;
-    closeModal: () => void;
-}> = ({
+export const AddCityMenu = ({
     hasCity,
     addCity,
     closeModal,
+}: {
+    hasCity: (city: City) => boolean;
+    addCity: (city: City) => void;
+    closeModal: () => void;
 }) => {
     const [searchText, setSearchText] = useState("");
     const [foundCities, setFoundCities] = useState<UICity[]>([]);

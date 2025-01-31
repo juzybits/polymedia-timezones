@@ -5,14 +5,14 @@ import { getFlagEmoji } from "./lib/utils";
 /**
  * Full-screen panel with a column/row for each timezone
  */
-export const SlotsPanel: React.FC<{
-    slots: Slot[];
-    localDate: Date;
-    delCity: (city: City) => void;
-}> = ({
+export const SlotsPanel = ({
     slots,
     localDate,
     delCity,
+}: {
+    slots: Slot[];
+    localDate: Date;
+    delCity: (city: City) => void;
 }) =>
 {
     return (
@@ -36,14 +36,14 @@ export const SlotsPanel: React.FC<{
 /**
  * Colorful slot showing the timezone and city info
  */
-const SlotComp: React.FC<{
-    slot: Slot;
-    localDate: Date;
-    delCity: (city: City) => void;
-}> = ({
+const SlotComp = ({
     slot,
     localDate,
     delCity,
+}: {
+    slot: Slot;
+    localDate: Date;
+    delCity: (city: City) => void;
 }) =>
 {
     // The cities in a slot may be on different timezones, but it is the same time in all of them,
