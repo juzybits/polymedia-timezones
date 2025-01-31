@@ -18,13 +18,9 @@ export const AboutButton = ({
 export const AboutMenu = () => (
     <div id="about-menu">
         <h2>About</h2>
-        <p>Polymedia Timezones is <a href="https://github.com/juzybits/polymedia-timezones" target="_blank" rel="noopener noreferrer">open-source</a></p>
-        <p>See my other work at <a href="https://polymedia.app" target="_blank" rel="noopener noreferrer">polymedia.app</a></p>
-        <p>Send your feedback/bugs/requests:
-            <br/><a href="https://twitter.com/juzybits" target="_blank" rel="noopener noreferrer">@juzybits</a>
-            <br/><a href="https://twitter.com/polymedia_app" target="_blank" rel="noopener noreferrer">@polymedia_app</a>
-            <br/><a href="https://discord.gg/3ZaE69Eq78" target="_blank" rel="noopener noreferrer">Polymedia Discord</a></p>
-
+        <p>See code: <a href="https://github.com/juzybits/polymedia-timezones" target="_blank" rel="noopener noreferrer">github.com</a></p>
+        <p>See my other projects: <a href="https://polymedia.app" target="_blank" rel="noopener noreferrer">polymedia.app</a></p>
+        <p>Give me feedback: <a href="https://twitter.com/juzybits" target="_blank" rel="noopener noreferrer">@juzybits</a></p>
         <br/>
         <hr/>
         <div id="about-keyboard">
