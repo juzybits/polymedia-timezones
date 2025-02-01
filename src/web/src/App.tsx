@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
-import { HelpButton } from "./Help";
 import { AddCityButton } from "./AddCity";
+import { HelpButton } from "./Help";
 import { loadCitiesFromStorage, saveCitiesToStorage } from "./lib/storage";
 import { compareTimezones, newDateInTimezone } from "./lib/time";
 import { Modal } from "./Modal";

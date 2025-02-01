@@ -2,6 +2,8 @@ import { City } from "../App";
 
 const STORAGE_KEY = "polymedia.timezones.cities";
 
+type CityWithoutKey = Omit<City, "key">;
+
 export function saveCitiesToStorage(cities: City[]): void
 {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(cities));
@@ -9,18 +11,29 @@ export function saveCitiesToStorage(cities: City[]): void
 
 export function loadCitiesFromStorage(): Map<string, City>
 {
-    const cityMap = new Map<string, City>();
+    const defaultCities: CityWithoutKey[] = [
+        { name: "San Francisco", country: "us", tz: "America/Los_Angeles" },
+        { name: "New York", country: "us", tz: "America/New_York" },
+        { name: "London", country: "gb", tz: "Europe/London" },
+        { name: "Dubai", country: "ae", tz: "Asia/Dubai" },
+        { name: "Tokyo", country: "jp", tz: "Asia/Tokyo" },
+    ];
+
+    // Load cities from storage or use default ones
     const rawValue = localStorage.getItem(STORAGE_KEY);
-    // const rawValue = getTestCities();
+    const citiesWithoutKeys = rawValue ? JSON.parse(rawValue) as CityWithoutKey[] : defaultCities;
+
+    // Add keys to the cities
+    const cities = citiesWithoutKeys.map(city => ({
+        ...city,
+        key: getCityKey(city.name, city.country)
+    }));
+
     if (!rawValue) {
-        return cityMap;
+        saveCitiesToStorage(cities);
     }
-    const cityArr = JSON.parse(rawValue) as City[];
-    for (const city of cityArr) {
-        city.key = getCityKey(city.name, city.country);
-        cityMap.set(city.key, city);
-    }
-    return cityMap;
+
+    return new Map(cities.map(city => [city.key, city]));
 }
 
 export function getCityKey(
