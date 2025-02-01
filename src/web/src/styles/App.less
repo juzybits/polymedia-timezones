@@ -77,7 +77,7 @@ a {
             height: 2rem;
         }
     }
-    &#about-btn {
+    &#help-btn {
         @media (orientation: portrait) {
             bottom: 1.25rem;
             right: 1.25rem;
@@ -240,20 +240,36 @@ a {
     margin-top: 1em;
 }
 
-/* About */
+/* Help menu */
 
-#about-menu {
-    p {
-        margin-top: 0.9em;
+#help-menu {
+    .help-section {
+        margin-bottom: 2rem;
+
+        h2 {
+            margin-bottom: 1rem;
+        }
     }
-}
 
-#about-keyboard {
-    margin-top: 1em;
-    span {
-        font-family: monospace;
-        display: inline-block;
-        width: 90px;
+    .help-table {
+        border-spacing: 0;
+        width: 100%;
+
+        td {
+            padding: 0.5rem 0;
+        }
+
+        .action-key {
+            font-family: monospace;
+            width: 100px;
+            font-weight: 500;
+        }
+    }
+
+    .help-links {
+        p {
+            margin: 0.75rem 0;
+        }
     }
 }
 

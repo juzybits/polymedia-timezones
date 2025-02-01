@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-import { AboutButton } from "./About";
+import { HelpButton } from "./Help";
 import { AddCityButton } from "./AddCity";
 import { loadCitiesFromStorage, saveCitiesToStorage } from "./lib/storage";
 import { compareTimezones, newDateInTimezone } from "./lib/time";
@@ -209,7 +209,7 @@ export const App = () =>
                 hasOffset={timeOffset !== 0}
             />
             <AddCityButton openModal={openModal} hasCity={hasCity} addCity={addCity} closeModal={closeModal} />
-            <AboutButton openModal={openModal} />
+            <HelpButton openModal={openModal} />
             <Modal content={modalContent} onClose={closeModal} />
         </div>
     );
