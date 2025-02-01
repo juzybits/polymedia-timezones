@@ -86,15 +86,15 @@ export const App = () =>
                 // In landscape, only respond to vertical swipes
                 if (Math.abs(deltaY) > SCROLL_THRESHOLD && Math.abs(deltaY) > Math.abs(deltaX) * 2) {
                     const direction = Math.sign(deltaY);
-                    // Swipe up = increase time, swipe down = decrease time
-                    setTimeOffset(prev => prev - direction);
+                    // Swipe down = increase time, swipe up = decrease time
+                    setTimeOffset(prev => prev + direction);
                 }
             } else {
                 // In portrait, only respond to horizontal swipes
                 if (Math.abs(deltaX) > SCROLL_THRESHOLD && Math.abs(deltaX) > Math.abs(deltaY) * 2) {
                     const direction = Math.sign(deltaX);
-                    // Swipe left = decrease time, swipe right = increase time
-                    setTimeOffset(prev => prev + direction);
+                    // Swipe left = increase time, swipe right = decrease time
+                    setTimeOffset(prev => prev - direction);
                 }
             }
 
