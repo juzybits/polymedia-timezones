@@ -25,8 +25,8 @@ body {
 }
 
 #layout {
-    display: inline-block;
-    min-width: 100%;
+    display: block;
+    width: 100%;
     position: relative;
 }
 
@@ -71,12 +71,16 @@ a {
 #slots-panel {
     display: flex;
     align-items: stretch;
-    min-height: 100dvh;
     @media (orientation: landscape) {
         flex-direction: row;
+        overflow-x: auto;
+        overflow-y: hidden;
+        width: 100vw;
+        height: 100dvh;
     }
     @media (orientation: portrait) {
         flex-direction: column;
+        min-height: 100dvh;
         height: auto;
         .slot-cities {
             text-align: center;
