@@ -48,7 +48,8 @@ export const App = () =>
 
                 if (Math.abs(scrollAccumulatorRef.current) >= threshold) {
                     const direction = Math.sign(scrollAccumulatorRef.current);
-                    setTimeOffset(prev => prev - direction);
+                    // Scroll up = increase time, scroll down = decrease time
+                    setTimeOffset(prev => prev + direction);
                     scrollAccumulatorRef.current = 0;
                 }
             } else {
@@ -60,6 +61,7 @@ export const App = () =>
 
                 if (Math.abs(scrollAccumulatorRef.current) >= threshold) {
                     const direction = Math.sign(scrollAccumulatorRef.current);
+                    // Scroll left = decrease time, scroll right = increase time
                     setTimeOffset(prev => prev - direction);
                     scrollAccumulatorRef.current = 0;
                 }
@@ -84,12 +86,14 @@ export const App = () =>
                 // In landscape, only respond to vertical swipes
                 if (Math.abs(deltaY) > SCROLL_THRESHOLD && Math.abs(deltaY) > Math.abs(deltaX) * 2) {
                     const direction = Math.sign(deltaY);
+                    // Swipe up = increase time, swipe down = decrease time
                     setTimeOffset(prev => prev - direction);
                 }
             } else {
                 // In portrait, only respond to horizontal swipes
                 if (Math.abs(deltaX) > SCROLL_THRESHOLD && Math.abs(deltaX) > Math.abs(deltaY) * 2) {
                     const direction = Math.sign(deltaX);
+                    // Swipe left = decrease time, swipe right = increase time
                     setTimeOffset(prev => prev + direction);
                 }
             }
