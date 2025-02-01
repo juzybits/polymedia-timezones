@@ -193,8 +193,13 @@ export const App = () =>
     return (
         <div id="layout">
             {timeOffset !== 0 && (
-                <div id="time-offset-indicator">
-                    {timeOffset > 0 ? `+${timeOffset}` : timeOffset} hours from now
+                <div
+                    id="time-offset-indicator"
+                    onClick={() => setTimeOffset(0)}
+                    title="Click to reset to current time"
+                >
+                    <span>{timeOffset > 0 ? `+${timeOffset}` : timeOffset} hours from now</span>
+                    <span className="reset-time">↺</span>
                 </div>
             )}
             <SlotsPanel slots={slots} localDate={displayDate} delCity={delCity} />

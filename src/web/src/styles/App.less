@@ -280,15 +280,32 @@ a {
     padding: 0.5em 1em;
     border-radius: 20px;
     font-size: 0.9em;
-    pointer-events: none;
-    transition: opacity 0.2s ease;
+    transition: all 0.2s ease;
     z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 0.8em;
+    white-space: nowrap;
+    cursor: pointer;
 
     @media (orientation: landscape) {
         top: 1.5rem;
     }
     @media (orientation: portrait) {
         bottom: 1.5rem;
+    }
+
+    &:hover {
+        background: rgba(0, 0, 0, 0.85);
+        transform: translateX(-50%) scale(1.02);
+        .reset-time {
+            transform: rotate(-70deg);
+        }
+    }
+
+    .reset-time {
+        font-size: 1.2em;
+        transition: all 0.2s ease;
     }
 
     &.hidden {
