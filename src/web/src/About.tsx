@@ -1,3 +1,5 @@
+import { IconQuestion } from "./lib/icons";
+
 export const AboutButton = ({
     openModal,
 }: {
@@ -10,7 +12,7 @@ export const AboutButton = ({
             className="big-btn"
             onClick={() => openModal(<AboutMenu />)}
         >
-            <img id="about-logo" src="https://assets.polymedia.app/img/all/logo-nomargin-transparent-512x512.webp" alt="Polymedia logo" />
+            <IconQuestion />
         </div>
     );
 };

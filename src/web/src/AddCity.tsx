@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
 import { City } from "./App";
+import { IconAdd } from "./lib/icons";
 import { getCityKey } from "./lib/storage";
 import { loadTimezones } from "./lib/timezones";
 import { toLatinString } from "./lib/utils";
@@ -38,7 +39,7 @@ export const AddCityButton = ({
 
     return (
         <div id="add-city-btn" className="big-btn" onClick={openMenu}>
-            <span>+</span>
+            <IconAdd />
         </div>
     );
 };

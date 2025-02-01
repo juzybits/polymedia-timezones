@@ -64,6 +64,20 @@ a {
         transform: translateY(3px) translateX(3px);
         border-color: #444;
     }
+    &#add-city-btn {
+        left: 1.25rem;
+        svg {
+            width: 2rem;
+            height: 2rem;
+        }
+    }
+    &#about-btn {
+        right: 1.25rem;
+        svg {
+            width: 1.75rem;
+            height: 1.75rem;
+        }
+    }
 }
 
 /* Slots */
@@ -157,15 +171,6 @@ a {
 
 /* AddCity */
 
-#add-city-btn {
-    left: 22px;
-    > span { // The "+" symbol
-        font-size: 3em;
-        line-height: 100%;
-        transform: translateY(-7%);
-    }
-}
-
 @border-radius: 8px;
 @border-color: rgb(120 120 120);
 
@@ -211,14 +216,6 @@ a {
 }
 
 /* About */
-
-#about-btn {
-    right: 22px;
-    #about-logo {
-        width: 35px;
-        transform: translateY(-1px);
-    }
-}
 
 #about-menu {
     p {
