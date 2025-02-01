@@ -271,7 +271,27 @@ a {
     }
 }
 
-/* Logo */
-// .slot-main, .slot-cities, .big-btn {
-//     display: none !important;
-// }
+#time-offset-indicator {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 0.5em 1em;
+    border-radius: 20px;
+    font-size: 0.9em;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    z-index: 100;
+
+    @media (orientation: landscape) {
+        top: 1.5rem;
+    }
+    @media (orientation: portrait) {
+        bottom: 1.5rem;
+    }
+
+    &.hidden {
+        opacity: 0;
+    }
+}

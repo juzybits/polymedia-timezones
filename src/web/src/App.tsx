@@ -188,6 +188,11 @@ export const App = () =>
 
     return (
         <div id="layout">
+            {timeOffset !== 0 && (
+                <div id="time-offset-indicator">
+                    {timeOffset > 0 ? `+${timeOffset}` : timeOffset} hours from now
+                </div>
+            )}
             <SlotsPanel slots={slots} localDate={displayDate} delCity={delCity} />
             <AddCityButton openModal={openModal} hasCity={hasCity} addCity={addCity} closeModal={closeModal} />
             <AboutButton openModal={openModal} />
