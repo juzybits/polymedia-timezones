@@ -13,7 +13,6 @@ type Timezone = {
  * Return the timezones from timezones.json that exist in the current browser
  */
 export function loadTimezones(): Timezone[] {
-    // @ts-ignore // this flag can be removed when VSCode updates to TypeScript >= 5.1
     const browserTzs: string[] = Intl.supportedValuesOf("timeZone");
     const selectedTzs: Timezone[] = [];
     for (const tz of timezones) {
