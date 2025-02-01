@@ -21,15 +21,26 @@ export function loadCitiesFromStorage(): Map<string, City>
 
     // Load cities from storage or use default ones
     const rawValue = localStorage.getItem(STORAGE_KEY);
-    const citiesWithoutKeys = rawValue ? JSON.parse(rawValue) as CityWithoutKey[] : defaultCities;
+    const savedCities = (() => {
+        if (!rawValue)
+            return null;
+        try {
+            const parsed = JSON.parse(rawValue);
+            if (!Array.isArray(parsed) || parsed.length === 0)
+                return null;
+            return parsed as CityWithoutKey[];
+        } catch {
+            return null;
+        }
+    })();
 
     // Add keys to the cities
-    const cities = citiesWithoutKeys.map(city => ({
+    const cities = (savedCities || defaultCities).map(city => ({
         ...city,
         key: getCityKey(city.name, city.country)
     }));
 
-    if (!rawValue) {
+    if (!savedCities) {
         saveCitiesToStorage(cities);
     }
 
