@@ -9,14 +9,16 @@ export const SlotsPanel = ({
     slots,
     localDate,
     delCity,
+    hasOffset,
 }: {
     slots: Slot[];
     localDate: Date;
     delCity: (city: City) => void;
+    hasOffset: boolean;
 }) =>
 {
     return (
-        <div id="slots-panel">
+        <div id="slots-panel" className={hasOffset ? "has-offset" : ""}>
             {slots.map((slot, index) => (
                 <SlotComp
                     slot={slot}

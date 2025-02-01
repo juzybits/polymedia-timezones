@@ -202,7 +202,12 @@ export const App = () =>
                     <span className="reset-time">↺</span>
                 </div>
             )}
-            <SlotsPanel slots={slots} localDate={displayDate} delCity={delCity} />
+            <SlotsPanel
+                slots={slots}
+                localDate={displayDate}
+                delCity={delCity}
+                hasOffset={timeOffset !== 0}
+            />
             <AddCityButton openModal={openModal} hasCity={hasCity} addCity={addCity} closeModal={closeModal} />
             <AboutButton openModal={openModal} />
             <Modal content={modalContent} onClose={closeModal} />

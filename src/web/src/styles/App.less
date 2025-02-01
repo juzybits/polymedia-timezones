@@ -110,9 +110,9 @@ a {
         min-height: 100dvh;
         height: auto;
 
-        .slot:last-child {
-            // make room for the time offset indicator and the buttons
-            padding-bottom: 4rem;
+        &.has-offset .slot:last-child {
+            // make room for the time offset indicator
+            padding-bottom: 5rem;
         }
 
         .slot-cities {
@@ -130,7 +130,13 @@ a {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        padding: 1em;
+
+        @media (orientation: portrait) {
+            padding: 1.5rem 1rem;
+        }
+        @media (orientation: landscape) {
+            padding: 1rem;
+        }
 
         .slot-top-filler {
             flex: 1;
