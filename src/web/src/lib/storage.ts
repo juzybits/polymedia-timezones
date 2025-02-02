@@ -25,7 +25,7 @@ export function loadCitiesFromStorage(): Map<string, City>
         if (!rawValue)
             return null;
         try {
-            const parsed = JSON.parse(rawValue);
+            const parsed: unknown = JSON.parse(rawValue);
             if (!Array.isArray(parsed) || parsed.length === 0)
                 return null;
             return parsed as CityWithoutKey[];
