@@ -130,7 +130,6 @@ export const AddCityMenu = ({
             addCity(city);
             setFoundCities([...foundCities]);
         }
-        closeModal();
     }
 
     const inputRef = useRef<HTMLInputElement>(null);
