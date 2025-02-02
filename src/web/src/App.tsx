@@ -32,6 +32,9 @@ export const App = () =>
     const touchStartYRef = useRef<number | null>(null);
     const scrollAccumulatorRef = useRef(0);
 
+    const [modalContent, setModalContent] = useState<React.ReactNode | null>(null);
+    const modalOpenRef = useRef(false); // needed for event handlers
+
     // handle scroll and touch events
     useEffect(() =>
     {
@@ -39,6 +42,8 @@ export const App = () =>
 
         // desktop
         function handleScroll(event: WheelEvent) {
+            if (modalOpenRef.current) return;
+
             if (isLandscape()) {
                 // In landscape, only respond to vertical scrolling (deltaY)
                 if (Math.abs(event.deltaX) > Math.abs(event.deltaY)) return;
@@ -75,6 +80,8 @@ export const App = () =>
         }
 
         function handleTouchEnd(event: TouchEvent) {
+            if (modalOpenRef.current) return;
+
             if (touchStartXRef.current === null || touchStartYRef.current === null) return;
 
             const touchEndX = event.changedTouches[0].clientX;
@@ -180,12 +187,16 @@ export const App = () =>
 
     /* Modal menu */
 
-    const [modalContent, setModalContent] = useState<React.ReactNode | null>(null);
     const openModal = (content: React.ReactNode) => {
         setModalContent(content);
+        document.body.classList.add("modal-open");
+        modalOpenRef.current = true;
     };
+
     const closeModal = () => {
         setModalContent(null);
+        document.body.classList.remove("modal-open");
+        modalOpenRef.current = false;
     };
 
     /* Render */
